@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :rooms, only: [:create]
+  # This has to be above the route definition for 'rooms/:room_hash' 
+  # otherwise 'random_room' will be treated as a hash
+  get 'rooms/random_room', to: 'rooms#random_room', as: 'random_room'
+  get 'rooms/:room_hash', to: 'rooms#show', as: 'room'
+
   root 'static#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
