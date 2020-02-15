@@ -1,4 +1,5 @@
 class Room < ApplicationRecord
+  has_one_attached :jam
   before_create :generate_room_hash
 
   def self.random_room

@@ -2,22 +2,22 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-        Welcome to Jam Roulette
+        Jam Roulette. Add your part.
       </h1>
       <h2 class="subtitle">
-        Add your part.
+        Join a room to start building up a track or start your own.
       </h2>
-      <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
-        <span class="icon">
-          <i class="fas fa-plus-circle"></i>
-        </span>
-        <span>Create a new room</span>
-      <% end %>
       <%= link_to(random_room_path, class: "button is-primary is-inverted") do %>
         <span class="icon">
           <i class="fas fa-door-open"></i>
         </span>
         <span>Join a random room</span>
+      <% end %>
+      <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
+        <span class="icon">
+          <i class="fas fa-plus-circle"></i>
+        </span>
+        <span>Create a new room</span>
       <% end %>
     </div>
   </div>
