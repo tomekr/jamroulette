@@ -1,4 +1,5 @@
 # Jam Roulette
+[![Build Status](https://travis-ci.com/tomekr/jamroulette.svg?branch=master)](https://travis-ci.com/tomekr/jamroulette)
 
 Jam Roulette is a Rails (+ React, Typescript) application for layered jamming and collaboration.
 
