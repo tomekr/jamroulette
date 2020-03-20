@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 2020_02_14_045711) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "title"
     t.string "room_hash"

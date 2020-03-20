@@ -6,27 +6,25 @@
     </h2>
   </div>
 </section>
-
-
 <section class="section">
   <div class="container">
     <% if @room.jam.attached? %>
       <audio id="<%= @room.jam.id %>" controls>
-        <source src="<%= url_for(@room.jam) %>"></source>
-      </audio>
-    <% else %>
-      This room is brand new, upload a track to get the jam started!
-    <% end %>
-  </div>
+        <source src="<%= url_for(@room.jam) %>">
+      </source>
+    </audio>
+  <% else %>
+    This room is brand new, upload a track to get the jam started!
+  <% end %>
+</div>
 </section>
-
 <section class="section">
-    <%= form_with(model: @room, url: room_path(@room.room_hash), local: true) do |form| %>
-      <div class="container">
-        <div id="choose-file-box" class="file is-boxed">
-          <label class="file-label">
-            <%= form.file_field :jam, class: 'file-input' %>
-            <span class="file-cta">
+  <%= form_with(model: @room, url: room_path(@room.room_hash), local: true) do |form| %>
+    <div class="container">
+      <div id="choose-file-box" class="file is-boxed">
+        <label class="file-label">
+          <%= form.file_field :jam, class: 'file-input' %>
+          <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
               </span>
@@ -38,23 +36,53 @@
             </span>
           </label>
         </div>
-      </div>
-      <br />
-      <div class="container">
+    </div>
+    <br />
+    <div class="container">
+      <% if @room.jam.attached? %>
         <%= form.submit 'Replace track', data: { confirm: 'You are about to replace the existing track. Do you want to continue?'}, class: 'button is-primary' %>
-      </div>
-    <% end %>
+        
+      <% else %>
+        <%= form.submit 'Upload track', class: 'button is-primary', id: 'upload-file-button' %>
+      <% end %>
+    </div>
+  <% end %>
 
-    <script>
-      const fileInput = document.querySelector('#choose-file-box input[type=file]');
-      fileInput.onchange = () => {
-        if (fileInput.files.length > 0) {
-          const fileName = document.querySelector('#choose-file-box .file-name');
-          fileName.textContent = fileInput.files[0].name;
-        }
+  <div class="modal" id="file-upload-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Tell us about the track</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Save changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
+  <script>
+    const fileInput = document.querySelector('#choose-file-box input[type=file]');
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        const fileName = document.querySelector('#choose-file-box .file-name');
+        fileName.textContent = fileInput.files[0].name;
       }
-    </script>
+    }
 
+    // const uploadButton = document.querySelector('#upload-file-button');
+    // const uploadModal = document.querySelector('#file-upload-modal');
 
+    // uploadButton.onclick = () => {
+    //   alert('button clicked');
+    //   uploadModal.classList.add("is-active");
+
+    //   if (fileInput.files.length > 0) {
+
+    //   }
+    // }
+  </script>
 </section>
-
