@@ -11,7 +11,9 @@
     <% if @room.jam.attached? %>
       <audio id="<%= @room.jam.id %>" controls>
         <source src="<%= url_for(@room.jam) %>">
-      </source>
+      </audio>
+
+      <div id="waveform"></div>
     </audio>
   <% else %>
     This room is brand new, upload a track to get the jam started!
