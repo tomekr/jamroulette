@@ -1,24 +1,16 @@
-# README
+# Jam Roulette
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Jam Roulette is a Rails (+ React, Typescript) application for layered jamming and collaboration.
 
-Things you may want to cover:
+## Development
 
-* Ruby version
+### Docker
 
-* System dependencies
+TODO
 
-* Configuration
+### Running locally
 
-* Database creation
+1. Run `bundle install`.
+2. Run `bundle exec rails server`
+3. Point your browser to [http://localhost:3000/](http://localhost:3000/)
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
