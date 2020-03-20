@@ -9,11 +9,11 @@
 <section class="section">
   <div class="container">
     <% if @room.jam.attached? %>
-      <audio id="<%= @room.jam.id %>" controls>
-        <source src="<%= url_for(@room.jam) %>">
-      </audio>
-
-      <div id="waveform"></div>
+      <button id="waveformAudioControl" class="button is-large" onClick="clickPlay()">
+        <i id="waveformAudioControlIcon" class="far fa-play-circle"></i>
+      </button>
+      
+      <div id="waveform" data-audio-url="<%= url_for(@room.jam) %>"></div>
     </audio>
   <% else %>
     This room is brand new, upload a track to get the jam started!
@@ -67,6 +67,46 @@
     </div>
   </div>
   <script>
+    // Waveform
+    var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'violet',
+      progressColor: 'purple',
+      plugins: [
+        WaveSurfer.cursor.create({
+          showTime: true,
+          opacity: 1,
+          customShowTimeStyle: {
+              'background-color': '#000',
+              color: '#fff',
+              padding: '2px',
+              'font-size': '10px'
+          }
+       })
+      ]
+    });
+
+    // Grab the URL from the data-audio-url attribute
+    wavesurfer.load(wavesurfer.container.dataset.audioUrl);
+
+    function clickPlay() {
+      if (wavesurfer) {
+        if (wavesurfer.isPlaying()) {
+          wavesurfer.pause();
+        } else {
+          wavesurfer.play();
+        }
+        toggleAudioControlIcon();
+      }
+    }
+
+    function toggleAudioControlIcon() {
+      const audioControllerIcon = document.querySelector("#waveformAudioControlIcon");
+      audioControllerIcon.classList.toggle("fa-play-circle");
+      audioControllerIcon.classList.toggle("fa-pause-circle");
+    }
+
+    // Upload Button
     const fileInput = document.querySelector('#choose-file-box input[type=file]');
     fileInput.onchange = () => {
       if (fileInput.files.length > 0) {
@@ -75,6 +115,9 @@
       }
     }
 
+
+
+    // Modal
     // const uploadButton = document.querySelector('#upload-file-button');
     // const uploadModal = document.querySelector('#file-upload-modal');
 
