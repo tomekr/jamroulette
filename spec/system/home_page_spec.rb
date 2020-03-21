@@ -12,7 +12,6 @@ RSpec.describe 'visiting the home page', type: :system do
   end
 
   it 'allows a user to create a new room' do
-    pending 'TODO'
     visit root_path
     click_on('Create a new room')
 
