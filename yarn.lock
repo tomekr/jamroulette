@@ -931,6 +931,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/wavesurfer.js@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/wavesurfer.js/-/wavesurfer.js-3.2.0.tgz#9d72f7d720380ed22e7f070372afd566de6d67a7"
+  integrity sha512-qwzUfxbXhcEMSseDSEMlDtGR6XefET4jB1hU3PxapCCkSrNZOkkSXVNAoj0bNRmaJnK407qS/BOvhKqghh6grg==
+
 "@types/webpack-env@^1.15.1":
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.15.1.tgz#c8e84705e08eed430b5e15b39c65b0944e4d1422"
@@ -7357,6 +7362,11 @@ watchpack@^1.6.0:
     chokidar "^2.0.2"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+
+wavesurfer.js@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-3.3.1.tgz#af6e4fb260c7d4fe1b14e7eb51df2dea802ad5c6"
+  integrity sha512-5w+Daa4EIoFcErXX4hZSkNdfdnCSTiaoTJMF5r7O7O6Kiv+oCrIlLwA73Ms9ULs+IZqOM9XhC33sfINgYdC4rw==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"
