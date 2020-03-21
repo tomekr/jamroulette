@@ -7,7 +7,11 @@ Jam Roulette is a Rails (+ React, Typescript) application for layered jamming an
 
 ### Docker
 
-TODO
+Build the image with `docker-compose build` (the first time building will take the longest)
+
+To run the server, `docker-compose up` and point your browser to [http://localhost:3000](lhttp://localhost:3000)
+
+To just run the test suite, `docker-compose run web rake`
 
 ### Running locally
 
