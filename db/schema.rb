@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_173123) do
+ActiveRecord::Schema.define(version: 2020_03_22_182816) do
+
+  create_table "jams", force: :cascade do |t|
+    t.string "filename"
+    t.string "bpm"
+    t.integer "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_jams_on_room_id"
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string "title"
@@ -20,4 +29,5 @@ ActiveRecord::Schema.define(version: 2020_03_21_173123) do
     t.index ["room_hash"], name: "index_rooms_on_room_hash", unique: true
   end
 
+  add_foreign_key "jams", "rooms"
 end
