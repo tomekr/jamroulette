@@ -3,10 +3,10 @@ import * as ReactDOM from "react-dom"
 import WaveformPlayer from "../components/waveform_player"
 
 document.addEventListener("turbolinks:load", () => {
-  if (document.getElementById("react-element")) {
+  if (document.getElementById("main-waveform-react-element")) {
     ReactDOM.render(
-      <WaveformPlayer audioUrl={"https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3"} />,
-      document.getElementById("react-element")
+      <WaveformPlayer audioUrl={"/amber.mp3"} id={0} />,
+      document.getElementById("main-waveform-react-element")
     )
   }
 })
