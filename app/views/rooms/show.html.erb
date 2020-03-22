@@ -1,3 +1,8 @@
+<% content_for :packs do %>
+  <%= javascript_pack_tag("waveform_player_display") %>
+  <%= javascript_pack_tag("previous_jams_waveform_display") %>
+<% end %>
+
 <div>
   <%= "Home/#{@room.room_hash}"%>
 </div>
@@ -6,4 +11,15 @@
   This room is brand new! Upload a track to get started!
 </div>
 
-<div id="react-element" />
+<div id="main-waveform-react-element"></div>
+
+<div id="previous-jams">
+  Previous JAMs on this track
+  <div id="previous-jams-react-element"></div>
+</div>
+
+<div>
+  <h1>JAM on this track!</h1>
+  <button class="button">Download Track</button>
+  <button class="button">Upload New Track</button>
+</div>

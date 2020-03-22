@@ -9,7 +9,7 @@
     
     <%= stylesheet_pack_tag("application") %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag("waveform_player_display") %>
+    <%= yield(:packs) %>
   </head>
 
   <body>
