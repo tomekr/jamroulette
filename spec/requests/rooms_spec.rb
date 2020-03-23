@@ -22,7 +22,7 @@ RSpec.describe 'Room viewing', type: :request do
 
   it 'displays previous Jam information if it exists' do
     previous_jam = create(:jam, bpm: '100', filename: 'previous-jam.wav')
-    current_jam = create(:jam, room: previous_jam.room)
+    current_jam = create(:jam, bpm: '120', filename: 'current-jam.wave', room: previous_jam.room)
 
     room = current_jam.room
     get "/rooms/#{room.room_hash}"
