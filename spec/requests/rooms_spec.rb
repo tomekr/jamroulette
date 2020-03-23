@@ -41,8 +41,6 @@ RSpec.describe 'Room viewing', type: :request do
     get "/rooms/#{room.room_hash}"
 
     expect(response.body).to_not include('Latest JAM')
-    expect(response.body).to_not include('FILE')
-    expect(response.body).to_not include('BPM')
     expect(response.body).to_not include('Previous JAMs on this track')
     expect(response.body).to_not include('Download Track')
 
