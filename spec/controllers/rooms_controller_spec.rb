@@ -12,8 +12,9 @@ RSpec.describe RoomsController, type: :controller do
     end
 
     it "doesn't allow routing to a room via id" do
-      get :show, params: { id: room.id, room_hash: room.id }
-      expect(response.status).to eq 404
+      expect do
+        get :show, params: { id: room.id, room_hash: room.id }
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

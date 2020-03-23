@@ -42,5 +42,11 @@
     <h1>JAM on this track!</h1>
     <%= link_to("Download Track", url_for(@current_jam.file), class: "button") %>  
   <% end %>
-  <button class="button">Upload New Track</button>
+
+  <%= form_with(model: @room, url: room_path(@room.room_hash), :multipart => true,  local: true) do |form| %>
+    <%= fields_for :jam do |jam_fields| %>
+      <%= jam_fields.file_field :file %>
+    <% end %>
+    <%= submit_tag("Upload New Track", class: "button") %>
+  <% end %>
 </div>
