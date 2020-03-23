@@ -37,3 +37,4 @@ yarn-debug.log*
 
 .rspec
 coverage
+.DS_Store
