@@ -1,20 +1,37 @@
 <% content_for :packs do %>
   <%= javascript_pack_tag("waveform_player_display") %>
-  <%= javascript_pack_tag("previous_jams_waveform_display") %>
 <% end %>
 
 <div>
   <%= "Home/#{@room.room_hash}"%>
 </div>
 
-<div>
-  This room is brand new! Upload a track to get started!
-</div>
-
-<div id="main-waveform-react-element"></div>
+<% if @current_jam %>
+    <div id="current-jam-attributes">
+      <ul>
+        <li>Latest JAM <%= @current_jam.created_at.strftime("%B, %d %Y") %></li>
+        <li>FILE: <%= @current_jam.filename %></li>
+        <li>BPM: <%= @current_jam.bpm %></li>
+      </ul>
+    <div>
+  <div id="main-waveform-react-element"></div>
+<% else %>
+  <div>
+    This room is brand new! Upload a track to get started!
+  </div>
+<% end %>
 
 <div id="previous-jams">
   Previous JAMs on this track
+  <% @jams.each do |jam| %>
+    <div id="previous-jam-attributes">
+      <ul>
+        <li>Latest JAM <%= jam.created_at.strftime("%B, %d %Y") %></li>
+        <li>FILE: <%= jam.filename %></li>
+        <li>BPM: <%= jam.bpm %></li>
+      </ul>
+    <div>
+  <% end %>
   <div id="previous-jams-react-element"></div>
 </div>
 
