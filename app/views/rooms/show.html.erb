@@ -30,6 +30,10 @@
           <li>Latest JAM <%= jam.created_at.strftime("%B, %d %Y") %></li>
           <li>FILE: <%= jam.filename %></li>
           <li>BPM: <%= jam.bpm %></li>
+          <li>
+            <audio controls src="<%= url_for(jam.file) %>"></audio>
+          </li>
+          <li><%= link_to("Download Track", url_for(jam.file), class: "button") %>  </li>
         </ul>
       <div>
     <% end %>

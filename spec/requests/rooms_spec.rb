@@ -30,6 +30,10 @@ RSpec.describe 'Room viewing', type: :request do
     expect(response.body).to include('Previous JAMs on this track')
     expect(response.body).to include("FILE: #{previous_jam.filename}")
     expect(response.body).to include("BPM: #{previous_jam.bpm}")
+
+    # Check for the download link
+    previous_jam_path = URI.parse(url_for(previous_jam.file)).path
+    expect(response.body).to include(previous_jam_path)
   end
 
   it 'does not display Jam attributes one does not exist' do
