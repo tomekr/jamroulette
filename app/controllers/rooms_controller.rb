@@ -19,6 +19,7 @@ class RoomsController < ApplicationController
     end
   end
 
+  # PATCH /rooms/:room_hash
   def update
     if params[:jam]
       @jam = @room.jams.build
