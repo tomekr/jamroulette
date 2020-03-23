@@ -14,6 +14,7 @@ RSpec.describe 'Room viewing', type: :request do
     expect(response.body).to include('Latest JAM January, 24 2020')
     expect(response.body).to include("FILE: #{jam.filename}")
     expect(response.body).to include("BPM: #{jam.bpm}")
+    expect(response.body).to include('Download Track')
 
     # Unlock datetime
     travel_back
@@ -39,6 +40,7 @@ RSpec.describe 'Room viewing', type: :request do
     expect(response.body).to_not include('FILE')
     expect(response.body).to_not include('BPM')
     expect(response.body).to_not include('Previous JAMs on this track')
+    expect(response.body).to_not include('Download Track')
 
     expect(response.body).to include('This room is brand new! Upload a track to get started!')
   end

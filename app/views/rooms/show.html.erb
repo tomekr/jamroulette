@@ -22,21 +22,25 @@
 <% end %>
 
 <div id="previous-jams">
-  Previous JAMs on this track
-  <% @jams.each do |jam| %>
-    <div id="previous-jam-attributes">
-      <ul>
-        <li>Latest JAM <%= jam.created_at.strftime("%B, %d %Y") %></li>
-        <li>FILE: <%= jam.filename %></li>
-        <li>BPM: <%= jam.bpm %></li>
-      </ul>
-    <div>
+  <% unless @jams.empty? %>
+    Previous JAMs on this track
+    <% @jams.each do |jam| %>
+      <div id="previous-jam-attributes">
+        <ul>
+          <li>Latest JAM <%= jam.created_at.strftime("%B, %d %Y") %></li>
+          <li>FILE: <%= jam.filename %></li>
+          <li>BPM: <%= jam.bpm %></li>
+        </ul>
+      <div>
+    <% end %>
+    <div id="previous-jams-react-element"></div>
   <% end %>
-  <div id="previous-jams-react-element"></div>
 </div>
 
 <div>
-  <h1>JAM on this track!</h1>
-  <button class="button">Download Track</button>
+  <% if @current_jam %>
+    <h1>JAM on this track!</h1>
+    <%= link_to("Download Track", url_for(@current_jam.file), class: "button") %>  
+  <% end %>
   <button class="button">Upload New Track</button>
 </div>

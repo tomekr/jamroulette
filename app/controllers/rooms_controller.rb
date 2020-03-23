@@ -4,8 +4,8 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show]
   # GET /rooms/:room_hash
   def show
-    @jams = @room.jams.order('jams.created_at ASC')
-    @current_jam = @jams.first
+    @jams = @room.jams.order('jams.created_at DESC').to_a
+    @current_jam = @jams.shift
   end
 
   # POST /rooms
