@@ -26,6 +26,8 @@ class RoomsController < ApplicationController
 
       @jam.file.attach(file)
       @jam.filename = file.original_filename
+
+      @jam.bpm = params[:jam][:bpm] unless params[:jam][:bpm].blank?
       @jam.save
     end
     redirect_to room_path(@room.room_hash)

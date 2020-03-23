@@ -54,7 +54,7 @@ RSpec.describe 'Room viewing', type: :request do
 
     it 'allows user to upload a jam' do
       room = create(:room)
-      patch "/rooms/#{room.room_hash}", params: { jam: { file: file } }
+      patch "/rooms/#{room.room_hash}", params: { jam: { bpm: '100', file: file } }
 
       jam = room.reload.jams.first
 
@@ -64,6 +64,7 @@ RSpec.describe 'Room viewing', type: :request do
 
       follow_redirect!
       expect(response.body).to include(file.original_filename)
+      expect(response.body).to include('BPM: 100')
     end
   end
 end
