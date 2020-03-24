@@ -91,14 +91,16 @@
 </div>
 
 <script>
-  document.querySelector('button#upload-jam-button').addEventListener('click', function(event) {
+  const uploadJamButton = document.querySelector('button#upload-jam-button');
+  uploadJamButton.onclick = (event) => {
     event.preventDefault();
-    var modal = document.querySelector('.modal');  // assuming you have only 1
-    var html = document.querySelector('html');
+
+    const modal = document.querySelector('.modal');  // assuming you have only 1
+    const html = document.querySelector('html');
     modal.classList.add('is-active');
     html.classList.add('is-clipped');
 
-    const closeFunction = function(e) {
+    const closeFunction = (e) => {
       e.preventDefault();
       modal.classList.remove('is-active');
       html.classList.remove('is-clipped');
@@ -109,7 +111,7 @@
     modal.querySelectorAll("button.modal-close-button").forEach(element => {
       element.addEventListener('click', closeFunction);
     });
-  });
+  }
 
   // For changing the name in the file upload element
   const fileInput = document.querySelector('#file-upload-field input[type=file]');
