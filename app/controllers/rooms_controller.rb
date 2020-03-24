@@ -12,11 +12,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new
 
-    if @room.save
-      redirect_to room_path(@room.room_hash), notice: 'Room was successfully created.'
-    else
-      redirect_to room_path, alert: 'An error occured creating a new room'
-    end
+    @room.save
+    redirect_to room_path(@room.room_hash), notice: 'Room was successfully created.'
   end
 
   # PATCH /rooms/:room_hash
