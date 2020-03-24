@@ -57,7 +57,7 @@ const WaveformPlayer = (props: WaveformPlayerProps) => {
         <i id="waveformAudioControlIcon" className="far fa-play-circle"></i>
       </button>
 
-      <div id={waveformId()}></div>
+      <div id={waveformId()} style={{position: 'relative'}}></div>
     </div>
   )
 }
