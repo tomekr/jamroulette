@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Room viewing', type: :request do
+  # TODO: Remove when beta invite requirements are removed
+  before(:each) do
+    InviteCode.create(code: 'correct-code')
+    post '/validate_beta_user', params: { beta_code: 'correct-code' }
+  end
+
   it 'displays current Jam information if it exists' do
     # Lock datetime to Jan 24, 2020 1:4:44
     travel_to Time.zone.local(2020, 1, 24, 0o1, 0o4, 44)

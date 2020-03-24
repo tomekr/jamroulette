@@ -3,6 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe StaticController, type: :controller do
+  # TODO: Remove when beta invite requirements are removed
+  before(:each) do
+    session[:is_beta_user] = true
+  end
+
   describe 'GET #index' do
     it 'returns http success' do
       get :index
