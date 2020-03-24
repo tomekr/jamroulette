@@ -1,4 +1,9 @@
 language: ruby
 before_install:
   - gem install bundler
+  - gem install bundler undercover --no-doc
 cache: bundler
+script:
+  - bundle exec rake
+  - git pull origin master:master
+  - undercover --compare master
