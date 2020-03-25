@@ -6,6 +6,7 @@ class RoomsController < ApplicationController
   def show
     @jams = @room.jams.order('jams.created_at DESC').to_a
     @current_jam = @jams.shift
+    @new_jam = @room.jams.build
   end
 
   # POST /rooms

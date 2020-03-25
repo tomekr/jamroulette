@@ -4,16 +4,18 @@ class JamsController < ApplicationController
   # POST /rooms/:room_hash/jams
   def create
     room = Room.find_by!(room_hash: params[:room_id])
-    if params[:jam]
-      jam = room.jams.build
-      file = params[:jam][:file]
-
-      jam.file.attach(file)
-      jam.filename = file.original_filename
-
-      jam.bpm = params[:jam][:bpm] unless params[:jam][:bpm].blank?
-      jam.save
+    jam = room.jams.build(jam_params)
+    if jam.save
+      flash[:success] = 'Jam successfully created!'
+    else
+      flash[:danger] = 'A file must be specified.'
     end
     redirect_to room_path(room)
+  end
+
+  private
+
+  def jam_params
+    params.require(:jam).permit(:bpm, :file)
   end
 end
