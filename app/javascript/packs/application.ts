@@ -11,3 +11,8 @@ ActiveStorage.start()
 const images = require.context("../images", true)
 // @ts-ignore
 const imagePath = name => images(name, true)
+
+// Support component names relative to this directory:
+var componentRequireContext = require.context("components", true);
+var ReactRailsUJS = require("react_ujs");
+ReactRailsUJS.useContext(componentRequireContext);

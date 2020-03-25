@@ -12,6 +12,9 @@
   </head>
 
   <body>
+    <% flash.each do |message_type, message| %>
+      <div class="notification is-radiusless is-marginless is-<%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

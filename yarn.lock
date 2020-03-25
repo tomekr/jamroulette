@@ -915,13 +915,26 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.19":
+"@types/react@*":
   version "16.9.19"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.19.tgz#c842aa83ea490007d29938146ff2e4d9e4360c40"
   integrity sha512-LJV97//H+zqKWMms0kvxaKYJDG05U2TtQB3chRLF8MPNs+MQh/H1aGlyDUxjaHvu08EAGerdX2z4LTBc7ns77A==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/react@^16.9.25":
+  version "16.9.25"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.25.tgz#6ae2159b40138c792058a23c3c04fd3db49e929e"
+  integrity sha512-Dlj2V72cfYLPNscIG3/SMUOzhzj7GK3bpSrfefwt2YT9GLynvLCCZjbhyF6VsT0q0+aRACRX03TDJGb7cA0cqg==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/wavesurfer.js@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/wavesurfer.js/-/wavesurfer.js-3.2.0.tgz#9d72f7d720380ed22e7f070372afd566de6d67a7"
+  integrity sha512-qwzUfxbXhcEMSseDSEMlDtGR6XefET4jB1hU3PxapCCkSrNZOkkSXVNAoj0bNRmaJnK407qS/BOvhKqghh6grg==
 
 "@types/webpack-env@^1.15.1":
   version "1.15.1"
@@ -6024,6 +6037,13 @@ react@^16.12.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
 
+react_ujs@^2.6.0, react_ujs@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/react_ujs/-/react_ujs-2.6.1.tgz#a202a33c95c9e2bb18ab56926b7e79f3325ec855"
+  integrity sha512-9M33/A8cubStkZ2cpJSimcTD0RlCWiqXF6e90IQmMw/Caf/W0dtAzOtHtiQE3JjLbt/nhRR7NLPxMfnlm141ig==
+  dependencies:
+    react_ujs "^2.6.0"
+
 read-cache@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/read-cache/-/read-cache-1.0.0.tgz#e664ef31161166c9751cdbe8dbcf86b5fb58f774"
@@ -7349,6 +7369,11 @@ watchpack@^1.6.0:
     chokidar "^2.0.2"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+
+wavesurfer.js@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/wavesurfer.js/-/wavesurfer.js-3.3.1.tgz#af6e4fb260c7d4fe1b14e7eb51df2dea802ad5c6"
+  integrity sha512-5w+Daa4EIoFcErXX4hZSkNdfdnCSTiaoTJMF5r7O7O6Kiv+oCrIlLwA73Ms9ULs+IZqOM9XhC33sfINgYdC4rw==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"

@@ -1,0 +1,122 @@
+<div>
+  <%= "Home/#{@room.room_hash}"%>
+</div>
+
+<% if @current_jam %>
+  <%= react_component("waveform_player", { id: @current_jam.id, audioUrl: url_for(@current_jam.file) }) %>
+  
+  <div id="current-jam-attributes">
+    <ul>
+      <li>Latest JAM <%= @current_jam.created_at.to_formatted_s(:long) %></li>
+      <li>FILE: <%= @current_jam.file.filename %></li>
+      <li>BPM: <%= @current_jam.bpm %></li>
+    </ul>
+  </div>
+<% else %>
+  <div>
+    This room is brand new! Upload a track to get started!
+  </div>
+<% end %>
+
+<div id="previous-jams">
+  <% unless @jams.empty? %>
+    Previous JAMs on this track
+    <% @jams.each do |jam| %>
+      <%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %>
+      <div id="previous-jam-attributes">
+        <ul>
+          <li>Latest JAM <%= jam.created_at.to_formatted_s(:long) %></li>
+          <li>FILE: <%= jam.file.filename %></li>
+          <li>BPM: <%= jam.bpm %></li>
+          <li><%= link_to "Download Track", url_for(jam.file), class: "button" %>  </li>
+        </ul>
+      <div>
+    <% end %>
+    <div id="previous-jams-react-element"></div>
+  <% end %>
+</div>
+
+<div>
+  <% if @current_jam %>
+    <h1>JAM on this track!</h1>
+    <%= link_to "Download Track", url_for(@current_jam.file), class: "button" %>  
+  <% end %>
+
+  <button id="upload-jam-button" class="button">Upload New Track</button>
+</div>
+
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <%= form_with(model: @new_jam, url: [@room, @new_jam],  multipart: true,  local: true) do |form| %>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Upload a Jam</p>
+        <button class="delete modal-close-button" aria-label="close"></button>
+      </header>
+
+      <section class="modal-card-body">
+          <div class="field">
+            <label class="label">BPM:</label>
+            <%= form.text_field :bpm, class: "input" %>
+          </div>
+
+          <div class="field">
+            <div id="file-upload-field" class="file has-name">
+              <label class="file-label">
+                <%= form.file_field :file, class: "file-input" %>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Choose a file...
+                  </span>
+                </span>
+                <span class="file-name">
+                  No file selected
+                </span>
+              </label>
+            </div>
+          </div>
+      </section>
+
+      <footer class="modal-card-foot">
+        <%= submit_tag "Upload", class: "button is-success" %>
+        <button class="button modal-close-button">Cancel</button>
+      </footer>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  const uploadJamButton = document.querySelector('button#upload-jam-button');
+  uploadJamButton.onclick = (event) => {
+    event.preventDefault();
+
+    const modal = document.querySelector('.modal');  // assuming you have only 1
+    const html = document.querySelector('html');
+    modal.classList.add('is-active');
+    html.classList.add('is-clipped');
+
+    const closeFunction = (e) => {
+      e.preventDefault();
+      modal.classList.remove('is-active');
+      html.classList.remove('is-clipped');
+    };
+
+    modal.querySelector('.modal-background').addEventListener('click', closeFunction);
+
+    modal.querySelectorAll("button.modal-close-button").forEach(element => {
+      element.addEventListener('click', closeFunction);
+    });
+  }
+
+  // For changing the name in the file upload element
+  const fileInput = document.querySelector('#file-upload-field input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload-field .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>
