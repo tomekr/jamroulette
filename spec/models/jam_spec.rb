@@ -13,13 +13,4 @@ RSpec.describe Jam, type: :model do
       expect(jam).to_not be_valid
     end
   end
-
-  describe '#filename' do
-    it 'extracts the filename from the file' do
-      file = fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.mp3'), 'audio/mpeg')
-      jam = create(:jam, file: file)
-
-      expect(jam.filename).to eq "test.mp3"
-    end
-  end
 end

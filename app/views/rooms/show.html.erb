@@ -3,12 +3,12 @@
 </div>
 
 <% if @current_jam %>
-  <%= react_component "waveform_player", { id: @current_jam.id, audioUrl: url_for(@current_jam.file) } %>
+  <%= react_component("waveform_player", { id: @current_jam.id, audioUrl: url_for(@current_jam.file) }) %>
   
   <div id="current-jam-attributes">
     <ul>
       <li>Latest JAM <%= @current_jam.created_at.to_formatted_s(:long) %></li>
-      <li>FILE: <%= @current_jam.filename %></li>
+      <li>FILE: <%= @current_jam.file.filename %></li>
       <li>BPM: <%= @current_jam.bpm %></li>
     </ul>
   </div>
@@ -22,11 +22,11 @@
   <% unless @jams.empty? %>
     Previous JAMs on this track
     <% @jams.each do |jam| %>
-      <%= react_component "waveform_player", { id: jam.id, audioUrl: url_for(jam.file) } %>
+      <%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %>
       <div id="previous-jam-attributes">
         <ul>
           <li>Latest JAM <%= jam.created_at.to_formatted_s(:long) %></li>
-          <li>FILE: <%= jam.filename %></li>
+          <li>FILE: <%= jam.file.filename %></li>
           <li>BPM: <%= jam.bpm %></li>
           <li><%= link_to "Download Track", url_for(jam.file), class: "button" %>  </li>
         </ul>

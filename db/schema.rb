@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2020_03_23_154645) do
   end
 
   create_table "jams", force: :cascade do |t|
-    t.string "filename"
     t.string "bpm"
     t.integer "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_154645) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "title"
-    t.string "room_hash"
+    t.string "room_hash", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_hash"], name: "index_rooms_on_room_hash", unique: true

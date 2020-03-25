@@ -8,18 +8,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-room = Room.create
-room.room_hash = 'jam'
-room.save
+# Create an empty room
+Room.create(room_hash: 'empty')
 
+# Create a room with two attached jams
+room = Room.create(room_hash: 'jams')
 jam = room.jams.build(bpm: '120')
-jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3')
+jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 jam.save
 
 other_jam = room.jams.build(bpm: '120')
-other_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3')
+other_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 other_jam.save
 
-room_without_jam = Room.create
-room_without_jam.room_hash = 'nojam'
-room_without_jam.save

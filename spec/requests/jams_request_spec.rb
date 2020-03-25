@@ -13,7 +13,7 @@ RSpec.describe 'Jams', type: :request do
       jam = room.reload.jams.first
 
       expect(jam).to_not be_nil
-      expect(jam.filename).to eq file.original_filename
+      expect(jam.file.filename).to eq file.original_filename
       expect(jam.file).to be_kind_of(ActiveStorage::Attached)
 
       follow_redirect!
