@@ -17,9 +17,9 @@ RSpec.describe 'Room viewing', type: :request do
     travel_to Time.zone.local(2020, 1, 24, 0o1, 0o4, 44) do
       get room_path(current_jam.room)
 
-      expect(response.body).to include('Latest JAM January 24, 2020 01:04')
-      expect(response.body).to include("FILE: #{current_jam.file.filename}")
-      expect(response.body).to include("BPM: #{current_jam.bpm}")
+      expect(response.body).to include('January 24, 2020 01:04')
+      expect(response.body).to include(current_jam.file.filename.to_s)
+      expect(response.body).to include(current_jam.bpm)
       expect(response.body).to include('Download Track')
     end
   end
@@ -29,8 +29,8 @@ RSpec.describe 'Room viewing', type: :request do
     get room_path(previous_jam.room)
 
     expect(response.body).to include('Previous JAMs on this track')
-    expect(response.body).to include("FILE: #{previous_jam.file.filename}")
-    expect(response.body).to include("BPM: #{previous_jam.bpm}")
+    expect(response.body).to include(previous_jam.file.filename.to_s)
+    expect(response.body).to include(previous_jam.bpm)
 
     # Check for the download link
     previous_jam_path = URI.parse(url_for(previous_jam.file)).path

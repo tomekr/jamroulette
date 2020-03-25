@@ -24,7 +24,7 @@ RSpec.describe 'Jams', type: :request do
 
       follow_redirect!
       expect(response.body).to include(file.original_filename)
-      expect(response.body).to include('BPM: 100')
+      expect(response.body).to include(jam.bpm)
       expect(response.body).to include('Jam successfully created!')
     end
 
