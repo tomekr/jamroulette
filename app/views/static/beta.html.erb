@@ -1,0 +1,28 @@
+<section class="hero is-primary is-fullheight is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Jam Roulette is currently in closed beta.
+      </h1>
+      <h2 class="subtitle">
+         To continue, please enter an invite code below.
+      </h2>
+      <%= form_with url: "/validate_beta_user", method: "post", local: true do %>
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <p class="control is-expanded">
+                <%= text_field_tag :beta_code, nil, class: "input", placeholder: "Enter invite code here" %>
+              </p>
+            </div>
+            <div class="field">
+              <div class="control">
+                <%= submit_tag "Go", class: "button is-success" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
