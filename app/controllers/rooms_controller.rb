@@ -14,21 +14,6 @@ class RoomsController < ApplicationController
     redirect_to room_path(room), notice: 'Room was successfully created.'
   end
 
-  # PATCH /rooms/:room_hash
-  def update
-    if params[:jam]
-      @jam = @room.jams.build
-      file = params[:jam][:file]
-
-      @jam.file.attach(file)
-      @jam.filename = file.original_filename
-
-      @jam.bpm = params[:jam][:bpm] unless params[:jam][:bpm].blank?
-      @jam.save
-    end
-    redirect_to room_path(@room)
-  end
-
   private
 
   def set_room
