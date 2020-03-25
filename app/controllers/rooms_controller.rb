@@ -12,7 +12,7 @@ class RoomsController < ApplicationController
   # POST /rooms
   def create
     room = Room.create!
-    redirect_to room_path(room), notice: 'Room was successfully created.'
+    redirect_to room_path(room)
   end
 
   private

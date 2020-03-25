@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Jams', type: :request do
+  # TODO: Remove when beta invite requirements are removed
+  before(:each) do
+    InviteCode.create(code: 'correct-code')
+    post '/validate_beta_user', params: { beta_code: 'correct-code' }
+  end
+
   context 'Uploading a jam' do
     let(:file) { fixture_file_upload('spec/support/assets/test.mp3') }
     let(:room) { create(:room) }

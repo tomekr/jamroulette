@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Room viewing', type: :request do
+  # TODO: Remove when beta invite requirements are removed
+  before(:each) do
+    InviteCode.create(code: 'correct-code')
+    post '/validate_beta_user', params: { beta_code: 'correct-code' }
+  end
+
   let(:room) { create(:room) }
   let(:current_jam) { create(:jam, room: room) }
 
