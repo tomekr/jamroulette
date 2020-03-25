@@ -1,1 +1,4 @@
 $primary: #611986; 
+// This appears to be required because of a current bug in bulma
+// https://github.com/jgthms/bulma/pull/2743
+$input-color: hsl(0, 0%, 21%);
