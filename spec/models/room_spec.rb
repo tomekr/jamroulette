@@ -3,9 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  let(:room) { build(:room) }
+  let(:room) { create(:room) }
 
   describe 'Validations' do
+    let(:room) { build(:room) }
+
     it 'is valid out of the factory' do
       expect(room).to be_valid
     end
@@ -18,7 +20,7 @@ RSpec.describe Room, type: :model do
   describe '#destroy' do
     context 'given a jam that belongs to a room' do
       it 'destroys the associated jam' do
-        room = create(:jam).room
+        create(:jam, room: room)
         expect { room.destroy }.to change(Jam, :count).by(-1)
       end
     end
