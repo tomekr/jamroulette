@@ -2,7 +2,7 @@
 
 class Room < ApplicationRecord
   validates :room_hash, uniqueness: true
-  before_create :generate_room_hash
+  after_initialize :generate_room_hash
 
   has_many :jams, dependent: :destroy
 
@@ -13,6 +13,6 @@ class Room < ApplicationRecord
   private
 
   def generate_room_hash
-    self.room_hash = SecureRandom.hex
+    self.room_hash ||= SecureRandom.hex
   end
 end
