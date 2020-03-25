@@ -6,6 +6,10 @@ class Room < ApplicationRecord
 
   has_many :jams
 
+  def to_param
+    room_hash
+  end
+
   private
 
   def generate_room_hash

@@ -7,13 +7,13 @@ RSpec.describe RoomsController, type: :controller do
     let(:room) { create(:room) }
 
     it 'renders a room page' do
-      get :show, params: { room_hash: room.room_hash }
+      get :show, params: { id: room.room_hash }
       expect(response.status).to eq(200)
     end
 
     it "doesn't allow routing to a room via id" do
       expect do
-        get :show, params: { id: room.id, room_hash: room.id }
+        get :show, params: { id: room.id }
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

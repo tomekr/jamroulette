@@ -10,10 +10,8 @@ class RoomsController < ApplicationController
 
   # POST /rooms
   def create
-    @room = Room.new
-
-    @room.save
-    redirect_to room_path(@room.room_hash), notice: 'Room was successfully created.'
+    room = Room.create!
+    redirect_to room_path(room), notice: 'Room was successfully created.'
   end
 
   # PATCH /rooms/:room_hash
@@ -28,12 +26,12 @@ class RoomsController < ApplicationController
       @jam.bpm = params[:jam][:bpm] unless params[:jam][:bpm].blank?
       @jam.save
     end
-    redirect_to room_path(@room.room_hash)
+    redirect_to room_path(@room)
   end
 
   private
 
   def set_room
-    @room = Room.find_by_room_hash!(params[:room_hash])
+    @room = Room.find_by!(room_hash: params[:id])
   end
 end

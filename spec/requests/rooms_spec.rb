@@ -9,7 +9,7 @@ RSpec.describe 'Room viewing', type: :request do
 
     jam = create(:jam)
     room = jam.room
-    get "/rooms/#{room.room_hash}"
+    get room_path(room)
 
     expect(response.body).to include('Latest JAM January, 24 2020')
     expect(response.body).to include("FILE: #{jam.filename}")
@@ -25,7 +25,7 @@ RSpec.describe 'Room viewing', type: :request do
     current_jam = create(:jam, bpm: '120', filename: 'current-jam.wave', room: previous_jam.room)
 
     room = current_jam.room
-    get "/rooms/#{room.room_hash}"
+    get room_path(room)
 
     expect(response.body).to include('Previous JAMs on this track')
     expect(response.body).to include("FILE: #{previous_jam.filename}")
@@ -38,7 +38,7 @@ RSpec.describe 'Room viewing', type: :request do
 
   it 'does not display Jam attributes one does not exist' do
     room = create(:room)
-    get "/rooms/#{room.room_hash}"
+    get room_path(room)
 
     expect(response.body).to_not include('Latest JAM')
     expect(response.body).to_not include('Previous JAMs on this track')
@@ -52,7 +52,7 @@ RSpec.describe 'Room viewing', type: :request do
 
     it 'allows user to upload a jam' do
       room = create(:room)
-      patch "/rooms/#{room.room_hash}", params: { jam: { bpm: '100', file: file } }
+      patch room_path(room), params: { jam: { bpm: '100', file: file } }
 
       jam = room.reload.jams.first
 

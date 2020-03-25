@@ -48,7 +48,7 @@
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
-    <%= form_with(model: @room, url: room_path(@room.room_hash), :multipart => true,  local: true) do |form| %>
+    <%= form_with(model: @room, url: room_path(@room), :multipart => true,  local: true) do |form| %>
       <header class="modal-card-head">
         <p class="modal-card-title">Upload a Jam</p>
         <button class="delete modal-close-button" aria-label="close"></button>
