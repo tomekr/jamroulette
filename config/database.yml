@@ -65,7 +65,7 @@ development:
 test:
   <<: *default
   database: jamroulette_test
-  <% if ENV["LOCAL"] %>
+  <% if ENV["LOCAL"] or ENV["CI"] %>
   host: localhost
   <% else %>
   host: db
