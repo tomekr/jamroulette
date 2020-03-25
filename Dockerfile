@@ -13,7 +13,7 @@ RUN wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.z
     unzip chromedriver_linux64.zip -d /usr/bin && \
     chmod u+x /usr/bin/chromedriver
 
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn google-chrome-stable
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn google-chrome-stable cmake
 RUN gem install bundler -v 2.1.4
 
 RUN mkdir /app
