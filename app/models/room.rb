@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Room < ApplicationRecord
-  validates :room_hash, uniqueness: true, allow_nil: false
+  validates :room_hash, uniqueness: true
   before_create :generate_room_hash
 
-  has_many :jams
+  has_many :jams, dependent: :destroy
 
   def to_param
     room_hash

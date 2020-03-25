@@ -16,6 +16,15 @@ RSpec.describe Room, type: :model do
     expect(room.room_hash).to match(/[0-9a-f]{32}/)
   end
 
+  describe '#destroy' do
+    context 'given a jam that belongs to a room' do
+      it 'destroys the associated jam' do
+        room = create(:jam).room
+        expect { room.destroy }.to change(Jam, :count)
+      end
+    end
+  end
+
   describe '#to_param' do
     context 'given a room that exists in the database' do
       it 'returns the room hash' do

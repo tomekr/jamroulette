@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: %i[show update]
   # GET /rooms/:room_hash
   def show
-    @jams = @room.jams.order('jams.created_at DESC').to_a
+    @jams = @room.jams.limit(20).order('jams.created_at DESC').to_a
     @current_jam = @jams.shift
     @new_jam = @room.jams.build
   end

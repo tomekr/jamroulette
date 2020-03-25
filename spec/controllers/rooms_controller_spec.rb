@@ -8,7 +8,7 @@ RSpec.describe RoomsController, type: :controller do
 
     it 'renders a room page' do
       get :show, params: { id: room.room_hash }
-      expect(response.status).to eq(200)
+      expect(response).to be_successful
     end
 
     it "doesn't allow routing to a room via id" do
