@@ -7,5 +7,5 @@ before_script:
 cache: bundler
 script:
   - bundle exec rake
-  - git pull origin master:master
+  - git fetch origin master:master
   - undercover --compare master
