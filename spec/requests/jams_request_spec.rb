@@ -35,7 +35,30 @@ RSpec.describe 'Jams', type: :request do
 
       expect(request).to redirect_to(room_path(room))
       follow_redirect!
-      expect(response.body).to include('A file must be specified.')
+      expect(response.body).to include('File must be attached')
+    end
+
+    context "File content type validation" do
+      context "Client-side" do
+        it "restricts mime type on form field to audio/*" do
+          get room_path(room)
+          expect(response.body).to include('accept="audio/*" type="file"')
+        end
+      end
+
+      context "Server-side" do
+        it "shows error if content type is not audio/*" do
+          invalid_file = fixture_file_upload('spec/support/assets/invalid_file.txt')
+
+          expect do
+            post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
+          end.to_not change(Jam, :count)
+
+          expect(request).to redirect_to(room_path(room))
+          follow_redirect!
+          expect(response.body).to include('must be an audio file')
+        end
+      end
     end
   end
 end
