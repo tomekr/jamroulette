@@ -12,11 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2020_03_25_182440) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -41,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_03_25_182440) do
 
   create_table "jams", force: :cascade do |t|
     t.string "bpm"
-    t.integer "room_id", null: false
+    t.bigint "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_jams_on_room_id"
@@ -49,10 +53,10 @@ ActiveRecord::Schema.define(version: 2020_03_25_182440) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "title"
-    t.string "room_hash", null: false
+    t.citext "public_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_hash"], name: "index_rooms_on_room_hash", unique: true
+    t.index ["public_id"], name: "index_rooms_on_public_id", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
