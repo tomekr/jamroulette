@@ -14,7 +14,7 @@ RSpec.describe Room, type: :model do
   end
 
   it 'generates a random hex room hash' do
-    expect(room.room_hash).to match(/[0-9a-f]{32}/)
+    expect(room.public_id).to match(/[0-9a-f]{32}/)
   end
 
   describe '#destroy' do
@@ -28,7 +28,7 @@ RSpec.describe Room, type: :model do
 
   describe '#to_param' do
     it 'returns the room hash' do
-      expect(room.to_param).to eq room.room_hash
+      expect(room.to_param).to eq room.public_id
     end
   end
 end

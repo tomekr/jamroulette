@@ -9,10 +9,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Create an empty room
-Room.create(room_hash: 'empty')
+Room.create(public_id: 'empty')
 
 # Create a room with two attached jams
-room = Room.create(room_hash: 'jams')
+room = Room.create(public_id: 'jams')
 jam = room.jams.build(bpm: '120')
 jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 jam.save

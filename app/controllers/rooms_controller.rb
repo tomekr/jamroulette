@@ -2,7 +2,7 @@
 
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show update]
-  # GET /rooms/:room_hash
+  # GET /rooms/:public_id
   def show
     @jams = @room.jams.last(20).to_a
     @current_jam = @jams.shift
@@ -18,6 +18,6 @@ class RoomsController < ApplicationController
   private
 
   def set_room
-    @room = Room.find_by!(room_hash: params[:id])
+    @room = Room.find_by!(public_id: params[:id])
   end
 end
