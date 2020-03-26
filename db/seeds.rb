@@ -21,3 +21,5 @@ other_jam = room.jams.build(bpm: '120')
 other_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 other_jam.save
 
+# TODO Remove when no longer in beta
+InviteCode.create(code: 'Mellon')
