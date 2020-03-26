@@ -30,4 +30,23 @@ To run the rails server on your local machine (to make things like using byebug 
 2. Run `LOCAL=true bundle exec rails server` (`LOCAL=true` tells rails to use the database listening on localhost)
 3. Point your browser to [http://localhost:3000/](http://localhost:3000/)
 
+## Deployment
 
+### Staging
+
+The Heroku pipeline is currently configured to automatically deploy when changes are pushed to master. If you would like to deploy from the Heroku CLI, follow the instructions below.
+
+This section requires that you:
+
+1. Have the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed.
+2. Have your CLI [connected to](https://devcenter.heroku.com/articles/heroku-cli#getting-started) your Heroku account. 
+2. Have access to Jam Roulettes's Heroku environment.
+
+To add a remote for staging:
+
+1. Run `heroku git:remote -a jamroulette-staging`
+2. Rename the remote with `git remote rename heroku staging`
+
+To deploy the master branch run `git push staging master`
+
+To deploy from a branch besides master `git push staging master`
