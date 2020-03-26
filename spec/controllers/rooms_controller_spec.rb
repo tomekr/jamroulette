@@ -12,7 +12,7 @@ RSpec.describe RoomsController, type: :controller do
     let(:room) { create(:room) }
 
     it 'renders a room page' do
-      get :show, params: { id: room.room_hash }
+      get :show, params: { id: room.public_id }
       expect(response).to be_successful
     end
 

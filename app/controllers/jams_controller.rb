@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class JamsController < ApplicationController
-  # POST /rooms/:room_hash/jams
+  # POST /rooms/:public_id/jams
   def create
-    room = Room.find_by!(room_hash: params[:room_id])
+    room = Room.find_by!(public_id: params[:room_id])
     jam = room.jams.build(jam_params)
     if jam.save
       flash[:success] = 'Jam successfully created!'
