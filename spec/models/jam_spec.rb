@@ -11,6 +11,14 @@ RSpec.describe Jam, type: :model do
     it 'is not valid without a file' do
       jam.file = nil
       expect(jam).to_not be_valid
+      expect(jam.errors[:file]).to include("must be attached")
+    end
+
+    it 'only allows content types of audio/*' do
+      invalid_file = fixture_file_upload('spec/support/assets/invalid_file.txt')
+      jam = build(:jam, file: invalid_file)
+      expect(jam).to_not be_valid
+      expect(jam.errors[:file]).to include("must be an audio file")
     end
   end
 end
