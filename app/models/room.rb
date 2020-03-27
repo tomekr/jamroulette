@@ -10,6 +10,10 @@ class Room < ApplicationRecord
     public_id
   end
 
+  def self.random_room
+    self.limit(1).order("RANDOM()").take
+  end
+
   private
 
   def generate_public_id
