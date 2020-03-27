@@ -8,7 +8,7 @@ class JamsController < ApplicationController
     if jam.save
       flash[:success] = 'Jam successfully created!'
     else
-      flash[:danger] = 'A file must be specified.'
+      flash[:danger] = jam.errors.full_messages.join(', ')
     end
     redirect_to room_path(room)
   end
