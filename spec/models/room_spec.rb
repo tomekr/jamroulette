@@ -17,6 +17,13 @@ RSpec.describe Room, type: :model do
     expect(room.public_id).to match(/[0-9a-f]{32}/)
   end
 
+  describe "Room#random_room" do
+    it 'returns a Jam' do
+      create_list(:room, 2)
+      expect(Room.random_room).to be_an_instance_of(Room)
+    end
+  end
+
   describe '#destroy' do
     context 'given a jam that belongs to a room' do
       it 'destroys the associated jam' do
