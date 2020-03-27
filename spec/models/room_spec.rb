@@ -17,18 +17,18 @@ RSpec.describe Room, type: :model do
     expect(room.public_id).to match(/[0-9a-f]{32}/)
   end
 
-  describe "Room#random_room" do
-    it 'returns a Jam' do
-      create_list(:room, 2)
-      expect(Room.random_room).to be_an_instance_of(Room)
+  describe "Room#recommended" do
+    it 'returns a Room that contains a jam' do
+      create(:jam, room: room)
+      expect(Room.recommended.take).to be_an_instance_of(Room)
     end
   end
 
   describe '#destroy' do
     context 'given a jam that belongs to a room' do
       it 'destroys the associated jam' do
-        create(:jam, room: room)
-        expect { room.destroy }.to change(Jam, :count).by(-1)
+        jam = create(:jam)
+        expect { jam.room.destroy! }.to change(Jam, :count).by(-1)
       end
     end
   end

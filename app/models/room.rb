@@ -5,13 +5,10 @@ class Room < ApplicationRecord
   after_initialize :generate_public_id
 
   has_many :jams, dependent: :destroy
+  scope :recommended, -> { joins(:jams).order("RANDOM()") }
 
   def to_param
     public_id
-  end
-
-  def self.random_room
-    self.limit(1).order("RANDOM()").take
   end
 
   private

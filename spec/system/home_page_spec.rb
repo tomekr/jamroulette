@@ -35,8 +35,11 @@ RSpec.describe 'visiting the home page', type: :system do
       click_on 'Go'
     end
 
-    it 'allows a user to join a random room' do
-      room = create(:room, public_id: "random-room")
+    it 'allows a user to join a random room that contains a jam' do
+      room = build(:room, public_id: "random-room")
+      create(:jam, room: room)
+
+      visit home_path
 
       click_link('Join a random room')
 
