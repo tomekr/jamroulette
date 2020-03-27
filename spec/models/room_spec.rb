@@ -17,10 +17,10 @@ RSpec.describe Room, type: :model do
     expect(room.public_id).to match(/[0-9a-f]{32}/)
   end
 
-  describe "Room#random_room" do
+  describe "Room#recommended" do
     it 'returns a Room that contains a jam' do
       create(:jam, room: room)
-      expect(Room.random_room).to be_an_instance_of(Room)
+      expect(Room.recommended.take).to be_an_instance_of(Room)
     end
   end
 

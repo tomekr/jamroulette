@@ -39,6 +39,8 @@ RSpec.describe 'visiting the home page', type: :system do
       room = build(:room, public_id: "random-room")
       create(:jam, room: room)
 
+      visit home_path
+
       click_link('Join a random room')
 
       expect(page).to have_content('random-room')

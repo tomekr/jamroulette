@@ -8,11 +8,13 @@
         Join a room to start building up a track or start your own.
       </h2>
 
-      <%= link_to(random_room_path, class: "button is-primary is-inverted") do %>
-        <span class="icon">
-          <i class="fas fa-door-open"></i>
-        </span>
-        <span>Join a random room</span>
+      <% if(room = Room.recommended.take) %>
+        <%= link_to(room_path(room), class: "button is-primary is-inverted") do %>
+          <span class="icon">
+            <i class="fas fa-door-open"></i>
+          </span>
+          <span>Join a random room</span>
+        <% end %>
       <% end %>
 
       <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
