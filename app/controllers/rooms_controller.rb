@@ -15,6 +15,10 @@ class RoomsController < ApplicationController
     redirect_to room_path(room)
   end
 
+  def random_room
+    redirect_to room_path(Room.random_room)
+  end
+
   private
 
   def set_room

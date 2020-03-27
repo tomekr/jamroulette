@@ -36,11 +36,11 @@ RSpec.describe 'visiting the home page', type: :system do
     end
 
     it 'allows a user to join a random room' do
-      pending 'TODO'
-      visit root_path
-      click_on('Join a random room')
+      room = create(:room, public_id: "random-room")
 
-      expect(page).to have_content('My Song 1')
+      click_link('Join a random room')
+
+      expect(page).to have_content('random-room')
     end
 
     it 'allows a user to create a new room' do
