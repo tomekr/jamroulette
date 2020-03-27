@@ -9,7 +9,7 @@ RSpec.describe 'Jams', type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
-  context 'Uploading a jam' do
+  describe 'Uploading a jam' do
     let(:file) { fixture_file_upload('spec/support/assets/test.mp3') }
     let(:room) { create(:room) }
 
@@ -28,36 +28,31 @@ RSpec.describe 'Jams', type: :request do
       expect(response.body).to include('Jam successfully created!')
     end
 
-    it 'fails if a file is not specified' do
-      expect do
-        post room_jams_path(room), params: { jam: { bpm: '100', file: nil } }
-      end.to_not change(Jam, :count)
-
-      expect(request).to redirect_to(room_path(room))
-      follow_redirect!
-      expect(response.body).to include('File must be attached')
+    it "restricts mime type on form field to audio/*" do
+      get room_path(room)
+      expect(response.body).to include('accept="audio/*" type="file"')
     end
 
-    context "File content type validation" do
-      context "Client-side" do
-        it "restricts mime type on form field to audio/*" do
-          get room_path(room)
-          expect(response.body).to include('accept="audio/*" type="file"')
-        end
+    context "with server side validation failure" do
+      let(:invalid_file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
+
+      it "redirects to the home page" do
+        post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
+
+        expect(request).to redirect_to(room_path(room))
       end
 
-      context "Server-side" do
-        it "shows error if content type is not audio/*" do
-          invalid_file = fixture_file_upload('spec/support/assets/invalid_file.txt')
+      it "alerts about error" do
+        post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
 
-          expect do
-            post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
-          end.to_not change(Jam, :count)
+        follow_redirect!
+        expect(response.body).to include('must be an audio file')
+      end
 
-          expect(request).to redirect_to(room_path(room))
-          follow_redirect!
-          expect(response.body).to include('must be an audio file')
-        end
+      it "doesn't create a Jam record" do
+        expect do
+          post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
+        end.to_not change(Jam, :count)
       end
     end
   end

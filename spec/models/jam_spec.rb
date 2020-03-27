@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Jam, type: :model do
+
   describe 'Validations' do
     let(:jam) { build(:jam) }
 
@@ -15,8 +16,7 @@ RSpec.describe Jam, type: :model do
     end
 
     it 'only allows content types of audio/*' do
-      invalid_file = fixture_file_upload('spec/support/assets/invalid_file.txt')
-      jam = build(:jam, file: invalid_file)
+      jam.file = fixture_file_upload('spec/support/assets/invalid_file.txt')
       expect(jam).to_not be_valid
       expect(jam.errors[:file]).to include("must be an audio file")
     end
