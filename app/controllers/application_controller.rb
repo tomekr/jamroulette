@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   private
 
   def ensure_beta_user
-    redirect_to root_path unless session[:is_beta_user]
+    unless session[:is_beta_user]
+      session[:redirect_to] = request.url
+      redirect_to root_path
+    end
   end
 end
