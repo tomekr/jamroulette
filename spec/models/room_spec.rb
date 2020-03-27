@@ -27,8 +27,8 @@ RSpec.describe Room, type: :model do
   describe '#destroy' do
     context 'given a jam that belongs to a room' do
       it 'destroys the associated jam' do
-        create(:jam, room: room)
-        expect { room.destroy }.to change(Jam, :count).by(-1)
+        jam = create(:jam)
+        expect { jam.room.destroy! }.to change(Jam, :count).by(-1)
       end
     end
   end
