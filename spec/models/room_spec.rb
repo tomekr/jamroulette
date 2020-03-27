@@ -18,8 +18,8 @@ RSpec.describe Room, type: :model do
   end
 
   describe "Room#random_room" do
-    it 'returns a Jam' do
-      create_list(:room, 2)
+    it 'returns a Room that contains a jam' do
+      create(:jam, room: room)
       expect(Room.random_room).to be_an_instance_of(Room)
     end
   end

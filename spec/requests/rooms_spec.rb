@@ -46,4 +46,17 @@ RSpec.describe 'Room viewing', type: :request do
 
     expect(response.body).to include('This room is brand new! Upload a track to get started!')
   end
+
+  it 'redirects a user to a random room that is not empty' do
+    create(:room, public_id: 'empty-room')
+
+    room = build(:room, public_id: 'room-with-a-jam')
+    create(:jam, room: room)
+    create(:jam)
+
+    get random_room_path
+    follow_redirect!
+
+    expect(response.body).to_not include('This room is brand new! Upload a track to get started!')
+  end
 end

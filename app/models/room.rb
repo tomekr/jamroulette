@@ -11,7 +11,7 @@ class Room < ApplicationRecord
   end
 
   def self.random_room
-    self.limit(1).order("RANDOM()").take
+    self.joins(:jams).where("jams.id IS NOT NULL").limit(1).order("RANDOM()").take
   end
 
   private
