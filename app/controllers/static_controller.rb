@@ -12,7 +12,7 @@ class StaticController < ApplicationController
     if InviteCode.find_by_code(params[:beta_code])
       session[:is_beta_user] = true
       flash[:success] = 'Welcome! Thanks for helping beta test Jam Roulette!'
-      redirect_to home_path
+      redirect_back fallback_location: home_path
     else
       session[:is_beta_user] = false
       flash[:danger] = 'Invalid invite code.'
