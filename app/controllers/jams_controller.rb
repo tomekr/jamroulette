@@ -5,6 +5,11 @@ class JamsController < ApplicationController
   def create
     room = Room.find_by!(public_id: params[:room_id])
     jam = room.jams.build(jam_params)
+
+    if user_signed_in?
+      jam.user = current_user
+    end
+
     if jam.save
       flash[:success] = 'Jam successfully created!'
     else

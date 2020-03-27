@@ -55,5 +55,26 @@ RSpec.describe 'Jams', type: :request do
         end.to_not change(Jam, :count)
       end
     end
+
+    context "user is unauthenticated" do
+      it "does not associate a user with a created jam" do
+        post room_jams_path(room), params: { jam: { bpm: '100', file: file } }
+        follow_redirect!
+
+        expect(response.body).to include("User - Anonymous")
+      end
+    end
+
+    context "user is authenticated" do
+      it "associates user with a created jam" do
+        user = create(:user, display_name: "Alice")
+        sign_in user
+
+        post room_jams_path(room), params: { jam: { bpm: '100', file: file } }
+        follow_redirect!
+
+        expect(response.body).to include("User - Alice")
+      end
+    end
   end
 end
