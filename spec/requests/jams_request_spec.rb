@@ -64,7 +64,7 @@ RSpec.describe 'Jams', type: :request do
         upload_jam(room)
         follow_redirect!
 
-        expect(response.body).to include("User - Anonymous")
+        expect(response.body).to include("Anonymous")
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe 'Jams', type: :request do
         upload_jam(room)
         follow_redirect!
 
-        expect(response.body).to include("User - Alice")
+        expect(response.body).to include("Alice")
       end
     end
   end
