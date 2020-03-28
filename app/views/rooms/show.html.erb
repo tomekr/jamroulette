@@ -40,7 +40,7 @@
           <li>
             <span class="jam-attribute jam-attribute-user">
               <span class="jam-key"><i class="far fa-user"></i> User: </span>
-              <span class="jam-value"><%= "Anonymous" %></span>
+              <span class="jam-value"><%= jam_user(@current_jam) %></span>
             </span>
           </li>
         </ul>
@@ -117,7 +117,7 @@
               <span class="jam-value"><%= jam.bpm %></span>
             </div>
             <div class="column">
-              <span class="jam-value"><%= "Anonymous" %></span>
+              <span class="jam-value"><%= jam_user(jam) %></span>
             </div>
             <div class="column">
               <span class="jam-value"><%= link_to "Download Track", url_for(jam.file), class: "button is-dark" %></span>
