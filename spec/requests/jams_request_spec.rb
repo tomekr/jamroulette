@@ -9,14 +9,17 @@ RSpec.describe 'Jams', type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
+  def upload_jam(room)
+    post room_jams_path(room), params: { jam: { bpm: '100', file: file } }
+    room.reload.jams.first
+  end
+
   describe 'Uploading a jam' do
     let(:file) { fixture_file_upload('spec/support/assets/test.mp3') }
     let(:room) { create(:room) }
 
     it 'allows user to upload a jam' do
-      post room_jams_path(room), params: { jam: { bpm: '100', file: file } }
-
-      jam = room.reload.jams.first
+      jam = upload_jam(room)
 
       expect(jam).to_not be_nil
       expect(jam.file.filename).to eq file.original_filename
@@ -58,7 +61,7 @@ RSpec.describe 'Jams', type: :request do
 
     context "user is unauthenticated" do
       it "does not associate a user with a created jam" do
-        post room_jams_path(room), params: { jam: { bpm: '100', file: file } }
+        upload_jam(room)
         follow_redirect!
 
         expect(response.body).to include("User - Anonymous")
@@ -70,7 +73,7 @@ RSpec.describe 'Jams', type: :request do
         user = create(:user, display_name: "Alice")
         sign_in user
 
-        post room_jams_path(room), params: { jam: { bpm: '100', file: file } }
+        upload_jam(room)
         follow_redirect!
 
         expect(response.body).to include("User - Alice")
