@@ -1,0 +1,22 @@
+<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="<%= home_path %>">
+      <span><i class="fas fa-dice-d20"></i> Jam Roulette</span>
+    </a>
+  </div>
+
+  <div id="jamroulette-navbar" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+        <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
+          <span class="icon">
+            <i class="fas fa-plus-circle"></i>
+          </span>
+          <span>Create New</span>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav
