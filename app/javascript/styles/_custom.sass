@@ -1,0 +1,128 @@
+@font-face
+  font-family: "jamface"
+  src: url('../fonts/ondo-medium.eot')
+  src: local('bingo')
+  src: url('../fonts/ondo-medium.svg#bingo') format('svg')
+  src: url('../fonts/ondo-medium.otf') format('opentype')
+
+body
+  height: 100vh
+  background: radial-gradient(ellipse at center,  #ec7676 0%,#df4578 100%)
+  color: white
+
+a
+  color: white
+  text-decoration: underline
+
+h1
+  font-size: 56px
+  font-family: "jamface"
+
+h2
+  font-size: 32px
+  font-family: "jamface"
+
+
+nav.navbar
+  background: $black
+
+.custom-font
+    font-family: "jamface"
+
+
+.jam-header
+  background: #252525
+  color: #fff
+  span
+    font-size: 12px
+
+#previous-jams
+  max-width: 1400px
+  margin: 0 auto
+  padding: 0
+  border-radius: 8px
+  overflow: hidden
+  box-shadow: 0 0 30px rgba(0,0,0,0.2)
+
+.jam-row
+  background-color: #515151
+  border-bottom: 1px solid #252525
+
+.jam-value
+  font-size: 12px
+  color: white
+
+nav.navbar 
+  height: 70px
+  box-shadow: 0 0 40px 0 rgba(0,0,0,1)
+
+nav.navbar .navbar-brand a
+  padding: 0
+  img
+    margin-left: 20px
+    width: 159px
+    height: 39px
+    max-height: 39px
+
+
+
+#room-header
+  span
+    position: relative
+    z-index: 1
+    padding: 10px 20px
+    background: rgba(255,255,255,0.2)
+    border-radius: 100px
+
+#breadcrumb
+  font-size: 12px
+  font-weight: 600
+
+#share-this-room
+  text-align: right
+  font-size: 12px
+  font-weight: 600
+
+
+
+#stage
+
+
+#stage.empty
+  position: absolute
+  z-index: 0
+  top: 0
+  left: 0
+  height: 100vh
+  width: 100vw
+  display: flex
+  justify-content: center
+  align-items: center
+
+.upload-trigger
+  text-align: center
+  background: rgba(255,255,255,0.2)
+  border-radius: 20px
+  padding: 40px
+  box-shadow: 0 0 40px 0 rgba(0,0,0,0.2)
+  
+  button:hover
+      transform: scale(1.1)
+
+
+.button
+    font-family: "jamface"
+    background: #000000
+    color: #ffffff
+    border-radius: 100px
+    font-size: 13px
+    height: 13px
+    line-height: 13px
+    margin: 0
+    padding: 20px 30px 33px 30px
+    border: none
+    transition: all .3s ease
+
+.button:hover, .button:focus
+    color: white
+    transition: all .3s ease

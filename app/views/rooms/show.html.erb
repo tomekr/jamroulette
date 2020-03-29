@@ -1,9 +1,10 @@
-<section class="section" id="room-header">
-  <div id="breadcrumb">
-    <%= "Home/#{@room.public_id}"%>
+<section class="section columns" id="room-header">
+  <div id="breadcrumb" class="column">
+    <span><%= "Home/#{@room.public_id}"%></span>
   </div>
-  <div id="share-this-room">
-    Share this Room: <%= link_to room_url(@room) %>
+
+  <div id="share-this-room" class="column">
+    <span>Share this Room: <%= link_to room_url(@room) %></span>
   <div>
 </section>
 
@@ -52,16 +53,17 @@
       <button id="upload-jam-button" class="button">Upload New Track</button>
     </div>
   <% else %>
-    <div>
-      <div>
-        <p>This room is brand new! Upload a track to get started!</p>
-      </div>
-      <br />
-      <button id="upload-jam-button" class="button">Upload New Track</button>
+    <div id="stage" class="empty">
+      <div class="upload-trigger">
+      <h2>This room is brand new!</h2><br />
+      <p>Upload a track to get started!</p><br /><br />
+
+      <button id="upload-jam-button" class="button">
+        <span> <i class="fas fa-file-upload"></i>&nbsp;&nbsp;&nbsp;Upload New Track</span>
+      </button>
     </div>
   <% end %>
 </section>
-
 
 <section class="section" id="previous-jams">
   <div id="previous-jams">
