@@ -7,21 +7,36 @@ RSpec.describe RoomsController, type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
+  describe 'GET #show' do
+    let(:room) { create(:room) }
+
+    it 'renders a room page' do
+      get room_path(room.public_id)
+      expect(response).to be_successful
+    end
+
+    it "doesn't allow routing to a room via id" do
+      expect do
+        get "/rooms/#{room.id}"
+      end.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
   context "user is authenticated" do
-    before(:each) { sign_in create(:user) }
+    let(:user) { create(:user) }
+    before(:each) { sign_in user }
 
-    describe 'GET #show' do
-      let(:room) { create(:room) }
-
-      it 'renders a room page' do
-        get room_path(room.public_id)
-        expect(response).to be_successful
+    describe 'POST #create' do
+      it 'creates an activity' do
+        expect do
+          post rooms_path
+        end.to change(Activity, :count).from(0).to(1)
       end
 
-      it "doesn't allow routing to a room via id" do
-        expect do
-          get "/rooms/#{room.id}"
-        end.to raise_error(ActiveRecord::RecordNotFound)
+      it 'associates the activity with the current user' do
+        post rooms_path
+        room = Room.take
+        expect(room.activities.take.user).to eq user
       end
     end
   end

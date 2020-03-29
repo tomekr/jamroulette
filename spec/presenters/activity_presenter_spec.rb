@@ -29,7 +29,7 @@ describe ActivityPresenter do
     it "displays the room public_id" do
       allow(room_activity).to receive(:subject_type).and_return("Room")
       expect(presenter.activity_feed_line).to eq(
-        "<span class='jam-activity'>You created <a href='/rooms/activity-presenter-room'>activity-presenter-room</span>"
+        "<span class='room-activity'>You created <a href='/rooms/activity-presenter-room'>activity-presenter-room</span>"
       )
     end
   end

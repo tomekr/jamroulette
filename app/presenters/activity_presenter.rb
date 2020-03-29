@@ -18,7 +18,7 @@ class ActivityPresenter < SimpleDelegator
       "<span class='jam-activity'>You uploaded #{filename} to #{room_link_for(jam.room)}</span>".html_safe
     when "Room"
       room = @activity.subject
-      "<span class='jam-activity'>You created #{room_link_for(room)}</span>".html_safe
+      "<span class='room-activity'>You created #{room_link_for(room)}</span>".html_safe
     end
   end
 

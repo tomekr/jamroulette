@@ -14,6 +14,7 @@ class RoomsController < ApplicationController
   # POST /rooms
   def create
     room = Room.create!
+    room.activities.create!(user: current_user)
     redirect_to room_path(room)
   end
 

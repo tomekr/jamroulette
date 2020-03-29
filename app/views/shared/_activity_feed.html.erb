@@ -1,8 +1,8 @@
 <table class="table">
   <tbody>
-    <% activities.each do |activity| %>
+    <% ActivityPresenter.activities(activities).each do |presenter| %>
       <tr>
-        <td><%= "You uploaded #{activity.subject.file.filename} to #{activity.subject.room.public_id}" %></td>
+        <td><%= presenter.activity_feed_line %></td>
       </tr>
     <% end %>
   </tbody>
