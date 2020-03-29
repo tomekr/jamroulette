@@ -46,11 +46,24 @@ RSpec.describe 'visiting the home page', type: :system do
       expect(page).to have_content('random-room')
     end
 
-    it 'allows a user to create a new room' do
-      visit root_path
-      click_on('Create a new room')
+    context "user is authenticated" do
+      before(:each) do
+        sign_in create(:user)
+      end
 
-      expect(page).to have_content('Upload a track to get started')
+      it 'allows a user to create a new room' do
+        visit home_path
+        click_on('Create a new room')
+
+        expect(page).to have_content('Upload a track to get started')
+      end
+
+      it 'allows a user to sign out' do
+        visit home_path
+        click_on('Sign Out')
+
+        expect(page).to have_content('Signed out successfully')
+      end
     end
   end
 end
