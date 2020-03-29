@@ -17,20 +17,11 @@
         <% end %>
       <% end %>
 
-      <% if user_signed_in? %>
-        <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
-          <span class="icon">
-            <i class="fas fa-plus-circle"></i>
-          </span>
-          <span>Create a new room</span>
-        <% end %>
-      <% else %>
-        <button class="button is-primary is-inverted" title="Sign in or create an account" disabled>
-          <span class="icon">
-            <i class="fas fa-plus-circle"></i>
-          </span>
-          <span>Create a new room</span>
-        </button>
+      <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
+        <span class="icon">
+          <i class="fas fa-plus-circle"></i>
+        </span>
+        <span>Create a new room</span>
       <% end %>
     </div>
   </div>
