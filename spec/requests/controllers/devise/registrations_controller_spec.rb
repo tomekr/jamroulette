@@ -2,19 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe Devise::RegistrationsController, type: :controller do
-  include Devise::Test::ControllerHelpers
-
+RSpec.describe Devise::RegistrationsController, type: :request do
+  # TODO: Remove when beta invite requirements are removed
   before(:each) do
-    # TODO: Remove when beta invite requirements are removed
-    session[:is_beta_user] = true
-    # Required when testing a devise controller from a controller spec
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    InviteCode.create(code: 'correct-code')
+    post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
   describe 'POST #create' do
     it 'permits entering a display_name attribute' do
-      post :create, params: {
+      post user_registration_path, params: {
         user: {
           display_name: "Bob",
           email: "bob@example.com",
@@ -30,7 +27,7 @@ RSpec.describe Devise::RegistrationsController, type: :controller do
     it 'permits entering a display_name attribute' do
       user = create(:user, display_name: 'Original Name')
       sign_in user
-      put :update, params: {
+      put user_registration_path, params: {
         user: {
           display_name: "New Name",
           current_password: user.password,
