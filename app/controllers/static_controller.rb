@@ -2,6 +2,8 @@
 
 class StaticController < ApplicationController
   skip_before_action :ensure_beta_user, only: %i[beta validate_beta_user]
+  skip_before_action :authenticate_user!
+
   def index; end
 
   def beta

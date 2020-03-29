@@ -2,7 +2,7 @@
 
 class RoomsController < ApplicationController
   before_action :set_room, only: :show
-  before_action :authenticate_user!, except: :show
+  skip_before_action :authenticate_user!, only: :show
 
   # GET /rooms/:public_id
   def show

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class JamsController < ApplicationController
-  before_action :authenticate_user!
-
   # POST /rooms/:public_id/jams
   def create
     room = Room.find_by!(public_id: params[:room_id])
