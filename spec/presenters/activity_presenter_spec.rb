@@ -26,7 +26,7 @@ describe ActivityPresenter do
   context 'presenting a room' do
     let(:activity) { room_activity }
 
-    it "displays the room public_id" do
+    it "displays the room link" do
       allow(room_activity).to receive(:subject_type).and_return("Room")
       expect(presenter.activity_feed_line).to eq(
         "<span class='room-activity'>You created <a href='/rooms/activity-presenter-room'>activity-presenter-room</span>"
