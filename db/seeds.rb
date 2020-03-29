@@ -23,3 +23,19 @@ other_jam.save
 
 # TODO Remove when no longer in beta
 InviteCode.create(code: 'Mellon')
+
+User.create(
+  display_name: 'bobby',
+  email: 'bob@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: Time.now
+)
+
+User.create(
+  display_name: 'alice',
+  email: 'alice@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: Time.now
+)
