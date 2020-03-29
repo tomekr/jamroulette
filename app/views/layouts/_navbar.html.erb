@@ -16,6 +16,12 @@
             </span>
             <span>Create Room</span>
           <% end %>
+          <%= link_to(destroy_user_session_path, method: :delete,  class: "button is-primary is-inverted") do %>
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span>
+            <span>Sign Out</span>
+          <% end %>
         <% else %>
           <%= link_to(new_user_session_path, class: "button is-primary is-inverted") do %>
             <span class="icon">
