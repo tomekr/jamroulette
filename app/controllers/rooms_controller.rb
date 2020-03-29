@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[show update]
+  before_action :set_room, only: :show
+  before_action :authenticate_user!, except: :show
+
   # GET /rooms/:public_id
   def show
     @jams = @room.jams.last(20).to_a
@@ -13,10 +15,6 @@ class RoomsController < ApplicationController
   def create
     room = Room.create!
     redirect_to room_path(room)
-  end
-
-  def random_room
-    redirect_to room_path(Room.random_room)
   end
 
   private

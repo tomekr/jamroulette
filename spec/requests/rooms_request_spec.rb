@@ -12,6 +12,14 @@ RSpec.describe 'Room viewing', type: :request do
   let(:room) { create(:room) }
   let(:current_jam) { create(:jam, room: room) }
 
+
+  context "user is unauthenticated" do
+    it 'redirects user to sign in page' do
+      post rooms_path
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
   it 'displays current Jam information if it exists' do
     # Lock datetime to Jan 24, 2020 1:4:44
     travel_to Time.zone.local(2020, 1, 24, 0o1, 0o4, 44) do
