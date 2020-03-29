@@ -16,21 +16,23 @@ RSpec.describe JamsController, type: :request do
     let(:file) { fixture_file_upload('spec/support/assets/test.mp3') }
     let(:jam_params) { { bpm: '100', file: file } }
     let(:upload_jam) { post room_jams_path(room), params: { jam: jam_params } }
+    let(:uploaded_jam) { room.reload.jams.first }
 
-    context 'with a valid jam' do
-      it 'allows user to upload a jam' do
-        upload_jam
-        jam = room.reload.jams.first
+    it 'uploads a jam' do
+      upload_jam
 
-        expect(jam).to_not be_nil
-        expect(jam.file.filename).to eq file.original_filename
-        expect(jam.file).to be_kind_of(ActiveStorage::Attached)
+      expect(uploaded_jam).to_not be_nil
+      expect(uploaded_jam.file.filename).to eq file.original_filename
+      expect(uploaded_jam.file).to be_kind_of(ActiveStorage::Attached)
+    end
 
-        follow_redirect!
-        expect(response.body).to include(file.original_filename)
-        expect(response.body).to include(jam.bpm)
-        expect(response.body).to include('Jam successfully created!')
-      end
+    it 'lists the uploaded jam' do
+      upload_jam
+      follow_redirect!
+
+      expect(response.body).to include(file.original_filename)
+      expect(response.body).to include(uploaded_jam.bpm)
+      expect(response.body).to include('Jam successfully created!')
     end
 
     context "with an invalid file" do
