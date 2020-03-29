@@ -1,0 +1,27 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+        <h1 class="title">Resend confirmation instructions</h1>
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="field">
+            <label class="label">Email Address</label>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, class: "input", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), placeholder: "Enter your email address" %>
+              <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+            </div>
+          </div>
+
+          <div class="actions is-centered is-focus-padded">
+            <%= f.submit "Resend Confirmation Email", class: "button is-link is-success" %>
+          </div>
+        <% end %>
+
+      <%= render "devise/shared/links" %>
+
+      </div>
+    </div>
+  </div>
+</section>

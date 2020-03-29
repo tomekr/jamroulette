@@ -1,0 +1,51 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+        <h1 class="title">Create a new account</h1>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="field">
+            <label class="label">Display Name</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :display_name, class: "input", placeholder: "This is what other users will see", autofocus: true %>
+              <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email Address</label>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, class: "input", placeholder: "Enter your email address" %>
+              <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left">
+              <%= f.password_field :password, class: "input", placeholder: "Enter a password (six character minimum)" %>
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password Confirmation</label>
+            <div class="control has-icons-left">
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: "input", placeholder: "Confirm password by retyping" %>
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+            </div>
+          </div>
+
+          <div class="actions is-centered is-focus-padded">
+            <%= f.submit "Sign Up", class: "button is-link is-success" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+
+      </div>
+    </div>
+  </div>
+</section>

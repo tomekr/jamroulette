@@ -1,0 +1,41 @@
+
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+				<h1 class="title">Log in</h1>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <label class="label">Email Address</label>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, class: "input", placeholder: "Enter your email address" %>
+              <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left">
+              <%= f.password_field :password, class: "input", placeholder: "Enter a password (six character minimum)" %>
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+            </div>
+          </div>
+
+          <% if devise_mapping.rememberable? -%>
+            <div class="field">
+              <label class="label">Remember me</label>
+              <%= f.check_box :remember_me, class: "checkbox" %>
+            </div>
+          <% end -%>
+
+          <div class="actions is-centered is-focus-padded">
+            <%= f.submit "Sign in", class: "button is-link is-success" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth">
+
+        <%= link_to "Back", :back %>
+        <h1 class="title">Update Your Account</h1>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <label class="label">Your Display Name</label>
+            <div class="control has-icons-left">
+              <%= f.text_field :display_name, class: "input", autofocus: true, placeholder: "Enter your display name" %>
+              <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email Address</label>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, class: "input", placeholder: "Enter your email address" %>
+              <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
+            </div>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class="notification is-warning">
+              Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <label class="label">Current Password</label>
+            <div class="control has-icons-left">
+              <%= f.password_field :current_password, autocomplete: "off", class: "input", placeholder: "Confirm existing password" %>
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Change Password (leave blank if you do not want to change your password)</label>
+            <div class="control has-icons-left">
+              <%= f.password_field :password, class: "input", autocomplete: "off", placeholder: "Enter your NEW password (six character minimum)" %>
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Change Password Confirmation</label>
+            <div class="control has-icons-left">
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: "input", placeholder: "Confirm NEW password by retyping" %>
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+            </div>
+          </div>
+
+          <div class="actions is-centered is-focus-padded">
+            <%= f.submit "Update Registration Information", class: "button is-link is-success" %>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>
+
