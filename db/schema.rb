@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_203556) do
+ActiveRecord::Schema.define(version: 2020_03_29_191513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2020_03_28_203556) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.string "subject_type", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_type", "subject_id"], name: "index_activities_on_subject_type_and_subject_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "invite_codes", force: :cascade do |t|
@@ -85,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_03_28_203556) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activities", "users"
   add_foreign_key "jams", "rooms"
   add_foreign_key "jams", "users"
 end
