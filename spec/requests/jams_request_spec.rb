@@ -29,19 +29,6 @@ RSpec.describe 'Jams', type: :request do
         expect(response.body).to include("Alice")
       end
 
-      it 'allows user to upload a jam' do
-        jam = upload_jam(room)
-
-        expect(jam).to_not be_nil
-        expect(jam.file.filename).to eq file.original_filename
-        expect(jam.file).to be_kind_of(ActiveStorage::Attached)
-
-        follow_redirect!
-        expect(response.body).to include(file.original_filename)
-        expect(response.body).to include(jam.bpm)
-        expect(response.body).to include('Jam successfully created!')
-      end
-
       it "restricts mime type on form field to audio/*" do
         get room_path(room)
         expect(response.body).to include('accept="audio/*" type="file"')
@@ -49,12 +36,6 @@ RSpec.describe 'Jams', type: :request do
 
       context "with server side validation failure" do
         let(:invalid_file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
-
-        it "redirects to the home page" do
-          post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
-
-          expect(request).to redirect_to(room_path(room))
-        end
 
         it "alerts about error" do
           post room_jams_path(room), params: { jam: { bpm: '100', file: invalid_file } }
