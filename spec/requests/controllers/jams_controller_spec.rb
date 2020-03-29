@@ -35,6 +35,17 @@ RSpec.describe JamsController, type: :request do
       expect(response.body).to include('Jam successfully created!')
     end
 
+    it 'creates an activity' do
+      expect do
+        upload_jam
+      end.to change(Activity, :count).from(0).to(1)
+    end
+
+    it 'associates the activity with the current user' do
+      upload_jam
+      expect(uploaded_jam.activities.first.user).to eq user
+    end
+
     context "with an invalid file" do
       let(:file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
 

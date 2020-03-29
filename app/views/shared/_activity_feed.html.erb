@@ -1,0 +1,9 @@
+<table class="table">
+  <tbody>
+    <% activities.each do |activity| %>
+      <tr>
+        <td><%= "You uploaded #{activity.subject.file.filename} to #{activity.subject.room.public_id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
