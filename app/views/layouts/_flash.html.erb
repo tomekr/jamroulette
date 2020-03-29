@@ -1,5 +1,5 @@
 <% flash.each do |message_type, message| %>
-  <div class="notification is-radiusless is-marginless is-<%= message_type %>">
+  <div class="notification is-radiusless is-marginless is-<%= bulma_flash_mapping(message_type) %>">
     <button class="delete"></button>
     <%= message %>
   </div>
