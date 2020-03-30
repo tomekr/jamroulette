@@ -5,6 +5,8 @@ class Room < ApplicationRecord
   after_initialize :generate_public_id
 
   has_many :jams, dependent: :destroy
+  has_many :activities, as: :subject, dependent: :destroy
+
   scope :recommended, -> { joins(:jams).order("RANDOM()") }
 
   def to_param

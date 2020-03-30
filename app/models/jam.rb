@@ -7,6 +7,8 @@ class Jam < ApplicationRecord
   validates :file, presence: { message: "must be attached" }
   validate :content_type_is_audio
 
+  has_many :activities, as: :subject, dependent: :destroy
+
   private
 
   def content_type_is_audio

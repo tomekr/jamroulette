@@ -6,11 +6,10 @@ class JamsController < ApplicationController
     room = Room.find_by!(public_id: params[:room_id])
     jam = room.jams.build(jam_params)
 
-    if user_signed_in?
-      jam.user = current_user
-    end
+    jam.user = current_user
 
     if jam.save
+      jam.activities.create!(user: current_user)
       flash[:success] = 'Jam successfully created!'
     else
       flash[:danger] = jam.errors.full_messages.join(', ')

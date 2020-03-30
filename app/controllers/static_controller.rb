@@ -4,7 +4,9 @@ class StaticController < ApplicationController
   skip_before_action :ensure_beta_user, only: %i[beta validate_beta_user]
   skip_before_action :authenticate_user!
 
-  def index; end
+  def index
+    @activities = current_user&.activities
+  end
 
   def beta
     redirect_to home_path if session[:is_beta_user]

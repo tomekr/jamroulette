@@ -47,9 +47,8 @@ RSpec.describe 'visiting the home page', type: :system do
     end
 
     context "user is authenticated" do
-      before(:each) do
-        sign_in create(:user)
-      end
+      let(:user) { create(:user) }
+      before(:each) { sign_in user }
 
       it 'allows a user to create a new room' do
         visit home_path
@@ -63,6 +62,19 @@ RSpec.describe 'visiting the home page', type: :system do
         click_on('Sign Out')
 
         expect(page).to have_content('Signed out successfully')
+      end
+
+      context 'activity feed' do
+        it 'allows user to view a jam they uploaded' do
+          activity = create(:activity, :jam, user: user)
+          jam = activity.subject
+          room = jam.room
+
+          visit home_path
+
+          expect(page).to have_content("Activity Feed")
+          expect(page).to have_content("You uploaded #{jam.file.filename} to #{room.public_id}")
+        end
       end
     end
   end

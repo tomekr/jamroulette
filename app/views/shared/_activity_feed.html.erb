@@ -1,0 +1,13 @@
+<h1 class="title">Activity Feed</h1>
+
+<table class="table">
+  <tbody>
+    <% ActivityPresenter.activities(owner, self).each do |activity| %>
+      <tr>
+        <td>
+          <span class='<%= activity.type %>-activity'><%= activity.message %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
