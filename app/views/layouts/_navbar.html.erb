@@ -23,6 +23,12 @@
             <span>Sign Out</span>
           <% end %>
         <% else %>
+          <%= link_to(new_user_registration_path, class: "button is-primary is-inverted") do %>
+            <span class="icon">
+              <i class="fas fa-user-plus"></i>
+            </span>
+            <span>Create an account</span>
+          <% end %>
           <%= link_to(new_user_session_path, class: "button is-primary is-inverted") do %>
             <span class="icon">
               <i class="fas fa-user"></i>
