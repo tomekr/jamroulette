@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RoomsController, type: :request do
   # TODO: Remove when beta invite requirements are removed
-  before(:each) do
+  before do
     InviteCode.create(code: 'correct-code')
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
@@ -22,24 +22,26 @@ RSpec.describe RoomsController, type: :request do
     end
   end
 
-  context "user is authenticated" do
+  describe 'POST #create' do
+    it_behaves_like "Auth Required"
+    let(:action) { post rooms_path }
+
     let(:user) { create(:user) }
-    before(:each) { sign_in user }
+    before { sign_in(user) }
 
-    describe 'POST #create' do
-      it 'creates a room' do
-        expect { post rooms_path }.to change(Room, :count).by(1)
-      end
 
-      it 'creates an activity' do
-        expect { post rooms_path }.to change(Activity, :count).by(1)
-      end
+    it 'creates a room' do
+      expect { action }.to change(Room, :count).by(1)
+    end
 
-      it 'associates the activity with the current user' do
-        post rooms_path
-        room = Room.last
-        expect(room.activities.take.user).to eq user
-      end
+    it 'creates an activity' do
+      expect { action }.to change(Activity, :count).by(1)
+    end
+
+    it 'associates the activity with the current user' do
+      action
+      room = Room.last
+      expect(room.activities.take.user).to eq user
     end
   end
 end
