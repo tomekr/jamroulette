@@ -7,4 +7,8 @@ module ApplicationHelper
       message_type
     end
   end
+
+  def beta_user?
+    session[:is_beta_user].present?
+  end
 end

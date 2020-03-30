@@ -5,39 +5,45 @@
     </a>
   </div>
 
-  <div id="jamroulette-navbar" class="navbar-menu">
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-        <% if user_signed_in? %>
-          <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
-            <span class="icon">
-              <i class="fas fa-plus-circle"></i>
-            </span>
-            <span>Create Room</span>
+  <% if beta_user?  %>
+    <div id="jamroulette-navbar" class="navbar-menu">
+      <div class="navbar-start">
+        <%= link_to 'Home', home_path, class: 'navbar-item'  %>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+          <% if user_signed_in? %>
+            <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
+              <span class="icon">
+                <i class="fas fa-plus-circle"></i>
+              </span>
+              <span>Create Room</span>
+            <% end %>
+            <%= link_to(destroy_user_session_path, method: :delete,  class: "button is-primary is-inverted") do %>
+              <span class="icon">
+                <i class="fas fa-user"></i>
+              </span>
+              <span>Sign Out</span>
+            <% end %>
+          <% else %>
+            <%= link_to(new_user_registration_path, class: "button is-primary is-inverted") do %>
+              <span class="icon">
+                <i class="fas fa-user-plus"></i>
+              </span>
+              <span>Create an account</span>
+            <% end %>
+            <%= link_to(new_user_session_path, class: "button is-primary is-inverted") do %>
+              <span class="icon">
+                <i class="fas fa-user"></i>
+              </span>
+              <span>Sign In</span>
+            <% end %>
           <% end %>
-          <%= link_to(destroy_user_session_path, method: :delete,  class: "button is-primary is-inverted") do %>
-            <span class="icon">
-              <i class="fas fa-user"></i>
-            </span>
-            <span>Sign Out</span>
-          <% end %>
-        <% else %>
-          <%= link_to(new_user_registration_path, class: "button is-primary is-inverted") do %>
-            <span class="icon">
-              <i class="fas fa-user-plus"></i>
-            </span>
-            <span>Create an account</span>
-          <% end %>
-          <%= link_to(new_user_session_path, class: "button is-primary is-inverted") do %>
-            <span class="icon">
-              <i class="fas fa-user"></i>
-            </span>
-            <span>Sign In</span>
-          <% end %>
-        <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </nav>
