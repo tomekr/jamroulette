@@ -26,11 +26,9 @@
         <% end %>
       </section>
 
-      <% if user_signed_in? && !@activities.empty? %>
+      <% if @current_user&.activities&.any? %>
         <section class="section">
-          <h1 class="title">Activity Feed</h1>
-
-          <%= render "shared/activity_feed", activities: @activities %>
+          <%= render "shared/activity_feed", owner: @current_user %>
         </section>
       <% end %>
     </div>

@@ -27,15 +27,17 @@ RSpec.describe RoomsController, type: :request do
     before(:each) { sign_in user }
 
     describe 'POST #create' do
+      it 'creates a room' do
+        expect { post rooms_path }.to change(Room, :count).by(1)
+      end
+
       it 'creates an activity' do
-        expect do
-          post rooms_path
-        end.to change(Activity, :count).from(0).to(1)
+        expect { post rooms_path }.to change(Activity, :count).by(1)
       end
 
       it 'associates the activity with the current user' do
         post rooms_path
-        room = Room.take
+        room = Room.last
         expect(room.activities.take.user).to eq user
       end
     end

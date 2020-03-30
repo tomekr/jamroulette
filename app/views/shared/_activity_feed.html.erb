@@ -1,8 +1,10 @@
+<h1 class="title">Activity Feed</h1>
+
 <table class="table">
   <tbody>
-    <% ActivityPresenter.activities(activities).each do |presenter| %>
+    <% ActivityPresenter.activities(owner).each do |activity| %>
       <tr>
-        <td><%= presenter.activity_feed_line %></td>
+        <td><%= activity.activity_feed_line %></td>
       </tr>
     <% end %>
   </tbody>

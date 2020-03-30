@@ -18,7 +18,7 @@ describe ActivityPresenter do
     it "displays filename and room link" do
       allow(jam_activity).to receive(:subject_type).and_return("Jam")
       expect(presenter.activity_feed_line).to eq(
-        "<span class='jam-activity'>You uploaded test.mp3 to <a href='/rooms/activity-presenter-room'>activity-presenter-room</span>"
+        "<span class='jam-activity'>You uploaded test.mp3 to <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a></span>"
       )
     end
   end
@@ -29,7 +29,7 @@ describe ActivityPresenter do
     it "displays the room link" do
       allow(room_activity).to receive(:subject_type).and_return("Room")
       expect(presenter.activity_feed_line).to eq(
-        "<span class='room-activity'>You created <a href='/rooms/activity-presenter-room'>activity-presenter-room</span>"
+        "<span class='room-activity'>You created <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a></span>"
       )
     end
   end
