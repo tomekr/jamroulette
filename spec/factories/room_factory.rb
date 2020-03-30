@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :room do
-    title { 'Room 1' }
+    name { 'Room 1' }
   end
 end

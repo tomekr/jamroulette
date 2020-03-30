@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_191513) do
+ActiveRecord::Schema.define(version: 2020_03_30_212553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_03_29_191513) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.citext "public_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
