@@ -1,30 +1,44 @@
 class ActivityPresenter < SimpleDelegator
-  include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::SanitizeHelper
 
-  def self.activities(owner)
-    owner.activities.map { |activity| new(activity) }
+  def self.activities(owner, view)
+    owner.activities.map { |activity| new(activity, view) }
   end
 
-  def initialize(activity)
-    super
+  def initialize(activity, view)
+    super(activity)
+    @view = view
   end
 
-  def activity_feed_line
+  # XXX Ensure all user controlled attributes are sanitized before embedding them into HTML
+  def message
     case subject_type
     when "Jam"
-      jam = subject
-      filename = sanitize(jam.file.filename.to_s)
-      "<span class='jam-activity'>You uploaded #{filename} to #{room_link_for(jam.room)}</span>".html_safe
+      "You uploaded #{jam_icon} #{sanitized_filename} to #{room_icon} #{room_link_for(subject.room)}".html_safe
     when "Room"
-      room = subject
-      "<span class='room-activity'>You created #{room_link_for(room)}</span>".html_safe
+      "You created #{room_icon} #{room_link_for(subject)}".html_safe
     end
+  end
+
+  def type
+    subject_type.downcase
   end
 
   private
 
+  def sanitized_filename
+    sanitize(subject&.file&.filename.to_s)
+  end
+
   def room_link_for(room)
-    link_to room.public_id, "/rooms/#{room.public_id}"
+    @view.link_to room.public_id, @view.room_path(room)
+  end
+
+  def room_icon
+    '<i class="fas fa-door-open"></i>'
+  end
+
+  def jam_icon
+    '<i class="fas fa-music"></i>'
   end
 end

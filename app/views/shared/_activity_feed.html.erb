@@ -2,9 +2,11 @@
 
 <table class="table">
   <tbody>
-    <% ActivityPresenter.activities(owner).each do |activity| %>
+    <% ActivityPresenter.activities(owner, self).each do |activity| %>
       <tr>
-        <td><%= activity.activity_feed_line %></td>
+        <td>
+          <span class='<%= activity.type %>-activity'><%= activity.message %></span>
+        </td>
       </tr>
     <% end %>
   </tbody>
