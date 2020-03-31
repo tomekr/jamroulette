@@ -64,6 +64,11 @@ RSpec.describe RoomsController, type: :request do
                          headers: { 'Referer': '/previous_page' }
         expect(response).to redirect_to('/previous_page')
       end
+
+      it 'adds error to flash' do
+        action
+        expect(flash.alert).to include("Name can't be blank")
+      end
     end
   end
 end

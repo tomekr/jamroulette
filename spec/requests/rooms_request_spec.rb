@@ -13,21 +13,6 @@ RSpec.describe 'Room viewing', type: :request do
   let(:room) { build(:room) }
   let(:room_params) { { room: { name: room.name } } }
 
-  context "user is authenticated" do
-    before { sign_in create(:user) }
-    let(:room) { build(:room, name: nil) }
-
-    context 'invalid room' do
-      let(:room) { build(:room, name: '') }
-
-      it 'displays an error if a name is not provided' do
-        post rooms_path, params: room_params
-        follow_redirect!
-        expect(flash.alert).to include("Name can't be blank")
-      end
-    end
-  end
-
   context "user is unauthenticated" do
     it 'redirects user to sign in page' do
       post rooms_path, params: room_params
