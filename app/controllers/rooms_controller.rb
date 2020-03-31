@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
 
   # POST /rooms
   def create
-    room = Room.new(room_parms)
+    room = current_user.rooms.build(room_parms)
 
     if room.save
       room.activities.create!(user: current_user)

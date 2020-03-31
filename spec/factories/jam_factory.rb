@@ -5,5 +5,6 @@ FactoryBot.define do
     bpm { '120' }
     file { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.mp3'), 'audio/mpeg') }
     room
+    user
   end
 end

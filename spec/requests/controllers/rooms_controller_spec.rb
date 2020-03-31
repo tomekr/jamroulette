@@ -39,6 +39,12 @@ RSpec.describe RoomsController, type: :request do
       expect { action }.to change(Room, :count).by(1)
     end
 
+    it 'associates the room with the current user' do
+      action
+      room = Room.last
+      expect(room.user).to eq user
+    end
+
     it 'creates an activity' do
       expect { action }.to change(Activity, :count).by(1)
     end

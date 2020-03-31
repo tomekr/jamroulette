@@ -5,6 +5,8 @@ class Room < ApplicationRecord
   validates :name, presence: true
   after_initialize :generate_public_id
 
+  belongs_to :user, optional: true
+
   has_many :jams, dependent: :destroy
   has_many :activities, as: :subject, dependent: :destroy
 
