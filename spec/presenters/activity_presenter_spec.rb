@@ -8,7 +8,7 @@ describe ActivityPresenter do
 
   context 'presenting a jam' do
     let(:jam) { build(:jam, room: room) }
-    let(:activity) { create(:activity, :room, subject: jam) }
+    let(:activity) { travel_to(10.minutes.ago) { create(:activity, :room, subject: jam) } }
 
     it 'returns correct type' do
       expect(presenter.type).to eq('jam')
@@ -16,13 +16,13 @@ describe ActivityPresenter do
 
     it 'returns a message' do
       expect(presenter.message).to eq(
-        "You uploaded <i class=\"fas fa-music\"></i> test.mp3 to <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a>"
+        "You uploaded <i class=\"fas fa-music\"></i> test.mp3 to <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a> 10 minutes ago"
       )
     end
   end
 
   context 'presenting a room' do
-    let(:activity) { create(:activity, :room, subject: room) }
+    let(:activity) { travel_to(10.minutes.ago) { create(:activity, :room, subject: room) } }
 
     it 'returns correct type' do
       expect(presenter.type).to eq('room')
@@ -30,7 +30,7 @@ describe ActivityPresenter do
 
     it 'returns a message' do
       expect(presenter.message).to eq(
-        "You created <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a>"
+        "You created <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a> 10 minutes ago"
       )
     end
   end
