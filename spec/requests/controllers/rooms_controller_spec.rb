@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RoomsController, type: :request do
@@ -23,7 +25,7 @@ RSpec.describe RoomsController, type: :request do
   end
 
   describe 'POST #create' do
-    it_behaves_like "Auth Required"
+    it_behaves_like 'Auth Required'
     let(:room) { build(:room) }
     let(:action) do
       post rooms_path, params: {
@@ -33,7 +35,6 @@ RSpec.describe RoomsController, type: :request do
 
     let(:user) { create(:user) }
     before { sign_in(user) }
-
 
     it 'creates a room' do
       expect { action }.to change(Room, :count).by(1)
@@ -58,8 +59,10 @@ RSpec.describe RoomsController, type: :request do
     context 'invalid room' do
       let(:room) { build(:room, name: '') }
 
-      it 'does not create a room without a name' do
-        expect { action }.to_not change(Activity, :count)
+      it 'redirects to previous page with error' do
+        post rooms_path, params: { room: { name: room.name } },
+                         headers: { 'Referer': '/previous_page' }
+        expect(response).to redirect_to('/previous_page')
       end
     end
   end

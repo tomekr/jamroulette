@@ -20,11 +20,6 @@ RSpec.describe 'Room viewing', type: :request do
     context 'invalid room' do
       let(:room) { build(:room, name: '') }
 
-      it 'redirects to the previous page user was on' do
-        post rooms_path, params: room_params, headers: { 'Referer': '/previous_page' }
-        expect(response).to redirect_to('/previous_page')
-      end
-
       it 'displays an error if a name is not provided' do
         post rooms_path, params: room_params
         follow_redirect!

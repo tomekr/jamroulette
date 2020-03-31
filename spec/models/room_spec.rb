@@ -13,7 +13,8 @@ RSpec.describe Room, type: :model do
     end
 
     it 'requires a room name' do
-      expect(build(:room, name: "")).to_not be_valid
+      room.name = ''
+      expect(room).to_not be_valid
     end
   end
 
