@@ -36,6 +36,10 @@ To run the rails server on your local machine (to make things like using byebug 
 2. Run `LOCAL=true bundle exec rails server` (`LOCAL=true` tells rails to use the database listening on localhost)
 3. Point your browser to [http://localhost:3000/](http://localhost:3000/)
 
+### Logging in
+
+`db/seeds.rb` will create two users. You can Sign In with user `bob@example.com`, password `password`.
+
 ## Deployment
 
 ### Staging
