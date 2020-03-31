@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable
   has_many :jams, dependent: :restrict_with_exception
+  has_many :rooms, dependent: :restrict_with_exception
+
   has_many :activities, dependent: :destroy
 end

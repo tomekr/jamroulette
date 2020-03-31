@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RoomsController, type: :request do
@@ -23,15 +25,25 @@ RSpec.describe RoomsController, type: :request do
   end
 
   describe 'POST #create' do
-    it_behaves_like "Auth Required"
-    let(:action) { post rooms_path }
+    it_behaves_like 'Auth Required'
+    let(:room) { build(:room) }
+    let(:action) do
+      post rooms_path, params: {
+        room: { name: room.name }
+      }
+    end
 
     let(:user) { create(:user) }
     before { sign_in(user) }
 
-
     it 'creates a room' do
       expect { action }.to change(Room, :count).by(1)
+    end
+
+    it 'associates the room with the current user' do
+      action
+      room = Room.last
+      expect(room.user).to eq user
     end
 
     it 'creates an activity' do
@@ -42,6 +54,21 @@ RSpec.describe RoomsController, type: :request do
       action
       room = Room.last
       expect(room.activities.take.user).to eq user
+    end
+
+    context 'invalid room' do
+      let(:room) { build(:room, name: '') }
+
+      it 'redirects to previous page with error' do
+        post rooms_path, params: { room: { name: room.name } },
+                         headers: { 'Referer': '/previous_page' }
+        expect(response).to redirect_to('/previous_page')
+      end
+
+      it 'adds error to flash' do
+        action
+        expect(flash.alert).to include("Name can't be blank")
+      end
     end
   end
 end

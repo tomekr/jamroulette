@@ -9,13 +9,13 @@ RSpec.describe 'Room viewing', type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
-  let(:room) { create(:room) }
   let(:current_jam) { create(:jam, room: room) }
-
+  let(:room) { build(:room) }
+  let(:room_params) { { room: { name: room.name } } }
 
   context "user is unauthenticated" do
     it 'redirects user to sign in page' do
-      post rooms_path
+      post rooms_path, params: room_params
       expect(response).to redirect_to(new_user_session_path)
     end
   end
@@ -45,7 +45,8 @@ RSpec.describe 'Room viewing', type: :request do
     expect(response.body).to include(previous_jam_path)
   end
 
-  it 'does not display Jam attributes one does not exist' do
+  it 'does not display Jam attributes if they do not exist' do
+    room = create(:room)
     get room_path(room)
 
     expect(response.body).to_not include('Latest JAM')

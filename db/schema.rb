@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_191513) do
+ActiveRecord::Schema.define(version: 2020_03_31_183524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -64,11 +64,13 @@ ActiveRecord::Schema.define(version: 2020_03_29_191513) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.citext "public_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["public_id"], name: "index_rooms_on_public_id", unique: true
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,4 +100,5 @@ ActiveRecord::Schema.define(version: 2020_03_29_191513) do
   add_foreign_key "activities", "users"
   add_foreign_key "jams", "rooms"
   add_foreign_key "jams", "users"
+  add_foreign_key "rooms", "users"
 end

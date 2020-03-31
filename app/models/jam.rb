@@ -2,7 +2,7 @@
 
 class Jam < ApplicationRecord
   belongs_to :room
-  belongs_to :user, optional: true
+  belongs_to :user
   has_one_attached :file
   validates :file, presence: { message: "must be attached" }
   validate :content_type_is_audio
