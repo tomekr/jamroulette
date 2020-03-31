@@ -60,4 +60,16 @@ RSpec.describe Room, type: :model do
       expect(room.users).to match([room.user, uploader])
     end
   end
+
+  describe '#self.random_id' do
+    it 'returns a random room id' do
+      jam = create(:jam, room: room)
+      room_2 = create(:room)
+      jam_2 = create(:jam, room: room_2)
+      room_3 = create(:room)
+      20.times do
+        expect(Room.random_id).to be_in([room.public_id, room_2.public_id])
+      end
+    end
+  end
 end
