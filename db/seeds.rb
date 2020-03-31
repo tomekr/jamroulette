@@ -25,12 +25,12 @@ alice = User.create(
 )
 
 # Create an empty room
-empty_room = Room.create(public_id: 'empty', user: bob)
-empty_room.activities.create(user: bob)
+empty_room = Room.create!(public_id: 'empty', user: bob, name: 'Empty Room')
+empty_room.activities.create!(user: bob)
 
 # Create a room with two attached jams
-room = Room.create(public_id: 'jams', user: bob)
-room.activities.create(user: bob)
+room = Room.create!(public_id: 'jams', user: bob, name: 'Jam Room')
+room.activities.create!(user: bob)
 
 jam = room.jams.build(bpm: '120', user: bob)
 jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
