@@ -24,7 +24,12 @@ RSpec.describe RoomsController, type: :request do
 
   describe 'POST #create' do
     it_behaves_like "Auth Required"
-    let(:action) { post rooms_path }
+    let(:room) { build(:room) }
+    let(:action) do
+      post rooms_path, params: {
+        room: { name: room.name }
+      }
+    end
 
     let(:user) { create(:user) }
     before { sign_in(user) }
@@ -42,6 +47,14 @@ RSpec.describe RoomsController, type: :request do
       action
       room = Room.last
       expect(room.activities.take.user).to eq user
+    end
+
+    context 'invalid room' do
+      let(:room) { build(:room, name: '') }
+
+      it 'does not create a room without a name' do
+        expect { action }.to_not change(Activity, :count)
+      end
     end
   end
 end

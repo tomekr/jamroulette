@@ -2,6 +2,7 @@
 
 class Room < ApplicationRecord
   validates :public_id, uniqueness: true
+  validates :name, presence: true
   after_initialize :generate_public_id
 
   has_many :jams, dependent: :destroy

@@ -11,6 +11,10 @@ RSpec.describe Room, type: :model do
     it 'is valid out of the factory' do
       expect(room).to be_valid
     end
+
+    it 'requires a room name' do
+      expect(build(:room, name: "")).to_not be_valid
+    end
   end
 
   it 'generates a random hex room hash' do

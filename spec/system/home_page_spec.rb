@@ -52,9 +52,13 @@ RSpec.describe 'visiting the home page', type: :system do
 
       it 'allows a user to create a new room' do
         visit home_path
-        click_on('Create a new room')
+        click_on 'Create a new room'
+
+        fill_in :room_name, with: 'test-room'
+        click_button 'Create'
 
         expect(page).to have_content('Upload a track to get started')
+        expect(page).to have_content('test-room')
       end
 
       it 'allows a user to sign out' do

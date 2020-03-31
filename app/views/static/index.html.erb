@@ -18,12 +18,12 @@
           <% end %>
         <% end %>
 
-        <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
+        <button class="button is-primary is-inverted create-room-button">
           <span class="icon">
             <i class="fas fa-plus-circle"></i>
           </span>
           <span>Create a new room</span>
-        <% end %>
+        </button>
       </section>
 
       <% if @current_user&.activities&.any? %>

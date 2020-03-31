@@ -1,0 +1,25 @@
+<div id="create-room-modal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <%= form_with model: Room, id: 'room-form', local: true do |f| %>
+      <header class="modal-card-head">
+        <p class="modal-card-title">Give your room a name</p>
+        <button class="delete modal-close-btn" aria-label="close"></button>
+      </header>
+
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <%= f.text_field :name, class: 'input' %>
+          </div>
+        </div>
+      </section>
+
+      <footer class="modal-card-foot">
+        <%= f.submit "Create", id: 'room-create-create-btn', class: 'button is-success' %>
+        <button class="button modal-close-btn">Cancel</button>
+      </footer>
+    <% end %>
+  </div>
+</div>

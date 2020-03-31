@@ -15,12 +15,12 @@
         <div class="navbar-item">
           <div class="buttons">
           <% if user_signed_in? %>
-            <%= link_to(rooms_path, method: :post, class: "button is-primary is-inverted") do %>
+            <button class="button is-primary is-inverted create-room-button">
               <span class="icon">
                 <i class="fas fa-plus-circle"></i>
               </span>
               <span>Create Room</span>
-            <% end %>
+            </button>
             <%= link_to(destroy_user_session_path, method: :delete,  class: "button is-primary is-inverted") do %>
               <span class="icon">
                 <i class="fas fa-user"></i>
