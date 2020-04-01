@@ -27,11 +27,11 @@ To run the server, `docker-compose up` and point your browser to [http://localho
 
 To just run the test suite, `docker-compose run web rake`
 
-### Running locally
+### Running the web server locally
 
 To run the rails server on your local machine (to make things like using byebug easier), follow these steps:
 
-0. Start the db docker service `docker-compose up -d db`
+0. Start the db and webpacker docker service `docker-compose up -d db webpacker`
 1. Run `bundle install`.
 2. Run `LOCAL=true bundle exec rails server` (`LOCAL=true` tells rails to use the database listening on localhost)
 3. Point your browser to [http://localhost:3000/](http://localhost:3000/)
