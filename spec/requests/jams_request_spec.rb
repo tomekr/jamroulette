@@ -19,6 +19,42 @@ RSpec.describe 'Jams', type: :request do
       before(:each) { sign_in user }
       let(:user) { create(:user, display_name: "Alice") }
 
+      context 'user email notification' do
+        let(:room_owner) { create(:user, email: 'room-owner@example.com') }
+        let(:room) { create(:room, name: 'email-room', user: room_owner) }
+
+        before { ActionMailer::Base.deliveries.clear }
+
+        it 'sends an email' do
+          expect do
+            perform_enqueued_jobs { upload_jam }
+          end.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end
+
+        it 'notifies room owner' do
+          perform_enqueued_jobs { upload_jam }
+
+          email = ActionMailer::Base.deliveries.first
+          expect(email.subject).to eq("Alice uploaded a jam to email-room")
+          expect(email.to).to eq(["room-owner@example.com"])
+        end
+
+        it 'notifies room contributors' do
+          contributor = create(:user, email: 'contributor@example.com')
+          create(:jam, room: room, user: contributor)
+
+          perform_enqueued_jobs { upload_jam }
+
+          email = ActionMailer::Base.deliveries.last
+          expect(email.subject).to eq("Alice uploaded a jam to a room you've contributed to!")
+          expect(email.to).to eq(["contributor@example.com"])
+        end
+
+        it 'does not send email to the uploader' do
+          pending "TODO"
+        end
+      end
+
       it "associates user with a created jam" do
         upload_jam
         follow_redirect!
