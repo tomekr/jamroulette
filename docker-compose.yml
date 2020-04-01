@@ -30,5 +30,4 @@ services:
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpacker
     depends_on:
-      - webpacker
       - db

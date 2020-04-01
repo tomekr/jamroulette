@@ -17,7 +17,7 @@ When you're done with working, please run `bundle exec rake` against the codebas
 
 This is required if  you've never built jamroulette via Docker before. This may also work to reset things in case Docker gets into a funky state.
 
-1. Run `script/setup-docker.sh`
+1. Run `script/setup-docker.sh` (this could take up to ~10 minutes to finish the first time)
 
 #### Starting up the web server (in Docker)
 
@@ -25,6 +25,10 @@ This is required if  you've never built jamroulette via Docker before. This may 
 2. Point your browser to [http://localhost:3000/](http://localhost:3000/)
 
 ### Running the web server locally
+
+Ensure dependencies are installed locally:
+
+1. Run `bundle install`
 
 To run the rails server on your local machine (to make things like using byebug easier), follow these steps:
 

@@ -6,6 +6,6 @@
 node_modules/
 
 # generated JavaScript
-public/javascripts
-public/webpack
-public/webpack-test
+public/assets
+public/packs
+public/packs-test
