@@ -1,0 +1,11 @@
+.git
+.dockerignore
+.env
+
+# managed dependencies
+node_modules/
+
+# generated JavaScript
+public/assets
+public/packs
+public/packs-test
