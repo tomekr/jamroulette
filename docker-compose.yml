@@ -9,6 +9,7 @@ services:
     command: ./bin/webpack-dev-server
     volumes:
       - .:/app
+      - /app/node_modules
     ports:
       - '3035:3035'
   db:
