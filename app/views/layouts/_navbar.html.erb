@@ -13,6 +13,21 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
+          <% if current_user&.notifications&.present? %>
+            <div id="notifications" class="container">
+              <span class="tag is-primary is-small"><%= current_user.notifications.count %></span>
+              <span class="icon">
+                <i class="far fa-bell"></i>
+              </span>
+            </div>
+          <% else %>
+            <span class="icon">
+              <i class="far fa-bell-slash"></i>
+            </span>
+          <% end %>
+        </div>
+
+        <div class="navbar-item">
           <div class="buttons">
           <% if user_signed_in? %>
             <button class="button is-primary is-inverted create-room-button">

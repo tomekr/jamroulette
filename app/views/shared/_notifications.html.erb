@@ -1,3 +1,16 @@
-<% current_user&.notifications&.each do |notification| %>
-  <%= "#{notification.actor.display_name} uploaded a jam to #{notification.target.room.name}" %>
-<% end %>
+<div class="container">
+  <div class="notification-feed columns is-hidden is-mobile">
+    <div class="column is-4 is-offset-8">
+      <div class="box" style="width: 300px;">
+        <% if(notifications = current_user&.notifications&.unread)  %>
+          <% current_user&.notifications&.each do |notification| %>
+            <%= "#{notification.actor.display_name} uploaded a jam to #{notification.target.room.name}" %>
+          <% end %>
+        <% else %>
+          No new notifications
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
