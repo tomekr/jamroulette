@@ -8,6 +8,8 @@ class Room < ApplicationRecord
   belongs_to :user
 
   has_many :jams, dependent: :destroy
+  has_many :users, through: :jams
+
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
 

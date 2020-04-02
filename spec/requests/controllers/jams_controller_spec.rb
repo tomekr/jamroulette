@@ -48,6 +48,20 @@ RSpec.describe JamsController, type: :request do
       expect(uploaded_jam.activities.first.user).to eq user
     end
 
+    it 'creates a notification' do
+      create(:jam, room: room, user: create(:user))
+
+      expect do
+        action
+      end.to change(Notification, :count).from(0).to(1)
+    end
+
+    it 'does not create a notification for the current user' do
+      expect do
+        action
+      end.to_not change{ user.notifications.count }
+    end
+
     context "with an invalid file" do
       let(:file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
 
