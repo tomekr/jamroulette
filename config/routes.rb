@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :notifications, only: :index
+    resources :notifications, only: :index do
+      put "read", on: :collection
+    end
   end
 
   resources :rooms, only: %i[create show] do

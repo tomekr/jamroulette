@@ -7,9 +7,17 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def read
+    @notifications.update_all(read_at: Time.now)
+
+    respond_to do |format|
+      format.json { render json: "OK" }
+    end
+  end
+
   private
 
   def set_room
-    @notifications = current_user.notifications
+    @notifications = current_user.notifications.unread
   end
 end
