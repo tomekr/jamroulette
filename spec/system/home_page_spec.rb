@@ -68,6 +68,18 @@ RSpec.describe 'visiting the home page', type: :system do
         expect(page).to have_content('Signed out successfully')
       end
 
+      it 'allows a user to upload a jam', js: true do
+        room = create(:room)
+        visit room_path(room)
+        click_on 'Upload New Track'
+
+        fill_in :jam_bpm, with: '120', visible: true
+        attach_file :jam_file, 'spec/support/assets/test.mp3', make_visible: true
+        click_on 'Upload'
+
+        expect(page).to have_content('Jam successfully created!')
+      end
+
       context 'activity feed' do
         it 'allows user to view a jam they uploaded' do
           activity = create(:activity, :jam, user: user)
