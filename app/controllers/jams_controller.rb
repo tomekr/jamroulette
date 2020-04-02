@@ -10,11 +10,13 @@ class JamsController < ApplicationController
 
     if jam.save
       jam.activities.create!(user: current_user)
-      notification = jam.notifications.create!(
-        user: jam.room.user,
-        notify_type: :jam_created,
-        actor: jam.user
-      )
+      room.users.reject{|user| user == current_user }.each do |user|
+        NotificationService.notify(
+          subject: jam,
+          user: user,
+          event: :jam_created
+        )
+      end
 
       flash[:success] = 'Jam successfully created!'
     else
