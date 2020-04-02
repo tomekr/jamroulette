@@ -6,5 +6,9 @@
 @import '~bulma'; 
 
 #notifications {
-  cursor: pointer
+  cursor: pointer;
+}
+
+.notifications-box {
+  margin: $navbar-height;
 }
