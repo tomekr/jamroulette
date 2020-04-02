@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_183524) do
+ActiveRecord::Schema.define(version: 2020_04_01_235510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(version: 2020_03_31_183524) do
     t.index ["user_id"], name: "index_jams_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "actor_id"
+    t.string "notify_type", null: false
+    t.string "target_type"
+    t.integer "target_id"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.citext "public_id", null: false
@@ -100,5 +112,6 @@ ActiveRecord::Schema.define(version: 2020_03_31_183524) do
   add_foreign_key "activities", "users"
   add_foreign_key "jams", "rooms"
   add_foreign_key "jams", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "rooms", "users"
 end
