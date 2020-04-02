@@ -31,4 +31,33 @@ RSpec.describe NotificationsController, type: :request do
       end
     end
   end
+
+  describe 'PUT #read' do
+    it_behaves_like 'Auth Required'
+
+    let(:user) { create(:user) }
+    before { sign_in(user) }
+
+    let(:action) { put read_user_notifications_path(user) }
+
+    context 'json' do
+      let(:action) do
+        headers = { 'Accept': 'application/json'}
+        put read_user_notifications_path(user), headers: headers
+      end
+
+      it 'is successful' do
+        action
+        expect(response).to be_successful
+      end
+
+      it 'marks an unread notification read' do
+        create(:notification, :jam, user: user)
+
+        expect do
+          action
+        end.to change{ user.notifications.unread.count }.from(1).to(0)
+      end
+    end
+  end
 end
