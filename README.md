@@ -62,4 +62,4 @@ To add a remote for staging:
 
 To deploy the master branch run `git push staging master`
 
-To deploy from a branch besides master `git push staging master`
+To deploy from a branch besides master `git push staging delayed-job:master -f`
