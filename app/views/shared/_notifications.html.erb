@@ -1,0 +1,3 @@
+<% current_user&.notifications&.each do |notification| %>
+  <%= "#{notification.actor.display_name} uploaded a jam to #{notification.target.room.name}" %>
+<% end %>

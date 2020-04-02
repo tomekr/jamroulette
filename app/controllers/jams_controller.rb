@@ -10,6 +10,12 @@ class JamsController < ApplicationController
 
     if jam.save
       jam.activities.create!(user: current_user)
+      notification = jam.notifications.create!(
+        user: jam.room.user,
+        notify_type: :jam_created,
+        actor: jam.user
+      )
+
       flash[:success] = 'Jam successfully created!'
     else
       flash[:danger] = jam.errors.full_messages.join(', ')
