@@ -13,6 +13,24 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
+          <% if has_unread_notifications?(current_user) %>
+            <div id="notifications" data-user-id="<%= current_user.id %>">
+              <span class="tag is-danger is-small notification-counter"><%= current_user.notifications.unread.count %></span>
+              <span class="icon">
+                <i class="far fa-bell"></i>
+              </span>
+            </div>
+          <% else %>
+            <div>
+              <span class="tag is-primary is-small notification-counter">0</span>
+              <span class="icon">
+                <i class="far fa-bell"></i>
+              </span>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="navbar-item">
           <div class="buttons">
           <% if user_signed_in? %>
             <button class="button is-primary is-inverted create-room-button">
