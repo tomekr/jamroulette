@@ -78,6 +78,18 @@ ActiveRecord::Schema.define(version: 2020_04_02_223118) do
     t.index ["user_id"], name: "index_jams_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "actor_id"
+    t.string "notify_type", null: false
+    t.string "target_type"
+    t.integer "target_id"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.citext "public_id", null: false
@@ -115,5 +127,6 @@ ActiveRecord::Schema.define(version: 2020_04_02_223118) do
   add_foreign_key "activities", "users"
   add_foreign_key "jams", "rooms"
   add_foreign_key "jams", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "rooms", "users"
 end
