@@ -8,6 +8,7 @@ class Jam < ApplicationRecord
   validate :content_type_is_audio
 
   has_many :activities, as: :subject, dependent: :destroy
+  has_many :notifications, as: :target, dependent: :destroy
 
   private
 

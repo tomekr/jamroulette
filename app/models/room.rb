@@ -9,6 +9,7 @@ class Room < ApplicationRecord
 
   has_many :jams, dependent: :destroy
   has_many :activities, as: :subject, dependent: :destroy
+  has_many :notifications, as: :target, dependent: :destroy
 
   scope :recommended, -> { joins(:jams).order("RANDOM()") }
 
