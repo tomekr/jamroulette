@@ -12,12 +12,12 @@ RSpec.describe 'Notifications', type: :request do
   let(:user) { create(:user) }
   let(:uploader) { create(:user, display_name: 'uploader') }
   let(:room) { create(:room, name: 'notification-room', public_id: 'notification-room') }
-  let(:jam) { create(:jam, room: room) }
+  let(:jam) { create(:jam, room: room, user: uploader) }
 
   before { sign_in user }
 
   it 'shows unread notifications in the navbar' do
-    create(:notification, :jam, target: jam, user: user, actor: uploader)
+    create(:notification, target: jam, user: user)
     get home_path
     expect(response.body).to include("uploader uploaded a jam")
   end

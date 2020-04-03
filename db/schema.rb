@@ -80,13 +80,13 @@ ActiveRecord::Schema.define(version: 2020_04_02_223118) do
 
   create_table "notifications", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "actor_id"
-    t.string "notify_type", null: false
-    t.string "target_type"
-    t.integer "target_id"
+    t.string "event", null: false
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
     t.datetime "read_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["target_type", "target_id"], name: "index_notifications_on_target_type_and_target_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 

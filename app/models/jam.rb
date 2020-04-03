@@ -10,7 +10,13 @@ class Jam < ApplicationRecord
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
 
+  after_create :create_activity
+
   private
+
+  def create_activity
+    activities.create!(user: user)
+  end
 
   def content_type_is_audio
     return unless file.attached?

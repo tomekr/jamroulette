@@ -21,7 +21,7 @@ RSpec.describe NotificationsController, type: :request do
       end
 
       it 'returns non-empty array as json' do
-        create(:notification, :jam, user: user)
+        create(:notification, user: user)
 
         action
 
@@ -52,7 +52,7 @@ RSpec.describe NotificationsController, type: :request do
       end
 
       it 'marks an unread notification read' do
-        create(:notification, :jam, user: user)
+        create(:notification, user: user)
 
         expect do
           action

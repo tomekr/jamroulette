@@ -1,23 +1,19 @@
 class NotificationsController < ApplicationController
-  before_action :set_room
+  before_action :set_notifications
 
   def index
-    respond_to do |format|
-      format.json { render json: @notifications }
-    end
+    render json: @notifications
   end
 
   def read
-    @notifications.update_all(read_at: Time.now)
+    @notifications.update_all(read_at: Time.current)
 
-    respond_to do |format|
-      format.json { render json: "OK" }
-    end
+    render json: "OK"
   end
 
   private
 
-  def set_room
+  def set_notifications
     @notifications = current_user.notifications.unread
   end
 end

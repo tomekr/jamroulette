@@ -1,10 +1,13 @@
 FactoryBot.define do
   factory :notification do
     user
-    association :actor, factory: :user
+
+    # Default to creating a jam
+    event { "jam_created" }
+    association :target, factory: :jam
 
     trait :jam do
-      notify_type { "jam_created" }
+      event { "jam_created" }
       association :target, factory: :jam
     end
   end

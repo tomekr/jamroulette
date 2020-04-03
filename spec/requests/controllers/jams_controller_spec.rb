@@ -7,7 +7,7 @@ RSpec.describe JamsController, type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
-  let(:room) { create(:room) }
+  let!(:room) { create(:room) }
 
   describe 'POST #create' do
     it_behaves_like 'Auth Required'
@@ -40,7 +40,7 @@ RSpec.describe JamsController, type: :request do
     it 'creates an activity' do
       expect do
         action
-      end.to change(Activity, :count).from(0).to(1)
+      end.to change(Activity, :count).by(1)
     end
 
     it 'associates the activity with the current user' do

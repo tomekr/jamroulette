@@ -15,11 +15,17 @@ class Room < ApplicationRecord
 
   scope :recommended, -> { joins(:jams).order("RANDOM()") }
 
+  after_create :create_activity
+
   def to_param
     public_id
   end
 
   private
+
+  def create_activity
+    activities.create!(user: user)
+  end
 
   def generate_public_id
     self.public_id ||= SecureRandom.hex

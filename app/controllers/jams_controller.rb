@@ -9,7 +9,6 @@ class JamsController < ApplicationController
     jam.user = current_user
 
     if jam.save
-      jam.activities.create!(user: current_user)
       room.users.reject{|user| user == current_user }.each do |user|
         NotificationService.notify(
           subject: jam,

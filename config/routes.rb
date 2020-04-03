@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :notifications, only: :index do
-      put "read", on: :collection
+    # # Default to json format for all notification routes
+    defaults format: :json do
+      resources :notifications, only: :index do
+        put "read", on: :collection
+      end
     end
   end
 

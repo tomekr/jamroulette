@@ -21,30 +21,17 @@ RSpec.describe ApplicationHelper, :type => :helper do
   end
 
   describe "#has_unread_notifications?" do
-    let(:notification) { create(:notification, :jam) }
-
-    context 'unread notifications' do
-      let(:user) { notification.user }
-
-      it 'returns true' do
-        expect(helper.has_unread_notifications?(user)).to be true
-      end
+    example 'unread notifications' do
+       notification = create(:notification)
+       expect(helper.has_unread_notifications?(notification.user)).to be true
     end
 
-    context 'no unread notifications' do
-      let(:user) { create(:user) }
-
-      it 'returns false' do
-        expect(helper.has_unread_notifications?(user)).to be false
-      end
+    example 'no unread notifications' do
+       expect(helper.has_unread_notifications?(create(:user))).to be false
     end
 
-    context 'user is not logged in' do
-      let(:user) { nil }
-
-      it 'returns false' do
-        expect(helper.has_unread_notifications?(user)).to be false
-      end
+    example 'user is not logged in' do
+      expect(helper.has_unread_notifications?(nil)).to be false
     end
   end
 end
