@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:public_id
   def show
-    @jams = @room.jams.last(20).to_a
+    @jams = @room.jams.order(created_at: :desc).last(20).to_a
     @current_jam = @jams.shift
     @new_jam = @room.jams.build
   end
