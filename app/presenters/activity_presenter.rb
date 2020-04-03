@@ -1,6 +1,5 @@
 class ActivityPresenter < SimpleDelegator
   include ActionView::Helpers::SanitizeHelper
-  include ActionView::Helpers::DateHelper
 
   def self.activities(owner, view)
     owner.activities.order(created_at: :desc).map { |activity| new(activity, view) }
@@ -29,7 +28,7 @@ class ActivityPresenter < SimpleDelegator
   private
 
   def time
-    "#{time_ago_in_words(subject.created_at)} ago"
+    "#{@view.time_ago_in_words(subject.created_at)} ago"
   end
 
   def sanitized_filename

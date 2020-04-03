@@ -9,8 +9,8 @@
           Join a room to start building up a track or start your own.
         </h2>
 
-        <% if(room = Room.recommended.take) %>
-          <%= link_to(room_path(room), class: "button is-primary is-inverted") do %>
+        <% if(@random_room) %>
+          <%= link_to(room_path(@random_room), class: "button is-primary is-inverted") do %>
             <span class="icon">
               <i class="fas fa-door-open"></i>
             </span>

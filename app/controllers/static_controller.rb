@@ -6,6 +6,7 @@ class StaticController < ApplicationController
 
   def index
     @has_activities = current_user&.activities&.exists?
+    @random_room = Room.recommended.take
   end
 
   def beta
