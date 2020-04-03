@@ -19,4 +19,19 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.beta_user?).to be false
     end
   end
+
+  describe "#has_unread_notifications?" do
+    example 'unread notifications' do
+       notification = create(:notification)
+       expect(helper.has_unread_notifications?(notification.user)).to be true
+    end
+
+    example 'no unread notifications' do
+       expect(helper.has_unread_notifications?(create(:user))).to be false
+    end
+
+    example 'user is not logged in' do
+      expect(helper.has_unread_notifications?(nil)).to be false
+    end
+  end
 end

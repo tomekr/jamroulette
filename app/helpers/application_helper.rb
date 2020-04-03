@@ -11,4 +11,9 @@ module ApplicationHelper
   def beta_user?
     session[:is_beta_user].present?
   end
+
+  def has_unread_notifications?(user)
+    return false unless user
+    user.notifications.unread.any?
+  end
 end

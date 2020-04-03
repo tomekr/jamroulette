@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Jam < ApplicationRecord
+  include Trackable
+
   belongs_to :room
   belongs_to :user
   has_one_attached :file
@@ -8,6 +10,7 @@ class Jam < ApplicationRecord
   validate :content_type_is_audio
 
   has_many :activities, as: :subject, dependent: :destroy
+  has_many :notifications, as: :target, dependent: :destroy
 
   private
 

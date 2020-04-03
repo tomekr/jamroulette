@@ -22,7 +22,13 @@ RSpec.describe Room, type: :model do
     expect(room.public_id).to match(/[0-9a-f]{32}/)
   end
 
-  describe "Room#recommended" do
+  it 'creates an activity' do
+    expect do
+      create(:room)
+    end.to change(Activity, :count).by(1)
+  end
+
+  describe ".recommended" do
     it 'returns a Room that contains a jam' do
       create(:jam, room: room)
       expect(Room.recommended.take).to be_an_instance_of(Room)
@@ -41,6 +47,17 @@ RSpec.describe Room, type: :model do
   describe '#to_param' do
     it 'returns the room hash' do
       expect(room.to_param).to eq room.public_id
+    end
+  end
+
+  describe '#users' do
+    let(:uploader) { create(:user) }
+
+    it 'returns all participants in the room' do
+      create(:jam, room: room, user: room.user)
+      create(:jam, room: room, user: uploader)
+
+      expect(room.users).to match([room.user, uploader])
     end
   end
 end

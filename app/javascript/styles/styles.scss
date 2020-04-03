@@ -4,3 +4,12 @@
 @import "custom";
 
 @import '~bulma'; 
+
+#notifications {
+  cursor: pointer;
+}
+
+.notification-feed {
+  min-width: 15em;
+  padding-top: 15px;
+}

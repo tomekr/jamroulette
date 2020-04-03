@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :rooms, dependent: :restrict_with_exception
 
   has_many :activities, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 end

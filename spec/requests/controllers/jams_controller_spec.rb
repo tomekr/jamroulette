@@ -7,7 +7,7 @@ RSpec.describe JamsController, type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
-  let(:room) { create(:room) }
+  let!(:room) { create(:room) }
 
   describe 'POST #create' do
     it_behaves_like 'Auth Required'
@@ -37,15 +37,23 @@ RSpec.describe JamsController, type: :request do
       expect(response.body).to include('Jam successfully created!')
     end
 
-    it 'creates an activity' do
-      expect do
-        action
-      end.to change(Activity, :count).from(0).to(1)
-    end
-
-    it 'associates the activity with the current user' do
+    it 'associates generated activity with the current user' do
       action
       expect(uploaded_jam.activities.first.user).to eq user
+    end
+
+    it 'creates a notification' do
+      create(:jam, room: room, user: create(:user))
+
+      expect do
+        action
+      end.to change(Notification, :count).from(0).to(1)
+    end
+
+    it 'does not create a notification for the current user' do
+      expect do
+        action
+      end.to_not change{ user.notifications.count }
     end
 
     context "with an invalid file" do
