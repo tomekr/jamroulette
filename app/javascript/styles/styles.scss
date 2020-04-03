@@ -9,6 +9,7 @@
   cursor: pointer;
 }
 
-.notifications-box {
-  margin: $navbar-height;
+.notification-feed {
+  min-width: 15em;
+  padding-top: 15px;
 }

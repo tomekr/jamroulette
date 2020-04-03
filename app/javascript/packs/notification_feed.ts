@@ -1,11 +1,11 @@
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Show modal when a "Create room" button is clicked
   document.querySelector("#notifications").addEventListener('click', (event) => {
     console.log('clicked')
 
     // Toggle feed list
-    const feed = document.querySelector('.notification-feed') as HTMLElement
-    feed.classList.toggle('is-hidden')
+    const feed = document.querySelector('#notifications') as HTMLElement
+    feed.classList.toggle('is-active')
 
     // Remove counter tag
     const counter = document.querySelector(".notification-counter") as HTMLElement

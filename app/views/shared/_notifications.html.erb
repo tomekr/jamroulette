@@ -1,12 +1,12 @@
-<div class="notification-feed columns is-overlay is-hidden">
-  <div class="column is-4 is-offset-8">
-    <div class="box notifications-box" style="width: 300px;">
-      <% if has_unread_notifications?(current_user) %>
-        <% current_user.notifications.unread.each do |notification| %>
+<div class="notification-feed dropdown-menu" id="dropdown-menu">
+  <div class="dropdown-content">
+    <% if has_unread_notifications?(current_user) %>
+      <% current_user.notifications.unread.each do |notification| %>
+        <div class="dropdown-item">
           <%= "#{notification.actor.display_name} uploaded a jam to " %>
           <%= link_to notification.target.room.name, room_path(notification.target.room)%>
-        <% end %>
+        </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
