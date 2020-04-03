@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/validate_beta_user', to: 'static#validate_beta_user'
   get 'home', to: 'static#index'
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :users do
     # # Default to json format for all notification routes

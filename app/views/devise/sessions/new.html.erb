@@ -1,9 +1,8 @@
-
 <section class="section">
   <div class="container">
-    <div class="columns">
-      <div class="column is-three-fifths is-offset-one-fifth">
-				<h1 class="title">Log in</h1>
+    <div class="columns is-vcentered">
+      <div class="column">
+        <h1 class="title">Log in</h1>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field">
             <label class="label">Email Address</label>
@@ -32,10 +31,17 @@
             <%= f.submit "Sign in", class: "button is-link is-success" %>
           </div>
         <% end %>
+      </div>
 
-        <%= render "devise/shared/links" %>
+      <div class="column has-text-centered">
+        <h4 class="subtitle is-3">or</h4>
+      </div>
 
+      <div class="column">
+        <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "button is-info is-rounded" %>
       </div>
     </div>
+
+    <%= render "devise/shared/links" %>
   </div>
 </section>
