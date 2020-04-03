@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Room < ApplicationRecord
+  include Trackable
+
   validates :public_id, uniqueness: true
   validates :name, presence: true
   after_initialize :generate_public_id
@@ -15,17 +17,11 @@ class Room < ApplicationRecord
 
   scope :recommended, -> { joins(:jams).order("RANDOM()") }
 
-  after_create :create_activity
-
   def to_param
     public_id
   end
 
   private
-
-  def create_activity
-    activities.create!(user: user)
-  end
 
   def generate_public_id
     self.public_id ||= SecureRandom.hex

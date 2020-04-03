@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Jam, type: :model do
+  let(:jam) { build(:jam) }
 
   describe 'Validations' do
-    let(:jam) { build(:jam) }
-
     it 'is valid out of the factory' do
       expect(jam).to be_valid
     end
@@ -20,5 +19,12 @@ RSpec.describe Jam, type: :model do
       expect(jam).to_not be_valid
       expect(jam.errors[:file]).to include("must be an audio file")
     end
+  end
+
+  it 'creates an activity' do
+    jam = build(:jam, room: create(:room))
+    expect do
+      jam.save
+    end.to change(Activity, :count).by(1)
   end
 end

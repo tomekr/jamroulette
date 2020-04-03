@@ -37,13 +37,7 @@ RSpec.describe JamsController, type: :request do
       expect(response.body).to include('Jam successfully created!')
     end
 
-    it 'creates an activity' do
-      expect do
-        action
-      end.to change(Activity, :count).by(1)
-    end
-
-    it 'associates the activity with the current user' do
+    it 'associates generated activity with the current user' do
       action
       expect(uploaded_jam.activities.first.user).to eq user
     end

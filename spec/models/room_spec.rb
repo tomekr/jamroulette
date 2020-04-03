@@ -22,6 +22,12 @@ RSpec.describe Room, type: :model do
     expect(room.public_id).to match(/[0-9a-f]{32}/)
   end
 
+  it 'creates an activity' do
+    expect do
+      create(:room)
+    end.to change(Activity, :count).by(1)
+  end
+
   describe ".recommended" do
     it 'returns a Room that contains a jam' do
       create(:jam, room: room)
