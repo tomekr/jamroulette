@@ -2,7 +2,7 @@ class ActivityPresenter < SimpleDelegator
   include ActionView::Helpers::SanitizeHelper
 
   def self.activities(owner, view)
-    owner.activities.map { |activity| new(activity, view) }
+    owner.activities.order(created_at: :desc).map { |activity| new(activity, view) }
   end
 
   def initialize(activity, view)

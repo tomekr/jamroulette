@@ -5,7 +5,7 @@ class StaticController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @activities = current_user&.activities
+    @has_activities = current_user&.activities&.exists?
   end
 
   def beta
