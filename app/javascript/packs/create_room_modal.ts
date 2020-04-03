@@ -17,8 +17,6 @@ class CreateRoomModal {
     // show the modal
     this.modal.classList.add('is-active');
 
-    // Because turbolinks doesn't reload the page we have to clear the input
-    this.nameInput.value = ''
     // send focus to the name input field
     this.nameInput.focus()
 
@@ -56,7 +54,7 @@ class CreateRoomModal {
   }
 }
 
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".create-room-button").forEach(createRoomButton => {
     // Show modal when a "Create room" button is clicked
     createRoomButton.addEventListener('click', () => {
