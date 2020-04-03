@@ -1,7 +1,7 @@
 <div id="create-room-modal" class="modal">
   <div class="modal-background"></div>
   <div class="modal-card">
-    <%= form_with model: Room, id: 'room-form', local: true do |f| %>
+    <%= form_with model: Room.new, id: 'room-form', local: true do |f| %>
       <header class="modal-card-head">
         <p class="modal-card-title">Give your room a name</p>
         <button class="delete modal-close-btn" aria-label="close"></button>
