@@ -15,7 +15,5 @@ before_script:
 cache: bundler
 script:
   - bundle exec rake
-  - git fetch origin master:master
-  - bundle exec undercover --compare master
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
