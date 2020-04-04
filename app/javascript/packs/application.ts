@@ -6,9 +6,9 @@ Rails.start()
 ActiveStorage.start()
 
 // This is so that we can reference images in app/javascript/packs/images
-// const images = require.context("../images", true)
+const images = require.context("../images", true)
 // @ts-ignore
-// const imagePath = name => images(name, true)
+const imagePath = name => images(name, true)
 
 // Support component names relative to this directory:
 // @ts-ignore
