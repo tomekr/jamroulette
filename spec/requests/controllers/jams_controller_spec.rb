@@ -56,6 +56,29 @@ RSpec.describe JamsController, type: :request do
       end.to_not change{ user.notifications.count }
     end
 
+    context 'tagging' do
+      let(:jam_params) do
+        {
+          bpm: '100',
+          song_key_list: 'A Major',
+          style_list: 'Electronic, Lofi',
+          could_use_list: 'Bass, Guitar, Vocals',
+          file: file }
+      end
+      let(:uploaded_jam) { room.reload.jams.first }
+
+      let(:action) { post room_jams_path(room), params: { jam: jam_params } }
+
+      it 'allows for setting bpm' do
+        action
+
+        expect(uploaded_jam.bpm).to eq '100'
+        expect(uploaded_jam.song_key_list).to include('A Major')
+        expect(uploaded_jam.style_list).to include('Electronic', 'Lofi')
+        expect(uploaded_jam.could_use_list).to include('Bass', 'Guitar', 'Vocals')
+      end
+    end
+
     context "with an invalid file" do
       let(:file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
 

@@ -2,6 +2,7 @@
 
 class Jam < ApplicationRecord
   include Trackable
+  acts_as_taggable_on :song_key, :styles, :could_use
 
   belongs_to :room
   belongs_to :user
