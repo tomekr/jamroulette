@@ -89,7 +89,7 @@ RSpec.describe 'visiting the home page', type: :system do
           visit home_path
 
           expect(page).to have_content("Activity Feed")
-          expect(page).to have_content("You uploaded #{jam.file.filename} to #{room.public_id}")
+          expect(page).to have_content("You uploaded #{jam.file.filename} to #{room.name}")
         end
       end
     end

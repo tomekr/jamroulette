@@ -3,7 +3,7 @@ require "rails_helper"
 describe ActivityPresenter do
   include ActionView::TestCase::Behavior
 
-  let(:room) { build(:room, public_id: 'activity-presenter-room') }
+  let(:room) { build(:room, public_id: 'activity-presenter-room', name: 'Presenter Room') }
   let(:presenter) { ActivityPresenter.new(activity, view) }
 
   context 'presenting a jam' do
@@ -18,7 +18,7 @@ describe ActivityPresenter do
       travel 10.minutes do
         expect(presenter.message).to eq(
           "You uploaded <i class=\"fas fa-music\"></i> test.mp3 " \
-          "to <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a> " \
+          "to <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">Presenter Room</a> " \
           "10 minutes ago"
         )
       end
@@ -35,7 +35,7 @@ describe ActivityPresenter do
     it 'returns a message' do
       travel 10.minutes do
         expect(presenter.message).to eq(
-          "You created <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">activity-presenter-room</a> " \
+          "You created <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">Presenter Room</a> " \
           "10 minutes ago"
         )
       end

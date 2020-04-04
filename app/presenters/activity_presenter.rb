@@ -36,7 +36,7 @@ class ActivityPresenter < SimpleDelegator
   end
 
   def room_link_for(room)
-    @view.link_to room.public_id, @view.room_path(room)
+    @view.link_to room.name, @view.room_path(room)
   end
 
   def room_icon
