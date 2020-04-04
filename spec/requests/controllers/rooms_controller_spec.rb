@@ -71,4 +71,28 @@ RSpec.describe RoomsController, type: :request do
       end
     end
   end
+
+  describe 'GET #random' do
+    let(:action) { get random_rooms_path }
+
+    it 'redirects to a room with a jam' do
+      jam = create(:jam)
+      action
+      expect(response).to redirect_to(room_path(jam.room))
+    end
+
+    context 'empty room' do
+      let!(:room) { create(:room) }
+
+      it 'redirects to home page' do
+        action
+        expect(response).to redirect_to(home_path)
+      end
+
+      it 'shows a flash message' do
+        action
+        expect(flash.alert).to include("No rooms with a jam exist")
+      end
+    end
+  end
 end

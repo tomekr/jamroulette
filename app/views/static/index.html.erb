@@ -9,13 +9,11 @@
           Join a room to start building up a track or start your own.
         </h2>
 
-        <% if(@random_room) %>
-          <%= link_to(room_path(@random_room), class: "button is-primary is-inverted") do %>
-            <span class="icon">
-              <i class="fas fa-door-open"></i>
-            </span>
-            <span>Join a random room</span>
-          <% end %>
+        <%= link_to(random_rooms_path, class: "button is-primary is-inverted") do %>
+          <span class="icon">
+            <i class="fas fa-door-open"></i>
+          </span>
+          <span>Join a random room</span>
         <% end %>
 
         <button class="button is-primary is-inverted create-room-button">

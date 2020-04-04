@@ -18,5 +18,6 @@ Rails.application.routes.draw do
 
   resources :rooms, only: %i[create show] do
     resources :jams, only: :create
+    get 'random', on: :collection
   end
 end
