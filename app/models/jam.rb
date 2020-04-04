@@ -12,6 +12,10 @@ class Jam < ApplicationRecord
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
 
+  def testing_coverage_results
+    puts "testing coverage results"
+  end
+
   private
 
   def content_type_is_audio
