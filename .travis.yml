@@ -1,9 +1,15 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=0ea707b2be7ed506e25cc2c81bf5f72f9fe802502e26eb9d5e1c2e132533a15c
 language: ruby
 services:
   - postgresql
 before_install:
   - gem install bundler
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   - npm install
   - psql -c 'create database jamroulette_test;' -U postgres
 cache: bundler
@@ -11,3 +17,5 @@ script:
   - bundle exec rake
   - git fetch origin master:master
   - bundle exec undercover --compare master
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
