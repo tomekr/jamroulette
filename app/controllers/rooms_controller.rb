@@ -2,7 +2,7 @@
 
 class RoomsController < ApplicationController
   before_action :set_room, only: :show
-  skip_before_action :authenticate_user!, only: :show
+  skip_before_action :authenticate_user!, only: [:show, :random]
 
   # GET /rooms/:public_id
   def show
@@ -20,6 +20,15 @@ class RoomsController < ApplicationController
     else
       flash.alert = room.errors.full_messages.join(', ')
       redirect_back fallback_location: home_path
+    end
+  end
+
+  # GET /rooms/random
+  def random
+    if (room = Room.recommended.take)
+      redirect_to room
+    else
+      redirect_to home_path, alert: "No rooms with a jam exist"
     end
   end
 

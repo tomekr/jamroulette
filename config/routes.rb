@@ -16,9 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/rooms/random', to: redirect { "/rooms/#{Room.random_id}" }
-
   resources :rooms, only: %i[create show] do
     resources :jams, only: :create
+    get 'random', on: :collection
   end
 end
