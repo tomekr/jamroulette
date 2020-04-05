@@ -22,7 +22,7 @@ RSpec.describe 'uploading jams', type: :system do
 
       attach_file :jam_file, 'spec/support/assets/test.mp3', make_visible: true
 
-      fill_in :jam_bpm, with: '120'
+      fill_in :jam_bpm_list, with: '120'
 
       click_on 'Upload'
 

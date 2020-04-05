@@ -15,7 +15,7 @@ RSpec.describe JamsController, type: :request do
     before { sign_in(user) }
 
     let(:file) { fixture_file_upload('spec/support/assets/test.mp3') }
-    let(:jam_params) { { bpm: '100', file: file } }
+    let(:jam_params) { { bpm_list: '100', file: file } }
     let(:uploaded_jam) { room.reload.jams.first }
 
     let(:action) { post room_jams_path(room), params: { jam: jam_params } }
@@ -59,16 +59,14 @@ RSpec.describe JamsController, type: :request do
     context 'tagging' do
       let(:jam_params) do
         {
-          bpm: '100',
-          song_key: 'A Major',
-          jam_type: 'MIX',
+          bpm_list: '100',
+          song_key_list: 'A Major',
+          jam_type_list: 'MIX',
           style_list: 'Electronic, Lofi',
           could_use_list: 'Bass, Guitar, Vocals',
-          file: file }
+          file: file,
+        }
       end
-      let(:uploaded_jam) { room.reload.jams.first }
-
-      let(:action) { post room_jams_path(room), params: { jam: jam_params } }
 
       it 'uploads a file with given tags' do
         action

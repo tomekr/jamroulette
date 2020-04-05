@@ -34,11 +34,11 @@
             <div class="field is-narrow">
               <div class="control">
                 <label class="radio">
-                  <%= form.radio_button :jam_type, "MIX", checked: true %>
+                  <%= form.radio_button :jam_type_list, "MIX", checked: true %>
                   MIX
                 </label>
                 <label class="radio">
-                  <%= form.radio_button :jam_type, "SOLO" %>
+                  <%= form.radio_button :jam_type_list, "SOLO" %>
                   SOLO
                 </label>
               </div>
@@ -50,7 +50,7 @@
           <label class="label">BPM</label>
           <div class="field has-addons">
             <div class="control">
-              <%= form.text_field :bpm, class: "input" %>
+              <%= form.text_field :bpm_list, class: "input" %>
             </div>
             <div class="control">
               <a class="button is-static">
@@ -62,7 +62,7 @@
 
         <div class="field">
           <label class="label">Song Key</label>
-          <%= form.text_field :song_key, class: "input", placeholder: '(e.g. "A Major", "G Dorian")' %>
+          <%= form.text_field :song_key_list, class: "input", placeholder: '(e.g. "A Major", "G Dorian")' %>
         </div>
 
         <div class="field">
