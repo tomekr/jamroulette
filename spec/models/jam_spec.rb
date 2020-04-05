@@ -19,6 +19,11 @@ RSpec.describe Jam, type: :model do
       expect(jam).to_not be_valid
       expect(jam.errors[:file]).to include("must be an audio file")
     end
+
+    it 'does not allow jam type that is not MIX or SOLO' do
+      jam.jam_type_list = ['INVALID']
+      expect(jam).to_not be_valid
+    end
   end
 
   it 'creates an activity' do

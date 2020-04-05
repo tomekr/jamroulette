@@ -26,6 +26,12 @@
             </span>
           </li>
           <li>
+            <span class="jam-attribute jam-attribute-bpm">
+              <span class="jam-key"><i class="fas fa-file-audio"></i> Jam Type: </span>
+              <span class="jam-value"><%= @current_jam.jam_type %></span>
+            </span>
+          </li>
+          <li>
             <span class="jam-attribute jam-attribute-length">
               <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
               <span class="jam-value"><%= "3:35" %></span>
@@ -35,6 +41,24 @@
             <span class="jam-attribute jam-attribute-bpm">
               <span class="jam-key"><i class="fas fa-drum"></i> BPM: </span>
               <span class="jam-value"><%= @current_jam.bpm %></span>
+            </span>
+          </li>
+          <li>
+            <span class="jam-attribute jam-attribute-bpm">
+              <span class="jam-key"><i class="fas fa-music"></i> Song Key: </span>
+              <span class="jam-value"><%= @current_jam.song_key_list %></span>
+            </span>
+          </li>
+          <li>
+            <span class="jam-attribute jam-attribute-bpm">
+              <span class="jam-key"><i class="fas fa-users"></i> Could Use: </span>
+              <span class="jam-value"><%= @current_jam.could_use_list %></span>
+            </span>
+          </li>
+          <li>
+            <span class="jam-attribute jam-attribute-bpm">
+              <span class="jam-key"><i class="fas fa-compact-disc"></i></i> Styles: </span>
+              <span class="jam-value"><%= @current_jam.style_list %></span>
             </span>
           </li>
           <li>
@@ -77,7 +101,7 @@
           Filename
         </div>
         <div class="column">
-          <i class="fas fa-compact-disc"></i>
+          <i class="fas fa-file-audio"></i>
         </div>
         <div class="column">
           <i class="far fa-clock"></i>
@@ -108,7 +132,7 @@
               <span class="jam-value"><%= jam.file.filename %></span>
             </div>
             <div class="column">
-              <span class="jam-value"><%= "MIX" %></span>
+              <span class="jam-value"><%= jam.jam_type %></span>
             </div>
             <div class="column">
               <span class="jam-value"><%= "3:35" %></span>
@@ -129,45 +153,7 @@
   </div>
 </section>
 
-<div id="upload-track-modal" class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <%= form_with(model: @new_jam, url: [@room, @new_jam],  multipart: true,  local: true) do |form| %>
-      <header class="modal-card-head">
-        <p class="modal-card-title">Upload a Jam</p>
-        <button class="delete modal-close-button" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
-        <div class="field">
-          <label class="label">BPM:</label>
-          <%= form.text_field :bpm, class: "input" %>
-        </div>
-        <div class="field">
-          <div id="file-upload-field" class="file has-name">
-            <label class="file-label">
-              <%= form.file_field :file, class: "file-input", accept: "audio/*" %>
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-                </span>
-                <span class="file-label">
-                  Choose a file...
-                </span>
-              </span>
-              <span class="file-name">
-                No file selected
-              </span>
-            </label>
-          </div>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        <%= submit_tag "Upload", class: "button is-success" %>
-        <button class="button modal-close-button">Cancel</button>
-      </footer>
-    <% end %>
-  </div>
-</div>
+<%= render 'upload_track_modal' %>
 
 <script>
   const uploadJamButton = document.querySelector('button#upload-jam-button');
