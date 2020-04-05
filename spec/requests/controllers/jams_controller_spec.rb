@@ -60,7 +60,8 @@ RSpec.describe JamsController, type: :request do
       let(:jam_params) do
         {
           bpm: '100',
-          song_key_list: 'A Major',
+          song_key: 'A Major',
+          jam_type: 'MIX',
           style_list: 'Electronic, Lofi',
           could_use_list: 'Bass, Guitar, Vocals',
           file: file }
@@ -69,11 +70,12 @@ RSpec.describe JamsController, type: :request do
 
       let(:action) { post room_jams_path(room), params: { jam: jam_params } }
 
-      it 'allows for setting bpm' do
+      it 'uploads a file with given tags' do
         action
 
         expect(uploaded_jam.bpm).to eq '100'
-        expect(uploaded_jam.song_key_list).to include('A Major')
+        expect(uploaded_jam.song_key).to include('A Major')
+        expect(uploaded_jam.jam_type).to include('MIX')
         expect(uploaded_jam.style_list).to include('Electronic', 'Lofi')
         expect(uploaded_jam.could_use_list).to include('Bass', 'Guitar', 'Vocals')
       end

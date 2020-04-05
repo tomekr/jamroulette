@@ -23,17 +23,14 @@ RSpec.describe 'uploading jams', type: :system do
       attach_file :jam_file, 'spec/support/assets/test.mp3', make_visible: true
 
       fill_in :jam_bpm, with: '120'
-      fill_in :jam_song_key_list, with: 'A Major'
-      fill_in :jam_style_list, with: 'Electronic, Lofi'
-      fill_in :jam_could_use_list, with: 'Bass, Guitar, Vocals'
 
       click_on 'Upload'
 
       expect(page).to have_content('Jam successfully created!')
       expect(page).to have_content('120')
-      expect(page).to have_content('A Major')
-      expect(page).to have_content('Electronic')
-      expect(page).to have_content('Bass')
+
+      # Radio button defaults to MIX
+      expect(page).to have_content('MIX')
     end
   end
 end

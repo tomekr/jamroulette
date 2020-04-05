@@ -26,6 +26,12 @@
             </span>
           </li>
           <li>
+            <span class="jam-attribute jam-attribute-bpm">
+              <span class="jam-key"><i class="fas fa-file-audio"></i> Jam Type: </span>
+              <span class="jam-value"><%= @current_jam.jam_type %></span>
+            </span>
+          </li>
+          <li>
             <span class="jam-attribute jam-attribute-length">
               <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
               <span class="jam-value"><%= "3:35" %></span>
@@ -126,7 +132,7 @@
               <span class="jam-value"><%= jam.file.filename %></span>
             </div>
             <div class="column">
-              <span class="jam-value"><%= "MIX" %></span>
+              <span class="jam-value"><%= jam.jam_type %></span>
             </div>
             <div class="column">
               <span class="jam-value"><%= "3:35" %></span>

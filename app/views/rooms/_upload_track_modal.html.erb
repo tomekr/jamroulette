@@ -26,6 +26,26 @@
           </div>
         </div>
 
+        <h1 class="subtitle is-3">Supply Optional Info</h1>
+
+        <div class="field">
+          <label class="label">Jam Type</label>
+          <div class="field-body">
+            <div class="field is-narrow">
+              <div class="control">
+                <label class="radio">
+                  <%= form.radio_button :jam_type, "MIX", checked: true %>
+                  MIX
+                </label>
+                <label class="radio">
+                  <%= form.radio_button :jam_type, "SOLO" %>
+                  SOLO
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="field">
           <label class="label">BPM</label>
           <div class="field has-addons">
@@ -42,13 +62,7 @@
 
         <div class="field">
           <label class="label">Song Key</label>
-          <%= form.text_field :song_key_list, class: "input", placeholder: '(e.g. "A Major", "G Dorian")' %>
-        </div>
-
-        <div class="field">
-          <label class="label">Styles</label>
-          <%= form.text_field :style_list, class: "input", placeholder: '(e.g. "Electronic, Lofi")' %>
-          <p class="help">Supports comma separated list</p>
+          <%= form.text_field :song_key, class: "input", placeholder: '(e.g. "A Major", "G Dorian")' %>
         </div>
 
         <div class="field">
@@ -57,7 +71,13 @@
           <p class="help">Supports comma separated list</p>
         </div>
 
+        <div class="field">
+          <label class="label">Styles</label>
+          <%= form.text_field :style_list, class: "input", placeholder: '(e.g. "Electronic, Lofi")' %>
+          <p class="help">Supports comma separated list</p>
+        </div>
       </section>
+
       <footer class="modal-card-foot">
         <%= submit_tag "Upload", class: "button is-success" %>
         <button class="button modal-close-button">Cancel</button>
