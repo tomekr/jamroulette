@@ -1,4 +1,6 @@
 language: ruby
+addons:
+  chrome: stable
 services:
   - postgresql
 before_install:
