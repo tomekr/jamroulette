@@ -9,7 +9,8 @@ class Jam < ApplicationRecord
   has_one_attached :file
   validates :file, presence: { message: "must be attached" }
   validate :content_type_is_audio
-  validate :jam_type_supported
+
+  validates :jam_type, inclusion: { in: %w[Mix Solo Idea] }, allow_blank: true
 
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
@@ -27,14 +28,6 @@ class Jam < ApplicationRecord
   end
 
   private
-
-  def jam_type_supported
-    return unless jam_type
-
-    unless  ['Mix', 'Solo', 'Idea'].include?(jam_type)
-      errors.add(:jam_type, "must be Mix, Solo, or Idea")
-    end
-  end
 
   def content_type_is_audio
     return unless file.attached?

@@ -6,15 +6,9 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:public_id
   def show
-    jams = @room.jams.order(created_at: :desc).last(20).to_a
-    @supporting_files = []
-
-    unless jams.empty?
-      # Find the first Mix jam
-      @current_jam = jams.find { |jam| jam.jam_type == 'Mix' }
-      @supporting_files = jams.tap { |jam| jams.delete(@current_jam) }
-    end
-
+    jams = @room.jams.last(20).reverse
+    @current_jam = @room.jams.tagged_with('Mix', on: :jam_type).last
+    @supporting_jams = jams - [@current_jam]
     @new_jam = @room.jams.build
   end
 
