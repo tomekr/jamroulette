@@ -9,7 +9,7 @@ RSpec.describe 'Room viewing', type: :request do
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
 
-  let(:current_jam) { create(:jam, room: room) }
+  let(:current_jam) { create(:jam, room: room, bpm_list: ['120']) }
   let(:room) { build(:room) }
   let(:room_params) { { room: { name: room.name } } }
 
@@ -32,11 +32,11 @@ RSpec.describe 'Room viewing', type: :request do
     end
   end
 
-  it 'displays previous Jam information if it exists' do
-    previous_jam = create(:jam, room: current_jam.room)
+  it 'displays supporting jams if they exist' do
+    previous_jam = create(:jam, room: current_jam.room, bpm_list: ['120'])
     get room_path(previous_jam.room)
 
-    expect(response.body).to include('Previous JAMs on this track')
+    expect(response.body).to include('Supporting Jams')
     expect(response.body).to include(previous_jam.file.filename.to_s)
     expect(response.body).to include(previous_jam.bpm)
 
@@ -50,7 +50,7 @@ RSpec.describe 'Room viewing', type: :request do
     get room_path(room)
 
     expect(response.body).to_not include('Latest JAM')
-    expect(response.body).to_not include('Previous JAMs on this track')
+    expect(response.body).to_not include('Supporting Jams')
     expect(response.body).to_not include('Download Track')
 
     expect(response.body).to include('This room is brand new! Upload a track to get started!')

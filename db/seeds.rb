@@ -30,11 +30,11 @@ empty_room = Room.create!(public_id: 'empty', user: bob, name: 'Empty Room')
 # Create a room with two attached jams
 room = Room.create!(public_id: 'jams', user: bob, name: 'Jam Room')
 
-jam = room.jams.build(bpm: '120', user: bob)
+jam = room.jams.build(bpm_list: '120', user: bob)
 jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 jam.save
 
-other_jam = room.jams.build(bpm: '120', user: alice)
+other_jam = room.jams.build(bpm_list: '120', user: alice)
 other_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 other_jam.save
 

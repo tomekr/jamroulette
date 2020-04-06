@@ -87,12 +87,12 @@
 </section>
 
 
-<section class="section" id="previous-jams">
+<section class="section" id="supporting-jams">
   <div id="previous-jams">
-    <% unless @jams.empty? %>
+    <% unless @supporting_jams.empty? %>
       <div class="columns jam-header">
         <div class="column">
-          Previous JAMs on this track
+          Supporting Jams
         </div>
         <div class="column">
           Date
@@ -120,7 +120,7 @@
       </div>
 
       <div class="jam-rows">
-        <% @jams.each do |jam| %>
+        <% @supporting_jams.each do |jam| %>
           <div class="columns jam-row">
             <div class="column">
               <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>

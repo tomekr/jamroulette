@@ -11,7 +11,7 @@ RSpec.describe 'Jams', type: :request do
 
   let(:room) { create(:room) }
   let(:file) { fixture_file_upload('spec/support/assets/test.mp3') }
-  let(:jam_params) { { bpm: '100', file: file } }
+  let(:jam_params) { { bpm_list: '100', file: file } }
   let(:upload_jam) { post room_jams_path(room), params: { jam: jam_params } }
 
   describe 'Uploading a jam' do
