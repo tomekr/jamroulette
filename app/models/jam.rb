@@ -31,8 +31,8 @@ class Jam < ApplicationRecord
   def jam_type_supported
     return unless jam_type
 
-    unless  ['MIX', 'SOLO'].include?(jam_type)
-      errors.add(:jam_type, "must be MIX or SOLO")
+    unless  ['Mix', 'Solo', 'Idea'].include?(jam_type)
+      errors.add(:jam_type, "must be Mix, Solo, or Idea")
     end
   end
 

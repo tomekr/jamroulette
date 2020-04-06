@@ -13,24 +13,33 @@ RSpec.describe 'uploading jams', type: :system do
 
   context 'authenticated' do
     let(:user) { create(:user) }
-    before(:each) { sign_in user }
-
-    it 'allows a user to upload a jam', js: true do
-      room = create(:room)
+    let(:room) { create(:room) }
+    before do
+      sign_in user
       visit room_path(room)
       click_on 'Upload New Track'
-
       attach_file :jam_file, 'spec/support/assets/test.mp3', make_visible: true
+    end
 
+
+    it 'allows a user to upload a jam', js: true do
       fill_in :jam_bpm_list, with: '120'
-
       click_on 'Upload'
 
       expect(page).to have_content('Jam successfully created!')
       expect(page).to have_content('120')
 
-      # Radio button defaults to MIX
-      expect(page).to have_content('MIX')
+      # Check that radio button defaults to Mix
+      expect(page).to have_content('Mix')
+    end
+
+    it 'moves jams that are not mixes straight to Supporting Files section' do
+      click_on 'Solo'
+      click_on 'Upload'
+
+      within('section#supporting-files') do
+        expect(page).to have_selector('span.jam-value', text: 'SOLO')
+      end
     end
   end
 end
