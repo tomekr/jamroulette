@@ -33,12 +33,12 @@ RSpec.describe 'uploading jams', type: :system do
       expect(page).to have_content('Mix')
     end
 
-    it 'moves jams that are not mixes straight to Supporting Files section' do
-      click_on 'Solo'
+    it 'moves jams that are not mixes straight to Supporting Files section', js: true do
+      click_button 'Solo'
       click_on 'Upload'
 
       within('section#supporting-files') do
-        expect(page).to have_selector('span.jam-value', text: 'SOLO')
+        expect(page).to have_selector('span.jam-value', text: 'Solo')
       end
     end
   end
