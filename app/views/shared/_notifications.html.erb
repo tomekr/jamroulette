@@ -7,6 +7,10 @@
           <%= link_to notification.target.room.name, room_path(notification.target.room)%>
         </div>
       <% end %>
+    <% else %>
+      <div class="dropdown-item">
+        No new notifications
+      </div>
     <% end %>
   </div>
 </div>
