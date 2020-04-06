@@ -34,7 +34,7 @@
           <li>
             <span class="jam-attribute jam-attribute-length">
               <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
-              <span class="jam-value"><%= "3:35" %></span>
+              <span class="jam-value"><%= format_duration(@current_jam.duration) %></span>
             </span>
           </li>
           <li>
@@ -135,7 +135,7 @@
               <span class="jam-value"><%= jam.jam_type %></span>
             </div>
             <div class="column">
-              <span class="jam-value"><%= "3:35" %></span>
+              <span class="jam-value"><%= format_duration(jam.duration) %></span>
             </div>
             <div class="column">
               <span class="jam-value"><%= jam.bpm %></span>
@@ -181,12 +181,24 @@
     });
   }
   
-  // For changing the name in the file upload element
+  // Handle audio file upload
   const fileInput = document.querySelector('#file-upload-field input[type=file]');
-  fileInput.onchange = () => {
+
+  fileInput.addEventListener('change', () => {
     if (fileInput.files.length > 0) {
       const fileName = document.querySelector('#file-upload-field .file-name');
-      fileName.textContent = fileInput.files[0].name;
+      const file = fileInput.files[0]
+      fileName.textContent = file.name;
+
+      const durationInput = document.querySelector('#jam_duration_list');
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  
+      file.arrayBuffer().then(fileBuffer => {
+        audioContext.decodeAudioData(fileBuffer).then(decodeAudioData => {
+          const duration = decodeAudioData.duration;
+          durationInput.value = parseInt(duration);
+        })
+      });
     }
-  }
+  });
 </script>

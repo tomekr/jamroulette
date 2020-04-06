@@ -19,4 +19,14 @@ RSpec.describe RoomsHelper, :type => :helper do
       end
     end
   end
+
+  describe "#format_duration" do
+    it 'returns duration in formated time' do
+      expect(helper.format_duration('90')).to eq('01:30')
+    end
+
+    it 'returns Unavailable if a duration does not exist' do
+      expect(helper.format_duration(nil)).to eq('Unavailable')
+    end
+  end
 end

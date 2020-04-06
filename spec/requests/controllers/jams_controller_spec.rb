@@ -64,6 +64,7 @@ RSpec.describe JamsController, type: :request do
           jam_type_list: 'Mix',
           style_list: 'Electronic, Lofi',
           could_use_list: 'Bass, Guitar, Vocals',
+          duration_list: '95',
           file: file,
         }
       end
@@ -74,6 +75,7 @@ RSpec.describe JamsController, type: :request do
         expect(uploaded_jam.bpm).to eq '100'
         expect(uploaded_jam.song_key).to include('A Major')
         expect(uploaded_jam.jam_type).to include('Mix')
+        expect(uploaded_jam.duration).to include('95')
         expect(uploaded_jam.style_list).to include('Electronic', 'Lofi')
         expect(uploaded_jam.could_use_list).to include('Bass', 'Guitar', 'Vocals')
       end

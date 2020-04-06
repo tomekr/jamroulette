@@ -2,7 +2,7 @@
 
 class Jam < ApplicationRecord
   include Trackable
-  acts_as_taggable_on :bpm, :song_key, :jam_type, :styles, :could_use
+  acts_as_taggable_on :bpm, :song_key, :jam_type, :duration, :styles, :could_use
 
   belongs_to :room
   belongs_to :user
@@ -25,6 +25,10 @@ class Jam < ApplicationRecord
 
   def jam_type
     jam_type_list.first
+  end
+
+  def duration
+    duration_list.first
   end
 
   private
