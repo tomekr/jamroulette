@@ -10,6 +10,7 @@ FactoryBot.define do
       bpm_list { ['120'] }
       song_key_list { ['A Major'] }
       jam_type_list { ['Mix'] }
+      duration_list { ['90'] }
       style_list { ['Electronic', 'Lofi'] }
       could_use_list { ['Bass', 'Drums'] }
     end

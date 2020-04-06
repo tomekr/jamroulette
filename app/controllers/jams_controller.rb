@@ -21,7 +21,7 @@ class JamsController < ApplicationController
 
   def jam_params
     params.require(:jam).permit(
-      :file, :bpm_list, :song_key_list,
+      :file, :bpm_list, :song_key_list, :duration_list,
       :jam_type_list, :style_list, :could_use_list
     )
   end

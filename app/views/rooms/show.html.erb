@@ -34,7 +34,7 @@
           <li>
             <span class="jam-attribute jam-attribute-length">
               <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
-              <span class="jam-value"><%= "3:35" %></span>
+              <span class="jam-value"><%= format_duration(@current_jam.duration) %></span>
             </span>
           </li>
           <li>
@@ -135,7 +135,7 @@
               <span class="jam-value"><%= jam.jam_type %></span>
             </div>
             <div class="column">
-              <span class="jam-value"><%= "3:35" %></span>
+              <span class="jam-value"><%= format_duration(jam.duration) %></span>
             </div>
             <div class="column">
               <span class="jam-value"><%= jam.bpm %></span>
@@ -156,37 +156,49 @@
 <%= render 'upload_track_modal' %>
 
 <script>
-  const uploadJamButton = document.querySelector('button#upload-jam-button');
-  uploadJamButton.onclick = (event) => {
-    event.preventDefault();
-  
-    const modal = document.querySelector('#upload-track-modal');
-    const html = document.querySelector('html');
-    modal.classList.add('is-active');
-    html.classList.add('is-clipped');
-  
-    const closeFunction = (e) => {
-      e.preventDefault();
-      modal.classList.remove('is-active');
-      html.classList.remove('is-clipped');
-    };
-  
-    // Give focus to bpm input element
-    modal.querySelector('#jam_bpm').focus();
+  document.addEventListener("DOMContentLoaded", () => {
+    const uploadTrackModal = document.querySelector('#upload-track-modal');
 
-    modal.querySelector('.modal-background').addEventListener('click', closeFunction);
-  
-    modal.querySelectorAll("button.modal-close-button").forEach(element => {
-      element.addEventListener('click', closeFunction);
-    });
-  }
-  
-  // For changing the name in the file upload element
-  const fileInput = document.querySelector('#file-upload-field input[type=file]');
-  fileInput.onchange = () => {
-    if (fileInput.files.length > 0) {
-      const fileName = document.querySelector('#file-upload-field .file-name');
-      fileName.textContent = fileInput.files[0].name;
+    const uploadJamButton = document.querySelector('button#upload-jam-button');
+    uploadJamButton.onclick = (event) => {
+      event.preventDefault();
+      
+      uploadTrackModal.classList.add('is-active');
+    
+      const closeFunction = (e) => {
+        e.preventDefault();
+        uploadTrackModal.classList.remove('is-active');
+      };
+
+      uploadTrackModal.querySelector('.modal-background').addEventListener('click', closeFunction);
+    
+      uploadTrackModal.querySelectorAll("button.modal-close-button").forEach(element => {
+        element.addEventListener('click', closeFunction);
+      });
     }
-  }
+    
+    // Handle audio file upload
+    const fileInput = document.querySelector('#file-upload-field input[type=file]');
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        const fileName = document.querySelector('#file-upload-field .file-name');
+        const file = fileInput.files[0]
+        fileName.textContent = file.name;
+
+        const durationInput = document.querySelector('#jam_duration_list');
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+        file.arrayBuffer().then(fileBuffer => {
+          audioContext.decodeAudioData(fileBuffer).then(decodeAudioData => {
+            const duration = decodeAudioData.duration;
+            durationInput.value = parseInt(duration);
+          })
+        });
+
+        // Send focus to bpm input
+        uploadTrackModal.querySelector('#jam_bpm_list').focus();
+      }
+    });
+  });
 </script>

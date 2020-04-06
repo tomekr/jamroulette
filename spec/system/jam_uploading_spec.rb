@@ -29,8 +29,12 @@ RSpec.describe 'uploading jams', type: :system do
       expect(page).to have_content('Jam successfully created!')
       expect(page).to have_content('120')
 
-      # Check that radio button defaults to Mix
-      expect(page).to have_content('Mix')
+      within('section#main') do
+        # Check that radio button defaulted to Mix
+        expect(page).to have_selector('span.jam-value', text: 'Mix')
+        # Fixture file is 1 second long
+        expect(page).to have_selector('span.jam-value', text: '00:01')
+      end
     end
 
     it 'moves jams that are not mixes straight to Supporting Jams section', js: true do

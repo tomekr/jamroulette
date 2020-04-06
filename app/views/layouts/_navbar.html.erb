@@ -14,24 +14,15 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <% if user_signed_in? %>
-            <% if has_unread_notifications?(current_user) %>
-              <div id="notifications" class="dropdown" aria-haspopup="true" aria-controls="dropdown-menu" data-user-id="<%= current_user.id %>">
-                <div class="dropdown-trigger">
-                  <span class="tag is-danger is-small notification-counter"><%= current_user.notifications.unread.count %></span>
-                  <span class="icon">
-                    <i class="far fa-bell"></i>
-                  </span>
-                </div>
-                <%= render 'shared/notifications' %>
-              </div>
-            <% else %>
-              <div>
-                <span class="tag is-primary is-small notification-counter">0</span>
+            <div id="notifications" class="dropdown" aria-haspopup="true" aria-controls="dropdown-menu" data-user-id="<%= current_user.id %>">
+              <div class="dropdown-trigger">
+                <span class="tag is-primary is-small notification-counter"><%= current_user.notifications.unread.count %></span>
                 <span class="icon">
                   <i class="far fa-bell"></i>
                 </span>
               </div>
-            <% end %>
+              <%= render 'shared/notifications' %>
+            </div>
           <% end %>
         </div>
 

@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const feed = document.querySelector('#notifications') as HTMLElement
+  const countTag = feed.querySelector(".tag") as HTMLSpanElement
+
+  if (countTag.innerText != "0") {
+    countTag.classList.replace("is-primary", "is-danger")
+  }
+
   // Show modal when a "Create room" button is clicked
   document.querySelector("#notifications").addEventListener('click', (event) => {
-    console.log('clicked')
-
     // Toggle feed list
-    const feed = document.querySelector('#notifications') as HTMLElement
     feed.classList.toggle('is-active')
 
     // Remove counter tag
