@@ -37,6 +37,14 @@ class Jam < ApplicationRecord
     ['audio/midi', 'audio/x-midi'].include?(file.content_type)
   end
 
+  def idea?
+    jam_type == "Idea"
+  end
+
+  def mix?
+    jam_type == "Mix"
+  end
+
   private
 
   def make_midi_solo

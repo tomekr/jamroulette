@@ -49,4 +49,38 @@ RSpec.describe Jam, type: :model do
       expect(jam.midi?).to be false
     end
   end
+
+  describe '#idea?' do
+    example 'jam is an idea' do
+      jam = build(:jam, :idea)
+      expect(jam.idea?).to be true
+    end
+
+    example 'jam is a solo' do
+      jam=build(:jam, :solo)
+      expect(jam.idea?).to be false
+    end
+
+    example 'jam is a mix' do
+      jam = build(:jam)
+      expect(jam.idea?).to be false
+    end
+  end
+
+  describe '#mix?' do
+    example 'jam is an idea' do
+      jam = build(:jam, :idea)
+      expect(jam.mix?).to be false
+    end
+
+    example 'jam is a solo' do
+      jam=build(:jam, :solo)
+      expect(jam.mix?).to be false
+    end
+
+    example 'jam is a mix' do
+      jam = build(:jam, :mix)
+      expect(jam.mix?).to be true
+    end
+  end
 end
