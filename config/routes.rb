@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
 
   resources :rooms, only: %i[create show] do
-    resources :jams, only: :create
+    resources :jams, only: :create do
+      get 'promote', on: :member
+    end
     get 'random', on: :collection
   end
 end
