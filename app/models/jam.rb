@@ -15,6 +15,8 @@ class Jam < ApplicationRecord
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
 
+  before_save :make_midi_solo
+
   def bpm
     bpm_list.first
   end
@@ -31,7 +33,15 @@ class Jam < ApplicationRecord
     duration_list.first
   end
 
+  def midi?
+    ['audio/midi', 'audio/x-midi'].include?(file.content_type)
+  end
+
   private
+
+  def make_midi_solo
+    self.jam_type_list = 'Solo' if midi?
+  end
 
   def content_type_is_audio
     return unless file.attached?
