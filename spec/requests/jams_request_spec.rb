@@ -31,6 +31,16 @@ RSpec.describe 'Jams', type: :request do
         expect(response.body).to include('accept="audio/*" type="file"')
       end
 
+      context "with a MIDI file" do
+        let(:file) { fixture_file_upload('spec/support/assets/test.mid') }
+
+        it "doesn't display a playable waveform" do
+          upload_jam
+          follow_redirect!
+          expect(response.body).to include('<span class="jam-value">MIDI File</span>')
+        end
+      end
+
       context "with an invalid file" do
         let(:file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
 

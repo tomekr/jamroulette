@@ -10,4 +10,12 @@ module RoomsHelper
       'Unavailable'
     end
   end
+
+  def midi?(content_type)
+    if ['audio/midi', 'audio/x-midi'].include?(content_type)
+      return true
+    else
+      return false
+    end
+  end
 end

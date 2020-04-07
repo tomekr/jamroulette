@@ -123,7 +123,11 @@
         <% @supporting_jams.each do |jam| %>
           <div class="columns jam-row">
             <div class="column">
-              <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>
+              <% if midi?(jam.file.content_type) %>
+                <span class="jam-value">MIDI File</span>
+              <% else %>
+                <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>
+              <% end %>
             </div>
             <div class="column">
               <span class="jam-value"><%= jam.created_at.to_formatted_s(:long) %></span>
