@@ -13,10 +13,10 @@ class ActivityPresenter < SimpleDelegator
   # XXX Ensure all user controlled attributes are sanitized before embedding them into HTML
   def message
     case subject_type
-    when "Jam"
+    when 'Jam'
       "You uploaded #{jam_icon} #{sanitized_filename} " \
       "to #{room_icon} #{room_link_for(subject.room)} #{time}".html_safe
-    when "Room"
+    when 'Room'
       "You created #{room_icon} #{room_link_for(subject)} #{time}".html_safe
     end
   end

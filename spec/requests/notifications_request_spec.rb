@@ -19,6 +19,6 @@ RSpec.describe 'Notifications', type: :request do
   it 'shows unread notifications in the navbar' do
     create(:notification, target: jam, user: user)
     get home_path
-    expect(response.body).to include("uploader uploaded a jam")
+    expect(response.body).to include('uploader uploaded a jam')
   end
 end

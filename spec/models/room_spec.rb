@@ -28,7 +28,7 @@ RSpec.describe Room, type: :model do
     end.to change(Activity, :count).by(1)
   end
 
-  describe ".recommended" do
+  describe '.recommended' do
     it 'returns a Room that contains a jam' do
       create(:jam, room: room)
       expect(Room.recommended.take).to be_an_instance_of(Room)

@@ -19,10 +19,10 @@ RSpec.describe 'Home page viewing', type: :request do
     expect(response).to redirect_to(room_path(room))
   end
 
-  context "user is unauthenticated" do
+  context 'user is unauthenticated' do
     before(:each) { validate_beta_user }
 
-    context "creating a room" do
+    context 'creating a room' do
       it 'redirects to sign in page' do
         post rooms_path
         expect(response).to redirect_to(new_user_session_path)

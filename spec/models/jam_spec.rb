@@ -11,13 +11,13 @@ RSpec.describe Jam, type: :model do
     it 'is not valid without a file' do
       jam.file = nil
       expect(jam).to_not be_valid
-      expect(jam.errors[:file]).to include("must be attached")
+      expect(jam.errors[:file]).to include('must be attached')
     end
 
     it 'only allows content types of audio/*' do
       jam.file = fixture_file_upload('spec/support/assets/invalid_file.txt')
       expect(jam).to_not be_valid
-      expect(jam.errors[:file]).to include("must be an audio file")
+      expect(jam.errors[:file]).to include('must be an audio file')
     end
 
     it 'does not allow jam type that is not Mix, Solo, or Idea' do
@@ -35,17 +35,17 @@ RSpec.describe Jam, type: :model do
 
   describe '#midi?' do
     example 'audio/midi' do
-      jam.file.content_type = "audio/midi"
+      jam.file.content_type = 'audio/midi'
       expect(jam.midi?).to be true
     end
 
     example 'audio/x-midi' do
-      jam.file.content_type = "audio/x-midi"
+      jam.file.content_type = 'audio/x-midi'
       expect(jam.midi?).to be true
     end
 
     example 'audio/ogg' do
-      jam.file.content_type = "audio/ogg"
+      jam.file.content_type = 'audio/ogg'
       expect(jam.midi?).to be false
     end
   end

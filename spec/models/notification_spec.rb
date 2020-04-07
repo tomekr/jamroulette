@@ -9,10 +9,10 @@ RSpec.describe Notification, type: :model do
     end
   end
 
-  describe ".unread" do
+  describe '.unread' do
     it 'returns a Notification that is unread' do
       create(:notification)
-      expect(Notification.unread.take.read_at).to  be nil
+      expect(Notification.unread.take.read_at).to be nil
     end
   end
 end

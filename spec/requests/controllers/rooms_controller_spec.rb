@@ -99,7 +99,7 @@ RSpec.describe RoomsController, type: :request do
 
       it 'shows a flash message' do
         action
-        expect(flash.alert).to include("No rooms with a jam exist")
+        expect(flash.alert).to include('No rooms with a jam exist')
       end
     end
   end

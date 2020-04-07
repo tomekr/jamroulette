@@ -13,7 +13,7 @@ RSpec.describe 'Room viewing', type: :request do
   let(:room) { build(:room) }
   let(:room_params) { { room: { name: room.name } } }
 
-  context "user is unauthenticated" do
+  context 'user is unauthenticated' do
     it 'redirects user to sign in page' do
       post rooms_path, params: room_params
       expect(response).to redirect_to(new_user_session_path)

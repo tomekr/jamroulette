@@ -53,7 +53,7 @@ RSpec.describe JamsController, type: :request do
     it 'does not create a notification for the current user' do
       expect do
         action
-      end.to_not change{ user.notifications.count }
+      end.to_not change { user.notifications.count }
     end
 
     context 'tagging' do
@@ -65,7 +65,7 @@ RSpec.describe JamsController, type: :request do
           style_list: 'Electronic, Lofi',
           could_use_list: 'Bass, Guitar, Vocals',
           duration_list: '95',
-          file: file,
+          file: file
         }
       end
 
@@ -90,10 +90,10 @@ RSpec.describe JamsController, type: :request do
       end
     end
 
-    context "with an invalid file" do
+    context 'with an invalid file' do
       let(:file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
 
-      it "redirects to the home page" do
+      it 'redirects to the home page' do
         action
         expect(request).to redirect_to(room_path(room))
       end

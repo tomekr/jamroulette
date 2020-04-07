@@ -13,13 +13,13 @@ RSpec.describe Devise::RegistrationsController, type: :request do
     it 'permits entering a display_name attribute' do
       post user_registration_path, params: {
         user: {
-          display_name: "Bob",
-          email: "bob@example.com",
-          password: "password",
-          password_confirmation: "password",
+          display_name: 'Bob',
+          email: 'bob@example.com',
+          password: 'password',
+          password_confirmation: 'password'
         }
       }
-      expect(User.first.display_name).to eq("Bob")
+      expect(User.first.display_name).to eq('Bob')
     end
   end
 
@@ -29,11 +29,11 @@ RSpec.describe Devise::RegistrationsController, type: :request do
       sign_in user
       put user_registration_path, params: {
         user: {
-          display_name: "New Name",
-          current_password: user.password,
+          display_name: 'New Name',
+          current_password: user.password
         }
       }
-      expect(user.reload.display_name).to eq("New Name")
+      expect(user.reload.display_name).to eq('New Name')
     end
   end
 end

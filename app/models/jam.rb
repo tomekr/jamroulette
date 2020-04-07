@@ -7,7 +7,7 @@ class Jam < ApplicationRecord
   belongs_to :room
   belongs_to :user
   has_one_attached :file
-  validates :file, presence: { message: "must be attached" }
+  validates :file, presence: { message: 'must be attached' }
   validate :content_type_is_audio
 
   validates :jam_type, inclusion: { in: %w[Mix Solo Idea] }, allow_blank: true
@@ -46,8 +46,8 @@ class Jam < ApplicationRecord
   def content_type_is_audio
     return unless file.attached?
 
-    unless file.content_type.match(/\Aaudio\/*/)
-      errors.add(:file, "must be an audio file")
+    unless file.content_type.match(%r{\Aaudio/*})
+      errors.add(:file, 'must be an audio file')
     end
   end
 end
