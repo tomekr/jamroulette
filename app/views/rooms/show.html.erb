@@ -123,7 +123,7 @@
         <% @supporting_jams.each do |jam| %>
           <div class="columns jam-row">
             <div class="column">
-              <% if midi?(jam.file.content_type) %>
+              <% if jam.midi? %>
                 <span class="jam-value">MIDI File</span>
               <% else %>
                 <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>

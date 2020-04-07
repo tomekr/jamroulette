@@ -32,4 +32,21 @@ RSpec.describe Jam, type: :model do
       jam.save
     end.to change(Activity, :count).by(1)
   end
+
+  describe '#midi?' do
+    example 'audio/midi' do
+      jam.file.content_type = "audio/midi"
+      expect(jam.midi?).to be true
+    end
+
+    example 'audio/x-midi' do
+      jam.file.content_type = "audio/x-midi"
+      expect(jam.midi?).to be true
+    end
+
+    example 'audio/ogg' do
+      jam.file.content_type = "audio/ogg"
+      expect(jam.midi?).to be false
+    end
+  end
 end

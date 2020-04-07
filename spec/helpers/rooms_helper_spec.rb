@@ -29,18 +29,4 @@ RSpec.describe RoomsHelper, :type => :helper do
       expect(helper.format_duration(nil)).to eq('Unavailable')
     end
   end
-
-  describe "#midi?" do
-    example 'audio/midi' do
-      expect(helper.midi?('audio/midi')).to be true
-    end
-
-    example 'audio/x-midi' do
-      expect(helper.midi?('audio/x-midi')).to be true
-    end
-
-    example 'audio/*' do
-      expect(helper.midi?('audio/mpeg')).to be false
-    end
-  end
 end
