@@ -190,15 +190,19 @@
         const file = fileInput.files[0]
         fileName.textContent = file.name;
 
-        const durationInput = document.querySelector('#jam_duration_list');
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
-        file.arrayBuffer().then(fileBuffer => {
-          audioContext.decodeAudioData(fileBuffer).then(decodeAudioData => {
-            const duration = decodeAudioData.duration;
-            durationInput.value = parseInt(duration);
-          })
-        });
+        // Extract duration if file is audio and also not midi
+        if (file.type.startsWith("audio/") && !(file.type === "audio/midi" || file.type === "audio/x-midi")) {
+          const durationInput = document.querySelector('#jam_duration_list');
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          // Extract duration from audio
+          file.arrayBuffer().then(fileBuffer => {
+            audioContext.decodeAudioData(fileBuffer)
+              .then(decodeAudioData => {
+                const duration = decodeAudioData.duration;
+                durationInput.value = parseInt(duration);
+              })
+          });
+        }
 
         // Send focus to bpm input
         uploadTrackModal.querySelector('#jam_bpm_list').focus();
