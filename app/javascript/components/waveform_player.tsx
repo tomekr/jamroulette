@@ -1,63 +1,82 @@
 import * as React from "react"
 import * as WaveSurfer from 'wavesurfer.js'
 import CursorPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.cursor'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlayCircle, faPauseCircle } from '@fortawesome/free-regular-svg-icons'
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+
+window.AudioContext = window.AudioContext || window['webkitAudioContext'] || null;
+if (!window.AudioContext) {
+  throw new Error(
+    'Could not find AudioContext. This may be because your browser does not support Web Audio.');
+}
 
 interface WaveformPlayerProps {
   audioUrl: string
-  id: number
 }
 
 const WaveformPlayer = (props: WaveformPlayerProps) => {
-  let wavesurfer: WaveSurfer;
+  const [playing, setPlaying] = React.useState(false)
+
+  const waveform = React.useRef<WaveSurfer | null>(null)
+  const audioContext = React.useRef(new AudioContext())
+  const waveformDivRef = React.useRef();
 
   React.useEffect(() => {
-    wavesurfer = WaveSurfer.create({
-      container: `#${waveformId()}`,
-      waveColor: 'violet',
-      progressColor: 'purple',
-      plugins: [
-        CursorPlugin.create({
-          showTime: true,
-          opacity: 1,
-          customShowTimeStyle: {
-            'background-color': '#000',
-            color: '#fff',
-            padding: '2px',
-            'font-size': '10px'
-          }
-        })
-      ]
-    });
-    wavesurfer.load(props.audioUrl)
-  }, [])
+    if (waveformDivRef.current && audioContext.current) {
+      waveform.current = WaveSurfer.create({
+        audioContext: audioContext.current,
+        container: waveformDivRef.current,
+        waveColor: 'violet',
+        progressColor: 'purple',
+        plugins: [
+          CursorPlugin.create({
+            showTime: true,
+            opacity: 1,
+            customShowTimeStyle: {
+              'background-color': '#000',
+              color: '#fff',
+              padding: '2px',
+              'font-size': '10px'
+            }
+          })
+        ]
+      });
 
-  function waveformId(): string {
-    return `waveform-${props.id}`
+      waveform.current.on('finish', audioFinishedPlaying)
+      waveform.current.load(props.audioUrl)
+    }
+  }, [props.audioUrl])
+
+  function togglePlayPause(): void {
+    if (audioContext.current.state === "suspended") {
+      audioContext.current.resume()
+    }
+
+    waveform.current.playPause()
+    setPlaying(!playing)
   }
 
-  function togglePlay(event): void {
-    if (wavesurfer) {
-      if (wavesurfer.isPlaying()) {
-        wavesurfer.pause();
-      } else {
-        wavesurfer.play();
-      }
+  function audioFinishedPlaying(): void {
+    setPlaying(false)
+  }
 
-      // Get icon inside of the button that was clicked
-      const audioControllerIcon = event.currentTarget.querySelector("#waveformAudioControlIcon");
-      // toggle relevant play/pause font awesome classes
-      audioControllerIcon.classList.toggle("fa-play-circle");
-      audioControllerIcon.classList.toggle("fa-pause-circle");
+  function stateButtonIcon(): IconDefinition {
+    if (playing) {
+      return faPauseCircle
+    } else {
+      return faPlayCircle
     }
   }
 
   return (
     <div>
-      <button id="waveformAudioControl" className="button is-large" onClick={togglePlay}>
-        <i id="waveformAudioControlIcon" className="far fa-play-circle"></i>
+      <button id="waveformAudioControl" className="button is-large" onClick={togglePlayPause}>
+        <FontAwesomeIcon icon={stateButtonIcon()} />
       </button>
 
-      <div id={waveformId()} style={{position: 'relative'}}></div>
+      <div ref={waveformDivRef} style={{ position: 'relative' }}>
+      </div>
     </div>
   )
 }
