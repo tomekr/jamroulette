@@ -81,6 +81,15 @@ RSpec.describe JamsController, type: :request do
       end
     end
 
+    context 'uploading a midi file' do
+      let(:file) { fixture_file_upload('spec/support/assets/test.mid') }
+
+      it 'makes jam type "Solo"' do
+        action
+        expect(uploaded_jam.jam_type).to include('Solo')
+      end
+    end
+
     context "with an invalid file" do
       let(:file) { fixture_file_upload('spec/support/assets/invalid_file.txt') }
 
