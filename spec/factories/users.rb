@@ -3,9 +3,9 @@ FactoryBot.define do
     sequence :email do |n|
       "person#{n}@example.com"
     end
-    display_name { "Bobby" }
-    password { "password" }
-    password_confirmation { "password" }
+    display_name { 'Bobby' }
+    password { 'password' }
+    password_confirmation { 'password' }
     confirmed_at { Date.today }
   end
 end

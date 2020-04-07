@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe ActivityPresenter do
   include ActionView::TestCase::Behavior
@@ -17,9 +17,9 @@ describe ActivityPresenter do
     it 'returns a message' do
       travel 10.minutes do
         expect(presenter.message).to eq(
-          "You uploaded <i class=\"fas fa-music\"></i> test.mp3 " \
-          "to <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">Presenter Room</a> " \
-          "10 minutes ago"
+          'You uploaded <i class="fas fa-music"></i> test.mp3 ' \
+          'to <i class="fas fa-door-open"></i> <a href="/rooms/activity-presenter-room">Presenter Room</a> ' \
+          '10 minutes ago'
         )
       end
     end
@@ -35,8 +35,8 @@ describe ActivityPresenter do
     it 'returns a message' do
       travel 10.minutes do
         expect(presenter.message).to eq(
-          "You created <i class=\"fas fa-door-open\"></i> <a href=\"/rooms/activity-presenter-room\">Presenter Room</a> " \
-          "10 minutes ago"
+          'You created <i class="fas fa-door-open"></i> <a href="/rooms/activity-presenter-room">Presenter Room</a> ' \
+          '10 minutes ago'
         )
       end
     end

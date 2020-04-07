@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'uploading jams', type: :system do
-  # TODO Remove when beta invite code feature is removed
+  # TODO: Remove when beta invite code feature is removed
   before :each do
     InviteCode.create(code: 'correct-code')
     visit root_path
@@ -20,7 +20,6 @@ RSpec.describe 'uploading jams', type: :system do
       click_on 'Upload New Track'
       attach_file :jam_file, 'spec/support/assets/test.mp3', make_visible: true
     end
-
 
     it 'allows a user to upload a jam', js: true do
       fill_in :jam_bpm_list, with: '120'

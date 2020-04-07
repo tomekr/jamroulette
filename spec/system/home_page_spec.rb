@@ -36,7 +36,7 @@ RSpec.describe 'visiting the home page', type: :system do
     end
 
     it 'allows a user to join a random room that contains a jam' do
-      room = build(:room, public_id: "random-room")
+      room = build(:room, public_id: 'random-room')
       create(:jam, room: room)
 
       visit home_path
@@ -46,7 +46,7 @@ RSpec.describe 'visiting the home page', type: :system do
       expect(page).to have_content('random-room')
     end
 
-    context "user is authenticated" do
+    context 'user is authenticated' do
       let(:user) { create(:user) }
       before(:each) { sign_in user }
 
@@ -76,7 +76,7 @@ RSpec.describe 'visiting the home page', type: :system do
 
           visit home_path
 
-          expect(page).to have_content("Activity Feed")
+          expect(page).to have_content('Activity Feed')
           expect(page).to have_content("You uploaded #{jam.file.filename} to #{room.name}")
         end
       end

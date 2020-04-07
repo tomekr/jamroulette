@@ -3,11 +3,11 @@ FactoryBot.define do
     user
 
     # Default to creating a jam
-    event { "jam_created" }
+    event { 'jam_created' }
     association :target, factory: :jam
 
     trait :jam do
-      event { "jam_created" }
+      event { 'jam_created' }
       association :target, factory: :jam
     end
   end

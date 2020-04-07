@@ -16,7 +16,7 @@ RSpec.describe NotificationsController, type: :request do
 
     context 'json request' do
       let(:action) do
-        headers = { 'Accept': 'application/json'}
+        headers = { 'Accept': 'application/json' }
         get user_notifications_path(user), headers: headers
       end
 
@@ -26,7 +26,7 @@ RSpec.describe NotificationsController, type: :request do
         action
 
         expect(response).to be_successful
-        expect(response.content_type).to eq("application/json; charset=utf-8")
+        expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(JSON.parse(response.body)).to_not be_empty
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe NotificationsController, type: :request do
 
     context 'json' do
       let(:action) do
-        headers = { 'Accept': 'application/json'}
+        headers = { 'Accept': 'application/json' }
         put read_user_notifications_path(user), headers: headers
       end
 
@@ -56,7 +56,7 @@ RSpec.describe NotificationsController, type: :request do
 
         expect do
           action
-        end.to change{ user.notifications.unread.count }.from(1).to(0)
+        end.to change { user.notifications.unread.count }.from(1).to(0)
       end
     end
   end

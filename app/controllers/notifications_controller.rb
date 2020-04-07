@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   def read
     @notifications.update_all(read_at: Time.current)
 
-    render json: "OK"
+    render json: 'OK'
   end
 
   private

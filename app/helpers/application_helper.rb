@@ -14,6 +14,7 @@ module ApplicationHelper
 
   def has_unread_notifications?(user)
     return false unless user
+
     user.notifications.unread.any?
   end
 end

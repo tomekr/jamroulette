@@ -11,8 +11,8 @@ FactoryBot.define do
       song_key_list { ['A Major'] }
       jam_type_list { ['Mix'] }
       duration_list { ['90'] }
-      style_list { ['Electronic', 'Lofi'] }
-      could_use_list { ['Bass', 'Drums'] }
+      style_list { %w[Electronic Lofi] }
+      could_use_list { %w[Bass Drums] }
     end
   end
 end

@@ -1,14 +1,14 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe ApplicationHelper, :type => :helper do
-  describe "#bulma_flash_mapping" do
+RSpec.describe ApplicationHelper, type: :helper do
+  describe '#bulma_flash_mapping' do
     it 'maps alert to danger' do
       expect(helper.bulma_flash_mapping('alert')).to eq('danger')
     end
   end
 
-  # TODO Remove when beta invite code feature is removed
-  describe "#beta_user?" do
+  # TODO: Remove when beta invite code feature is removed
+  describe '#beta_user?' do
     it 'returns true if beta user' do
       session[:is_beta_user] = true
       expect(helper.beta_user?).to be true
@@ -20,14 +20,14 @@ RSpec.describe ApplicationHelper, :type => :helper do
     end
   end
 
-  describe "#has_unread_notifications?" do
+  describe '#has_unread_notifications?' do
     example 'unread notifications' do
-       notification = create(:notification)
-       expect(helper.has_unread_notifications?(notification.user)).to be true
+      notification = create(:notification)
+      expect(helper.has_unread_notifications?(notification.user)).to be true
     end
 
     example 'no unread notifications' do
-       expect(helper.has_unread_notifications?(create(:user))).to be false
+      expect(helper.has_unread_notifications?(create(:user))).to be false
     end
 
     example 'user is not logged in' do
