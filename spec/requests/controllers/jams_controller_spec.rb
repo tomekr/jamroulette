@@ -39,12 +39,12 @@ RSpec.describe JamsController, type: :request do
       let(:solo) { create(:jam, :solo, room: room) }
       let(:action) { put promote_room_jam_path(room, solo) }
 
-      it 'shows alert when trying to promote' do
+      it 'shows alert' do
         action
         expect(flash.alert).to include('Only Mixes and Ideas can be promoted')
       end
 
-      it 'does not promote a solo' do
+      it 'does not promote' do
         action
         expect(room.primary_jam.id).to_not eq solo.id
       end
