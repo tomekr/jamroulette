@@ -149,7 +149,7 @@
             </div>
             <div class="column">
               <% if jam.idea? || jam.mix? %>
-                <span class="jam-value"><%= link_to "Promote", promote_room_jam_path(jam.room, jam), class: "button is-primary" %></span>
+                <span class="jam-value"><%= link_to "Promote", promote_room_jam_path(jam.room, jam), method: :put, class: "button is-primary" %></span>
               <% end %>
               <span class="jam-value"><%= link_to "Download Track", url_for(jam.file), class: "button is-dark" %></span>
             </div>

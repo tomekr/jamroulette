@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class JamsController < ApplicationController
+  before_action :set_room
+
   # POST /rooms/:public_id/jams
   def create
-    room = Room.find_by!(public_id: params[:room_id])
-    jam = room.jams.build(jam_params)
+    jam = @room.jams.build(jam_params)
 
     jam.user = current_user
+
+    # automatically promote uploaded jams of type mix
+    jam.promoted_at = Time.current if jam.mix?
 
     if jam.save
       NotificationService.notify_on_jam_creation(jam, current_user)
@@ -14,10 +18,25 @@ class JamsController < ApplicationController
     else
       flash[:danger] = jam.errors.full_messages.join(', ')
     end
-    redirect_to room_path(room)
+    redirect_to room_path(@room)
+  end
+
+  # POST /rooms/:public_id/jams/:id/promote
+  def promote
+    jam = @room.jams.find(params[:id])
+    if jam.mix? || jam.idea?
+      jam.promote
+      redirect_to room_path(@room), notice: 'Jam has been promoted'
+    else
+      redirect_to room_path(@room), alert: 'Jams of type Solo can not be promoted'
+    end
   end
 
   private
+
+  def set_room
+    @room = Room.find_by!(public_id: params[:room_id])
+  end
 
   def jam_params
     params.require(:jam).permit(

@@ -11,14 +11,14 @@ Rails.application.routes.draw do
     # # Default to json format for all notification routes
     defaults format: :json do
       resources :notifications, only: :index do
-        put "read", on: :collection
+        put 'read', on: :collection
       end
     end
   end
 
   resources :rooms, only: %i[create show] do
     resources :jams, only: :create do
-      get 'promote', on: :member
+      put 'promote', on: :member
     end
     get 'random', on: :collection
   end
