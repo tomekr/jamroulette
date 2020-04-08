@@ -9,7 +9,7 @@
 
 <section class="section" id="main">
   <% if @current_jam %>
-    <div id="stage">
+    <div id="stage" class="box">
       <%= react_component("waveform_player", { id: @current_jam.id, audioUrl: url_for(@current_jam.file) }) %>
       <div class="jam-attributes jam-attributes-big">
         <ul>
