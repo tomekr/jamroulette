@@ -121,39 +121,46 @@
 
       <div class="jam-rows">
         <% @supporting_jams.each do |jam| %>
-          <div class="columns jam-row">
-            <div class="column">
-              <% if jam.midi? %>
-                <span class="jam-value">MIDI File</span>
-              <% else %>
-                <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>
-              <% end %>
-            </div>
-            <div class="column">
-              <span class="jam-value"><%= jam.created_at.to_formatted_s(:long) %></span>
-            </div>
-            <div class="column">
-              <span class="jam-value"><%= jam.file.filename %></span>
-            </div>
-            <div class="column">
-              <span class="jam-value"><%= jam.jam_type %></span>
-            </div>
-            <div class="column">
-              <span class="jam-value"><%= format_duration(jam.duration) %></span>
-            </div>
-            <div class="column">
-              <span class="jam-value"><%= jam.bpm %></span>
-            </div>
-            <div class="column">
-              <span class="jam-value"><%= jam_user(jam) %></span>
-            </div>
-            <div class="column">
-              <% if jam.idea? || jam.mix? %>
-                <span class="jam-value"><%= link_to "Promote", promote_room_jam_path(jam.room, jam), method: :put, class: "button is-primary" %></span>
-              <% end %>
-              <span class="jam-value"><%= link_to "Download Track", url_for(jam.file), class: "button is-dark" %></span>
-            </div>
+          <div class="box">
+            <div class="columns jam-row">
+              <div class="column">
+                <% if jam.midi? %>
+                  <span class="jam-value">MIDI File</span>
+                <% else %>
+                  <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>
+                <% end %>
+              </div>
+              <div class="column">
+                <span class="jam-value"><%= jam.created_at.to_formatted_s(:long) %></span>
+              </div>
+              <div class="column">
+                <span class="jam-value"><%= jam.file.filename %></span>
+              </div>
+              <div class="column">
+                <span class="jam-value"><%= jam.jam_type %></span>
+              </div>
+              <div class="column">
+                <span class="jam-value"><%= format_duration(jam.duration) %></span>
+              </div>
+              <div class="column">
+                <span class="jam-value"><%= jam.bpm %></span>
+              </div>
+              <div class="column">
+                <span class="jam-value"><%= jam_user(jam) %></span>
+              </div>
+              <div class="column">
+                <div class="field">
+                  <span class="jam-value"><%= link_to "Download Track", url_for(jam.file), class: "button is-dark" %></span>
+                </div>
+                <% if jam.idea? || jam.mix? %>
+                  <div class="field">
+                    <span class="jam-value"><%= link_to "Promote", promote_room_jam_path(jam.room, jam), method: :put, class: "button is-primary" %></span>
+                  </div>
+                <% end %>
+              </div>
+            </div>  
           </div>
+          
         <% end %>
       </div>
     <% end %>
