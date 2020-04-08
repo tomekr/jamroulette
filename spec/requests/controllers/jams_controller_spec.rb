@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe JamsController, type: :request do
@@ -8,6 +10,49 @@ RSpec.describe JamsController, type: :request do
   end
 
   let!(:room) { create(:room) }
+
+  describe 'POST #promote' do
+    it_behaves_like 'Auth Required'
+    let(:user) { create(:user) }
+    before { sign_in(user) }
+
+    let!(:primary_jam) { create(:jam, room: room, promoted_at: 1.minute.ago) }
+    let(:jam) { create(:jam, :mix, room: room) }
+    let(:action) { put promote_room_jam_path(room, jam) }
+
+    it 'promotes a mix' do
+      action
+      expect(room.primary_jam.id).to eq jam.id
+    end
+
+    it 'redirects to room page' do
+      action
+      expect(response).to redirect_to(room_path(room))
+    end
+
+    it 'shows flash on successful promotion' do
+      action
+      expect(flash.notice).to include('Jam has been promoted')
+    end
+
+    it 'shows alert when trying to promote a solo jam' do
+      solo = create(:jam, :solo, room: room)
+      put promote_room_jam_path(room, solo)
+      expect(flash.alert).to include('Jams of type Solo can not be promoted')
+    end
+
+    it 'promotes an idea' do
+      idea = create(:jam, :idea, room: room)
+      put promote_room_jam_path(room, idea)
+      expect(room.primary_jam.id).to eq idea.id
+    end
+
+    it 'does not promote a solo' do
+      solo = create(:jam, :solo, room: room)
+      put promote_room_jam_path(room, solo)
+      expect(room.primary_jam.id).to_not eq solo.id
+    end
+  end
 
   describe 'POST #create' do
     it_behaves_like 'Auth Required'
@@ -40,6 +85,29 @@ RSpec.describe JamsController, type: :request do
     it 'associates generated activity with the current user' do
       action
       expect(uploaded_jam.activities.first.user).to eq user
+    end
+
+    context 'automatic promotion' do
+      let(:jam_params) { { jam_type_list: 'Mix', file: file } }
+
+      it 'promotes mixes' do
+        freeze_time do
+          action
+          expect(uploaded_jam.promoted_at).to eq Time.current
+        end
+      end
+
+      it 'does not promote ideas' do
+        jam_params[:jam_type_list] = 'Idea'
+        action
+        expect(uploaded_jam.promoted_at).to be nil
+      end
+
+      it 'does not promote solos' do
+        jam_params[:jam_type_list] = 'Solo'
+        action
+        expect(uploaded_jam.promoted_at).to be nil
+      end
     end
 
     it 'creates a notification' do

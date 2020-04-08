@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Jam, type: :model do
@@ -57,13 +59,22 @@ RSpec.describe Jam, type: :model do
     end
 
     example 'jam is a solo' do
-      jam=build(:jam, :solo)
+      jam = build(:jam, :solo)
       expect(jam.idea?).to be false
     end
 
     example 'jam is a mix' do
       jam = build(:jam)
       expect(jam.idea?).to be false
+    end
+  end
+
+  describe '#promote' do
+    it 'sets promoted_at field' do
+      freeze_time do
+        jam.promote
+        expect(jam.promoted_at).to eq Time.current
+      end
     end
   end
 
@@ -74,7 +85,7 @@ RSpec.describe Jam, type: :model do
     end
 
     example 'jam is a solo' do
-      jam=build(:jam, :solo)
+      jam = build(:jam, :solo)
       expect(jam.mix?).to be false
     end
 

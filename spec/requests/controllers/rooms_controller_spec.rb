@@ -23,9 +23,9 @@ RSpec.describe RoomsController, type: :request do
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'returns a mix if there are more than 20 supporting jams' do
-      create(:jam, room: room, jam_type_list: ['Mix'])
-      create_list(:jam, 20, room: room, jam_type_list: ['Solo'])
+    it 'returns a jam if there are more than 20 supporting jams' do
+      create(:jam, :mix, room: room)
+      create_list(:jam, 20, :solo, room: room)
 
       get room_path(room)
       expect(response.body).to include('<span class="jam-value">Mix</span>')

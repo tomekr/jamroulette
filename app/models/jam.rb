@@ -38,11 +38,15 @@ class Jam < ApplicationRecord
   end
 
   def idea?
-    jam_type == "Idea"
+    jam_type == 'Idea'
   end
 
   def mix?
-    jam_type == "Mix"
+    jam_type == 'Mix'
+  end
+
+  def promote
+    update(promoted_at: Time.current)
   end
 
   private

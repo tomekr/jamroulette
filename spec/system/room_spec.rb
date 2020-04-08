@@ -25,7 +25,7 @@ RSpec.describe 'viewing a room', type: :system do
       click_on 'Promote'
 
       within('section#main') do
-        expect(page).to have_selector('span.jam-value', text: 'Mix')
+        expect(page).to have_selector('span.jam-value', text: 'Idea')
         expect(page).to have_selector('span.jam-value', text: 'idea.mp3')
       end
     end

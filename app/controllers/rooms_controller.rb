@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
   # GET /rooms/:public_id
   def show
     jams = @room.jams.last(20).reverse
-    @current_jam = @room.jams.tagged_with('Mix', on: :jam_type).last
+    @current_jam = @room.primary_jam
     @supporting_jams = jams - [@current_jam]
     @new_jam = @room.jams.build
   end
