@@ -5,6 +5,9 @@
 
 @import '~bulma'; 
 
+body {
+  background: $white-ter;
+}
 #notifications {
   cursor: pointer;
 }
