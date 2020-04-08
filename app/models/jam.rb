@@ -8,14 +8,16 @@ class Jam < ApplicationRecord
   belongs_to :user
   has_one_attached :file
   validates :file, presence: { message: 'must be attached' }
-  validate :content_type_is_audio
-
   validates :jam_type, inclusion: { in: %w[Mix Solo Idea] }, allow_blank: true
+
+  validate :content_type_is_audio
+  validate :promotable
 
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
 
   before_save :make_midi_solo
+  before_create :promote_if_promotable
 
   def bpm
     bpm_list.first
@@ -50,6 +52,18 @@ class Jam < ApplicationRecord
   end
 
   private
+
+  def promotable
+    return unless promoted_at?
+
+    unless mix? || idea?
+      errors.add(:base, 'Only Mixes and Ideas can be promoted')
+    end
+  end
+
+  def promote_if_promotable
+    self.promoted_at = Time.current if mix?
+  end
 
   def make_midi_solo
     self.jam_type_list = 'Solo' if midi?

@@ -26,6 +26,45 @@ RSpec.describe Jam, type: :model do
       jam.jam_type_list = ['Invalid']
       expect(jam).to_not be_valid
     end
+
+    it 'allows absence of promotion' do
+      jam.promoted_at = nil
+      expect(jam).to be_valid
+    end
+
+    it 'allows mixes to be promoted' do
+      jam = build(:jam, :mix, promoted_at: Time.current)
+      expect(jam).to be_valid
+    end
+
+    it 'allows ideas to be promoted' do
+      jam = build(:jam, :idea, promoted_at: Time.current)
+      expect(jam).to be_valid
+    end
+
+    it 'does not allow solos to be promoted' do
+      jam = build(:jam, :solo, promoted_at: Time.current)
+      expect(jam).to_not be_valid
+    end
+  end
+
+  context 'automatic promotion on create' do
+    it 'promotes mixes' do
+      freeze_time do
+        jam = create(:jam, :mix)
+        expect(jam.promoted_at).to eq(Time.current)
+      end
+    end
+
+    it 'does not promote ideas' do
+      jam = create(:jam, :idea)
+      expect(jam.promoted_at).to be nil
+    end
+
+    it 'does not promote solos' do
+      jam = create(:jam, :solo)
+      expect(jam.promoted_at).to be nil
+    end
   end
 
   it 'creates an activity' do
@@ -73,7 +112,7 @@ RSpec.describe Jam, type: :model do
     it 'sets promoted_at field' do
       freeze_time do
         jam.promote
-        expect(jam.promoted_at).to eq Time.current
+        expect(jam.promoted_at).to eq(Time.current)
       end
     end
   end

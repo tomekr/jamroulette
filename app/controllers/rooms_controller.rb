@@ -7,8 +7,8 @@ class RoomsController < ApplicationController
   # GET /rooms/:public_id
   def show
     jams = @room.jams.last(20).reverse
-    @current_jam = @room.primary_jam
-    @supporting_jams = jams - [@current_jam]
+    @primary_jam = @room.primary_jam
+    @supporting_jams = jams - [@primary_jam]
     @new_jam = @room.jams.build
   end
 

@@ -52,6 +52,7 @@ RSpec.describe Room, type: :model do
 
   describe '#primary_jam' do
     it 'returns the most recently promoted jam' do
+      create(:jam, room: room, promoted_at: 2.minutes.ago)
       create(:jam, room: room, promoted_at: 1.minute.ago)
       primary_jam = create(:jam, room: room, promoted_at: Time.current)
 

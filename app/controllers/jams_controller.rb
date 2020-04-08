@@ -6,11 +6,7 @@ class JamsController < ApplicationController
   # POST /rooms/:public_id/jams
   def create
     jam = @room.jams.build(jam_params)
-
     jam.user = current_user
-
-    # automatically promote uploaded jams of type mix
-    jam.promoted_at = Time.current if jam.mix?
 
     if jam.save
       NotificationService.notify_on_jam_creation(jam, current_user)
@@ -21,15 +17,16 @@ class JamsController < ApplicationController
     redirect_to room_path(@room)
   end
 
-  # POST /rooms/:public_id/jams/:id/promote
+  # PUT /rooms/:public_id/jams/:id/promote
   def promote
     jam = @room.jams.find(params[:id])
-    if jam.mix? || jam.idea?
-      jam.promote
-      redirect_to room_path(@room), notice: 'Jam has been promoted'
+
+    if jam.promote
+      flash.notice = 'Jam has been promoted'
     else
-      redirect_to room_path(@room), alert: 'Jams of type Solo can not be promoted'
+      flash.alert = jam.errors.full_messages.join(', ')
     end
+    redirect_to room_path(@room)
   end
 
   private

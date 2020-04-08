@@ -22,7 +22,7 @@ class Room < ApplicationRecord
   end
 
   def primary_jam
-    jams.where.not(promoted_at: nil).order('promoted_at desc').first
+    jams.where.not(promoted_at: nil).order(promoted_at: :desc).first
   end
 
   private

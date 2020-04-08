@@ -4,18 +4,15 @@ FactoryBot.define do
   factory :jam do
     file { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.mp3'), 'audio/mpeg') }
     jam_type_list { ['Mix'] }
-    promoted_at { Time.current }
     room
     user
 
     trait :idea do
-      promoted_at { nil }
       jam_type_list { ['Idea'] }
       file { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'idea.mp3'), 'audio/mpeg') }
     end
 
     trait :solo do
-      promoted_at { nil }
       jam_type_list { ['Solo'] }
       file { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'solo.mp3'), 'audio/mpeg') }
     end

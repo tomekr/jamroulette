@@ -8,63 +8,63 @@
 </section>
 
 <section class="section" id="main">
-  <% if @current_jam %>
+  <% if @primary_jam %>
     <div id="stage" class="box">
-      <%= react_component("waveform_player", { id: @current_jam.id, audioUrl: url_for(@current_jam.file) }) %>
+      <%= react_component("waveform_player", { id: @primary_jam.id, audioUrl: url_for(@primary_jam.file) }) %>
       <div class="jam-attributes jam-attributes-big">
         <ul>
           <li>
             <span class="jam-attribute jam-attribute-date">
               <span class="jam-key">Latest JAM: </span>
-              <span class="jam-value"><%= @current_jam.created_at.to_formatted_s(:long) %></span>
+              <span class="jam-value"><%= @primary_jam.created_at.to_formatted_s(:long) %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-filename">
               <span class="jam-key">FILE: </span>
-              <span class="jam-value"><%= @current_jam.file.filename %></span>
+              <span class="jam-value"><%= @primary_jam.file.filename %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-bpm">
               <span class="jam-key"><i class="fas fa-file-audio"></i> Jam Type: </span>
-              <span class="jam-value"><%= @current_jam.jam_type %></span>
+              <span class="jam-value"><%= @primary_jam.jam_type %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-length">
               <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
-              <span class="jam-value"><%= format_duration(@current_jam.duration) %></span>
+              <span class="jam-value"><%= format_duration(@primary_jam.duration) %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-bpm">
               <span class="jam-key"><i class="fas fa-drum"></i> BPM: </span>
-              <span class="jam-value"><%= @current_jam.bpm %></span>
+              <span class="jam-value"><%= @primary_jam.bpm %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-bpm">
               <span class="jam-key"><i class="fas fa-music"></i> Song Key: </span>
-              <span class="jam-value"><%= @current_jam.song_key_list %></span>
+              <span class="jam-value"><%= @primary_jam.song_key_list %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-bpm">
               <span class="jam-key"><i class="fas fa-users"></i> Could Use: </span>
-              <span class="jam-value"><%= @current_jam.could_use_list %></span>
+              <span class="jam-value"><%= @primary_jam.could_use_list %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-bpm">
               <span class="jam-key"><i class="fas fa-compact-disc"></i></i> Styles: </span>
-              <span class="jam-value"><%= @current_jam.style_list %></span>
+              <span class="jam-value"><%= @primary_jam.style_list %></span>
             </span>
           </li>
           <li>
             <span class="jam-attribute jam-attribute-user">
               <span class="jam-key"><i class="far fa-user"></i> User: </span>
-              <span class="jam-value"><%= jam_user(@current_jam) %></span>
+              <span class="jam-value"><%= jam_user(@primary_jam) %></span>
             </span>
           </li>
         </ul>
@@ -72,7 +72,7 @@
     </div>
     <div class="jam-buttons">
       <h1>JAM on this track!</h1>
-      <%= link_to "Download Track", url_for(@current_jam.file), class: "button is-dark" %>
+      <%= link_to "Download Track", url_for(@primary_jam.file), class: "button is-dark" %>
       <button id="upload-jam-button" class="button">Upload New Track</button>
     </div>
   <% else %>
