@@ -21,6 +21,10 @@ class Room < ApplicationRecord
     public_id
   end
 
+  def primary_jam
+    jams.where.not(promoted_at: nil).order(promoted_at: :desc).first
+  end
+
   private
 
   def generate_public_id

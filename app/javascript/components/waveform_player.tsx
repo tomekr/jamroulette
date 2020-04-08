@@ -29,6 +29,9 @@ const WaveformPlayer = (props: WaveformPlayerProps) => {
         container: waveformDivRef.current,
         waveColor: 'violet',
         progressColor: 'purple',
+        responsive: true,
+        barWidth: 4,
+        normalize: true,
         plugins: [
           CursorPlugin.create({
             showTime: true,
@@ -70,12 +73,16 @@ const WaveformPlayer = (props: WaveformPlayerProps) => {
   }
 
   return (
-    <div>
-      <button id="waveformAudioControl" className="button is-large" onClick={togglePlayPause}>
-        <FontAwesomeIcon icon={stateButtonIcon()} />
-      </button>
+    <div className="columns is-vcentered">
+      <div className="column is-narrow">
+        <button id="waveformAudioControl" className="button is-large" onClick={togglePlayPause}>
+          <FontAwesomeIcon icon={stateButtonIcon()} />
+        </button>
+      </div>
 
-      <div ref={waveformDivRef} style={{ position: 'relative' }}>
+      <div className="column">
+        <div ref={waveformDivRef} style={{ position: 'relative' }}>
+        </div>
       </div>
     </div>
   )

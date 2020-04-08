@@ -50,6 +50,16 @@ RSpec.describe Room, type: :model do
     end
   end
 
+  describe '#primary_jam' do
+    it 'returns the most recently promoted jam' do
+      create(:jam, room: room, promoted_at: 2.minutes.ago)
+      create(:jam, room: room, promoted_at: 1.minute.ago)
+      primary_jam = create(:jam, room: room, promoted_at: Time.current)
+
+      expect(room.primary_jam).to eq primary_jam
+    end
+  end
+
   describe '#users' do
     let(:uploader) { create(:user) }
 
