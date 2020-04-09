@@ -1,0 +1,44 @@
+<div class="tabs is-centered is-large">
+  <ul>
+    <li class="is-active">
+      <a>
+        <span class="icon is-small"><i class="fas fa-users" aria-hidden="true"></i></span>
+        <span>Could Use</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="fas fa-compact-disc"></i></span>
+        <span>Styles</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<section class="section could-use-section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+				<div class="buttons">
+          <button class="button is-primary is-light">Drums</button>
+          <button class="button is-primary">Vocals</button>
+          <button class="button is-primary">Piano</button>
+          <button class="button is-primary is-light">Bass</button>
+          <button class="button is-primary">Synth</button>
+				</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section could-use-section">
+  <div class="container">
+    <% 3.times do %>
+      <div class="tile is-ancestor">
+        <% 3.times do %>
+          <%= render "room_tile", room: Room.last %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

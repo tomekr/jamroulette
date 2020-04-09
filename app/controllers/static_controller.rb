@@ -12,6 +12,8 @@ class StaticController < ApplicationController
     redirect_to home_path if session[:is_beta_user]
   end
 
+  def explore; end
+
   def validate_beta_user
     if InviteCode.find_by_code(params[:beta_code])
       session[:is_beta_user] = true

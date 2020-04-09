@@ -46,6 +46,23 @@ RSpec.describe 'visiting the home page', type: :system do
       expect(page).to have_content('random-room')
     end
 
+    it 'allows a user to explore jams that could use an instrument' do
+      create(:jam, could_use_list: %w[Bass Vocals])
+
+      visit home_path
+      click_on 'Explore'
+
+      click_on 'Bass'
+      click_on 'Vocals'
+
+      within('.room-tile') do
+        exptect(page).to have_content('Bass')
+        exptect(page).to have_content('Vocals')
+        exptect(page).to have_content(jam.room.name)
+        exptect(page).to have_content(jam.user.display_name)
+      end
+    end
+
     context 'user is authenticated' do
       let(:user) { create(:user) }
       before(:each) { sign_in user }
