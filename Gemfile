@@ -35,6 +35,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :production do
   gem "aws-sdk-s3", '1.61.1'
   gem "sentry-raven", '3.0.0'
+  gem 'newrelic_rpm'
 end
 
 group :development, :test do
