@@ -1,0 +1,31 @@
+<div class="box">
+  <p class="title"><%= room.name %></p>
+  <p class="subtitle"><%= room.user.display_name %></p>
+  <div class="content">
+    <%= react_component("waveform_player", { id: room.primary_jam.id, audioUrl: url_for(room.primary_jam.file) }) %>
+    
+    <div class="columns is-centered">
+      <div class="column">
+        <i class="fas fa-drum" aria-hidden="true"></i>
+        <%= room.primary_jam.bpm %>
+      </div>
+      <div class="column">
+        <i class="fas fa-file-upload" aria-hidden="true"></i>
+        <%= room.jams.count %>
+      </div>
+      <div class="column">
+        <i class="fas fa-clock" aria-hidden="true"></i>
+        <%= format_duration(room.primary_jam.duration) %>
+      </div>
+    </div>
+
+    <div class="container">
+      Could Use:
+      <div class="could-use-tags">
+        <% room.primary_jam.could_use_list.each do |tag| %>
+          <span class="tag is-primary"><%= tag %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

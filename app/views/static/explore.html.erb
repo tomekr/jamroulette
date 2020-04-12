@@ -1,0 +1,13 @@
+<section class="section could-use-section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% @rooms.each do |room| %>
+        <div class="column is-4">
+          <%= render 'room_tile', room: room %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+

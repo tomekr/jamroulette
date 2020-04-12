@@ -17,6 +17,15 @@ class Room < ApplicationRecord
 
   scope :recommended, -> { joins(:jams).order('RANDOM()') }
 
+  def self.primary_with_could_use
+    jams = ActsAsTaggableOn::Tagging.where(
+      taggable_type: 'Jam',
+      context: 'could_use'
+    ).map(&:taggable).uniq
+
+    jams.select { |jam| jam == jam.room.primary_jam }.map(&:room)
+  end
+
   def to_param
     public_id
   end

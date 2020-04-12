@@ -8,6 +8,11 @@ class StaticController < ApplicationController
     @has_activities = current_user&.activities&.exists?
   end
 
+  def explore
+    # TODO: Write test
+    @rooms = Room.primary_with_could_use
+  end
+
   def beta
     redirect_to home_path if session[:is_beta_user]
   end
