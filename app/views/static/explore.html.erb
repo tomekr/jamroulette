@@ -15,30 +15,37 @@
   </ul>
 </div>
 
-<section class="section could-use-section">
-  <div class="container">
+<section class="section could-use-section"
+    data-controller="room-tile-toggle"
+    data-room-tile-toggle-hidden-class="is-hidden"
+    data-room-tile-toggle-toggled-class="is-primary"
+    data-room-tile-toggle-toggled-value="false"
+    data-room-tile-toggle-filter-values="[]">
+  <div class="container"
+      data-room-tile-toggle-target="filterInput">
     <div class="columns is-centered">
       <div class="column is-narrow">
-				<div class="buttons">
-          <button class="button is-primary is-light">Drums</button>
-          <button class="button is-primary">Vocals</button>
-          <button class="button is-primary">Piano</button>
-          <button class="button is-primary is-light">Bass</button>
-          <button class="button is-primary">Synth</button>
-				</div>
+        <div class="buttons">
+          <% @could_use_tags.each do |tag| %>
+            <button class="button"
+                    data-action="click->room-tile-toggle#toggle">
+              <%= tag %>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-<section class="section could-use-section">
-  <div class="container">
-    <% 3.times do %>
-      <div class="tile is-ancestor">
-        <% 3.times do %>
-          <%= render "room_tile", room: Room.last %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <section class="section could-use-section">
+    <div class="container">
+      <% @rooms.each_slice(3) do |room_slice| %>
+        <div class="tile is-ancestor">
+          <% room_slice.each do |room| %>
+            <%= render "room_tile", room: room, primary_jam: room.primary_jam, could_use_tags: @could_use_tags %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
 </section>

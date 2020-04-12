@@ -1,10 +1,11 @@
-<div class="tile is-parent room-tile">
+<div class="tile is-parent room-tile is-4"
+    data-room-tile-toggle-target="roomTile">
   <article class="tile is-child box">
     <p class="title"><%= room.name %></p>
     <p class="subtitle"><%= room.user.display_name %></p>
     <div class="content">
-      <%= react_component("waveform_player", { id: room.primary_jam.id, audioUrl: url_for(room.primary_jam.file) }) %>
-      
+      <%= react_component('waveform_player', {id: primary_jam.id, audioUrl: url_for(primary_jam.file)}) %>
+
       <div class="columns is-centered">
         <div class="column">
           <i class="fas fa-drum" aria-hidden="true"></i>
@@ -20,11 +21,13 @@
         </div>
       </div>
 
-      <div class="container could-use-tags">
-        Could Use: 
-        <span class="tag is-primary">Vocals</span>
-        <span class="tag is-primary">Piano</span>
-        <span class="tag is-primary">Synth</span>
+      <div class="container">
+        Could Use:
+        <div class="could-use-tags">
+          <% primary_jam.could_use_list.each do |tag| %>
+            <span class="tag is-primary"><%= tag %></span>
+          <% end %>
+        </div>
       </div>
     </div>
   </article>

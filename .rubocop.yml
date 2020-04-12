@@ -1,0 +1,186 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - "test_prof/rubocop"
+
+AllCops:
+  TargetRubyVersion: 2.6
+  TargetRailsVersion: 6.0
+  DisabledByDefault: true
+  Exclude:
+    - ".bundle/**/*" # Auto-generated
+    - "bin/**/*"     # Auto-generated
+    - "db/schema.rb" # You can't touch this
+    - "vendor/**/*"  # We cannot solve the world's problems
+    - "node_modules/**/*"  # We cannot solve the world's problems
+
+Rails:
+  Enabled: true
+
+Metrics/AbcSize:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 80
+  Exclude:
+    - "Rakefile"
+    - "app/views/**/*.jbuilder"
+    - "config/**/*.rb"
+    - "db/migrate/**/*.rb"
+    - "spec/rails_helper.rb"
+    - "spec/spec_helper.rb"
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+  IndentationWidth: 4
+
+Style/CaseEquality:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "app/controllers/**/*"
+    - "app/helpers/**/*"
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: same_line
+
+Layout/MultilineHashBraceLayout:
+  EnforcedStyle: same_line
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/TrivialAccessors:
+  ExactNameMatch: true
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: no_comma
+
+Style/BlockDelimiters:
+  Exclude:
+    - "spec/**/*" # because let statements use braces for multiline blocks
+
+Layout/BlockEndNewline:
+  Exclude:
+    - "spec/**/*" # because let statements use braces for multiline blocks
+
+Layout/MultilineBlockLayout:
+  Exclude:
+    - "spec/**/*" # because let statements use braces for multiline blocks
+
+Style/Semicolon:
+  AllowAsExpressionSeparator: true
+  Exclude:
+    - "spec/**/*" # because sometimes we use this in expect or then blocks
+
+Style/RaiseArgs:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - stage
+    - test
+
+Rails/ApplicationRecord:
+  Exclude:
+    - "db/**/*" # Migrations should be isolated, models defined there should NOT inherit from ApplicationRecord
+
+Rails/Output:
+  Exclude:
+    - "db/seeds/**/*" # Allow `puts` from inside seed files
+    - "lib/tasks/**.rake"
+
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+  SpaceBeforeBlockParameters: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/HookArgument:
+  EnforcedStyle: "example"
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/DescribedClass:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/AggregateExamples:
+  Enabled: true
+  Include:
+    - 'spec/**/*.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/AccessModifierDeclarations:
+  EnforcedStyle: inline
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  Exclude:
+    - "Gemfile"
+    - "config.ru"
+    - "db/migrate/**.rb"
+  IgnoredMethods:
+    - "ap"
+    - "describe"
+    - "not_to"
+    - "p"
+    - "puts"
+    - "require"
+    - "require_relative"
+    - "to"
+
+Style/DateTime:
+  Enabled: false
+

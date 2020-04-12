@@ -16,6 +16,7 @@ class Room < ApplicationRecord
   has_many :notifications, as: :target, dependent: :destroy
 
   scope :recommended, -> { joins(:jams).order('RANDOM()') }
+  scope :with_jams, -> { joins(:jams) }
 
   def to_param
     public_id
