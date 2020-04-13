@@ -2,8 +2,10 @@
   <p class="title"><%= room.name %></p>
   <p class="subtitle"><%= room.user.display_name %></p>
   <div class="content">
-    <%= react_component("waveform_player", { id: room.primary_jam.id, audioUrl: url_for(room.primary_jam.file) }) %>
-    
+    <section class="section">
+      <%= react_component("audio_player", { audioUrl: url_for(room.primary_jam.file) }) %>
+    </section>
+
     <div class="columns is-centered">
       <div class="column">
         <i class="fas fa-drum" aria-hidden="true"></i>

@@ -3,10 +3,10 @@
        data-controller="text-filter"
        data-text-filter-hidden-class="is-hidden">
     <section class="section">
-      <label class="label">Filter</label>
+      <label class="label">Filter Could Use Tags:</label>
               
       <%= text_field_tag("search", "", placeholder: "'Drums', 'Vocals', etc",
-                          type: "search", id: "search_query", class: "input",
+                          type: "search", class: "input is-primary", autofocus: true,
                           "data-text-filter-target": "filterInput",
                           "data-action": "input->text-filter#filter") %> 
       
@@ -22,11 +22,13 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="box">
-        <%= paginate @rooms, class: 'pagination' %>
-      </div>
-    </section>
+    <% if path_to_next_page(@rooms) %>
+      <section class="section">
+        <div class="box">
+          <%= paginate @rooms, class: 'pagination' %>
+        </div>
+      </section>
+    <% end %>
   </div>
 </section>
 
