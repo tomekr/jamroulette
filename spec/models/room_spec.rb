@@ -28,6 +28,16 @@ RSpec.describe Room, type: :model do
     end.to change(Activity, :count).by(1)
   end
 
+  describe '.primary_with_could_use' do
+    let(:other_room) { create(:room) }
+    it 'returns rooms that have a primary jam with a could_use tag' do
+      create(:jam, room: other_room, could_use_list: nil)
+      create(:jam, room: room, could_use_list: nil)
+      create(:jam, room: room, could_use_list: %w[Bass Vocals])
+      expect(Room.primary_with_could_use).to contain_exactly(room)
+    end
+  end
+
   describe '.recommended' do
     it 'returns a Room that contains a jam' do
       create(:jam, room: room)
