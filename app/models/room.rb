@@ -8,7 +8,6 @@ class Room < ApplicationRecord
   after_initialize :generate_public_id
 
   belongs_to :user
-  belongs_to :primary_jam, class_name: 'Jam', optional: true
 
   has_many :jams, dependent: :destroy
   has_many :users, through: :jams
@@ -29,6 +28,10 @@ class Room < ApplicationRecord
 
   def to_param
     public_id
+  end
+
+  def primary_jam
+    jams.where.not(promoted_at: nil).order(promoted_at: :desc).first
   end
 
   private

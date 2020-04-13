@@ -46,14 +46,14 @@ RSpec.describe JamsController, type: :request do
 
       it 'does not promote' do
         action
-        expect(room.reload.primary_jam.id).to_not eq solo.id
+        expect(room.primary_jam.id).to_not eq solo.id
       end
     end
 
     it 'promotes an idea' do
       idea = create(:jam, :idea, room: room)
       put promote_room_jam_path(room, idea)
-      expect(room.reload.primary_jam.id).to eq idea.id
+      expect(room.primary_jam.id).to eq idea.id
     end
   end
 
