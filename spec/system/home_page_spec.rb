@@ -46,18 +46,22 @@ RSpec.describe 'visiting the home page', type: :system do
       expect(page).to have_content('random-room')
     end
 
-    it 'allows a user to explore jams that could use an instrument' do
-      create(:jam, could_use_list: %w[Bass Vocals])
+    it 'allows a user to explore jams that could use an instrument', js: true do
+      create(:jam, could_use_list: %w[Synth Vocals])
+      jam = create(:jam, could_use_list: %w[Bass Vocals])
 
       visit home_path
       click_on 'Explore'
 
       fill_in :search, with: 'Bass'
 
+      # Only jam with Bass and Vocals tags should render
+      expect(page).to have_selector('.room-tile', count: 1)
+
       within('.room-tile') do
-        exptect(page).to have_content('Bass')
-        exptect(page).to have_content(jam.room.name)
-        exptect(page).to have_content(jam.user.display_name)
+        expect(page).to have_content('Bass')
+        expect(page).to have_content(jam.room.name)
+        expect(page).to have_content(jam.user.display_name)
       end
     end
 

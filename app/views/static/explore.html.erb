@@ -1,12 +1,26 @@
 <section class="section could-use-section">
-  <div class="container">
-    <div class="columns is-multiline">
-      <% @rooms.each do |room| %>
-        <div class="column is-4">
-          <%= render 'room_tile', room: room %>
-        </div>
-      <% end %>
-    </div>
+  <div class="container"
+       data-controller="text-filter"
+       data-text-filter-hidden-class="is-hidden">
+    <section class="section">
+      <label class="label">Filter</label>
+              
+      <%= text_field_tag("search", "", placeholder: "'Drums', 'Vocals', etc",
+                          type: "search", id: "search_query", class: "input",
+                          "data-text-filter-target": "filterInput",
+                          "data-action": "input->text-filter#filter") %> 
+      
+    </section>
+
+    <section class="section">
+      <div class="columns is-multiline">
+        <% @rooms.each do |room| %>
+          <div class="column is-4" data-text-filter-target="roomTile">
+            <%= render 'room_tile', room: room %>
+          </div>
+        <% end %>
+      </div>
+    </section>
   </div>
 </section>
 
