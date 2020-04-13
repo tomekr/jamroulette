@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_215230) do
+ActiveRecord::Schema.define(version: 2020_04_13_003413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 2020_04_07_215230) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.bigint "primary_jam_id"
+    t.index ["primary_jam_id"], name: "index_rooms_on_primary_jam_id"
     t.index ["public_id"], name: "index_rooms_on_public_id", unique: true
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end

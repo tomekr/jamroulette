@@ -13,11 +13,13 @@ class Jam < ApplicationRecord
   validate :content_type_is_audio
   validate :promotable
 
+  has_one :claimed_room, dependent: :nullify, class_name: 'Room', foreign_key: 'primary_jam_id'
   has_many :activities, as: :subject, dependent: :destroy
   has_many :notifications, as: :target, dependent: :destroy
 
   before_save :make_midi_solo
   before_create :promote_if_promotable
+  after_create :set_primary_jam
 
   def bpm
     bpm_list.first
@@ -49,6 +51,7 @@ class Jam < ApplicationRecord
 
   def promote
     update(promoted_at: Time.current)
+    room.update!(primary_jam: self)
   end
 
   private
@@ -63,6 +66,10 @@ class Jam < ApplicationRecord
 
   def promote_if_promotable
     self.promoted_at = Time.current if mix?
+  end
+
+  def set_primary_jam
+    room.update!(primary_jam: self) if mix?
   end
 
   def make_midi_solo
