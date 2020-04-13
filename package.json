@@ -20,6 +20,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react_ujs": "^2.6.1",
+    "stimulus": "https://github.com/stimulusjs/dev-builds/archive/b8cc8c4/stimulus.tar.gz",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "wavesurfer.js": "^3.3.1"
