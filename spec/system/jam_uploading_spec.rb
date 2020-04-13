@@ -23,10 +23,12 @@ RSpec.describe 'uploading jams', type: :system do
 
     it 'allows a user to upload a jam', js: true do
       fill_in :jam_bpm_list, with: '120'
+      fill_in :jam_notes, with: 'this is a note'
       click_on 'Upload'
 
       expect(page).to have_content('Jam successfully created!')
       expect(page).to have_content('120')
+      expect(page).to have_content('this is a note')
 
       within('section#main') do
         # Check that radio button defaulted to Mix
