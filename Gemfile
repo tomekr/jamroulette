@@ -25,6 +25,7 @@ gem 'delayed_job_active_record'
 gem 'devise', '4.7.1'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'kaminari'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

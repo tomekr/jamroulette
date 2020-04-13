@@ -23,7 +23,10 @@ class Room < ApplicationRecord
       context: 'could_use'
     ).map(&:taggable).uniq
 
-    jams.select { |jam| jam == jam.room.primary_jam }.map(&:room)
+    room_ids = jams.select { |jam| jam == jam.room.primary_jam }.map(&:room_id)
+
+    # Return an ActiveRecord Relation for pagination
+    Room.where(id: room_ids)
   end
 
   def to_param

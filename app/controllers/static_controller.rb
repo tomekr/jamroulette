@@ -9,8 +9,7 @@ class StaticController < ApplicationController
   end
 
   def explore
-    # TODO: Write test
-    @rooms = Room.primary_with_could_use
+    @rooms = Room.primary_with_could_use.page params[:page]
   end
 
   def beta
