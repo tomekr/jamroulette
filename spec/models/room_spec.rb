@@ -30,6 +30,7 @@ RSpec.describe Room, type: :model do
 
   describe '.primary_with_could_use' do
     let(:other_room) { create(:room) }
+
     it 'returns rooms that have a primary jam with a could_use tag' do
       create(:jam, room: other_room, could_use_list: nil)
       create(:jam, room: room, could_use_list: nil)

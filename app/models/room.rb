@@ -18,15 +18,15 @@ class Room < ApplicationRecord
   scope :recommended, -> { joins(:jams).order('RANDOM()') }
 
   def self.primary_with_could_use
-    jams = ActsAsTaggableOn::Tagging.where(
-      taggable_type: 'Jam',
-      context: 'could_use'
-    ).map(&:taggable).uniq
-
-    room_ids = jams.select { |jam| jam == jam.room.primary_jam }.map(&:room_id)
-
-    # Return an ActiveRecord Relation for pagination
-    Room.where(id: room_ids)
+    Room
+      .includes(:jams)
+      .joins(:jams)
+      .merge(Jam.recent)
+      .merge(
+        Jam.tagged_with(
+          ActsAsTaggableOn::Tag.for_context(:could_use), on: :could_use, any: true
+        )
+      )
   end
 
   def to_param
