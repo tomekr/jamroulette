@@ -28,15 +28,42 @@ alice = User.create(
 empty_room = Room.create!(public_id: 'empty', user: bob, name: 'Empty Room')
 
 # Create a room with two attached jams
-room = Room.create!(public_id: 'jams', user: bob, name: 'Jam Room')
+room = Room.create!(public_id: 'jams', user: bob, name: 'Bob Jam Room')
 
-jam = room.jams.build(bpm_list: '120', jam_type_list: ['Mix'], promoted_at: Time.current, user: bob)
+jam = room.jams.build(
+  bpm_list: '120',
+  jam_type_list: ['Mix'],
+  could_use_list: %w[Bass Vocals],
+  duration_list: ['90'],
+  promoted_at: Time.current,
+  user: bob
+)
 jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 jam.save
 
-other_jam = room.jams.build(bpm_list: '120', jam_type_list: ['Mix'], promoted_at: Time.current, user: alice)
+other_jam = room.jams.build(
+  bpm_list: '120',
+  jam_type_list: ['Mix'],
+  could_use_list: %w[Vocals Synth],
+  duration_list: ['125'],
+  promoted_at: Time.current,
+  user: alice
+)
 other_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 other_jam.save
+
+alice_room = Room.create!(public_id: 'alice-jams', user: alice, name: 'Alice Jam Room')
+
+alice_jam = alice_room.jams.build(
+  bpm_list: '120',
+  jam_type_list: ['Mix'],
+  could_use_list: %w[Vocals Guitar],
+  duration_list: ['130'],
+  promoted_at: Time.current,
+  user: alice
+)
+alice_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
+alice_jam.save
 
 # TODO: Remove when no longer in beta
 InviteCode.create(code: 'Mellon')

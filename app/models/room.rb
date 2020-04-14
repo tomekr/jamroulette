@@ -17,6 +17,18 @@ class Room < ApplicationRecord
 
   scope :recommended, -> { joins(:jams).order('RANDOM()') }
 
+  def self.primary_with_could_use
+    Room
+      .includes(:jams)
+      .joins(:jams)
+      .merge(Jam.recent)
+      .merge(
+        Jam.tagged_with(
+          ActsAsTaggableOn::Tag.for_context(:could_use), on: :could_use, any: true
+        )
+      )
+  end
+
   def to_param
     public_id
   end
