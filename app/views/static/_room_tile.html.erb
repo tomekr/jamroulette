@@ -1,6 +1,20 @@
 <div class="box room-tile">
-  <p class="title"><%= room.name %></p>
-  <p class="subtitle"><%= room.user.display_name %></p>
+  <div class="container">
+    <div class="columns is-gapless">
+      <div class="column">
+        <p class="title"><%= room.name %></p>
+        <p class="subtitle"><%= room.user.display_name %></p>
+      </div>
+      <div class="column is-narrow">
+        <%= link_to(room_path(room), class: "button is-outlined is-primary") do %>
+          <span class="icon is-small">
+            <i class="fas fa-door-open"></i>
+          </span>
+          <span>Visit</span>
+         <% end %>
+      </div>
+    </div>
+  </div>
   <div class="content">
     <section class="section">
       <%= react_component("audio_player", { audioUrl: url_for(room.primary_jam.file) }) %>
