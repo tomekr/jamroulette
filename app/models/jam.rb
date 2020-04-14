@@ -19,7 +19,7 @@ class Jam < ApplicationRecord
   before_save :make_midi_solo
   before_create :promote_if_promotable
 
-  scope :recent, -> { where(promoted_at: 10.days.ago..) }
+  scope :recent, -> { where(promoted_at: 30.days.ago..) }
 
   def bpm
     bpm_list.first
