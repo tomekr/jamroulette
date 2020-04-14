@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe StaticController, type: :request do
@@ -11,6 +13,14 @@ RSpec.describe StaticController, type: :request do
     it 'returns http success' do
       get home_path
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'GET #explore' do
+    it 'contains link to room' do
+      jam = create(:jam, could_use_list: %w[Bass Vocals])
+      get explore_path
+      expect(response.body).to include(room_path(jam.room))
     end
   end
 end
