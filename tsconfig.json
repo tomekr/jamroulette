@@ -7,18 +7,11 @@
       "es6",
       "dom"
     ],
-    "jsx": "react",
     "module": "es6",
     "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "node_modules/*",
-        "app/javascript/*"
-      ]
-    },
     "sourceMap": true,
-    "target": "es5"
+    "target": "es5",
+    "jsx": "react"
   },
   "exclude": [
     "**/*.spec.ts",

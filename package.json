@@ -10,7 +10,7 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
+    "@rails/webpacker": "5.0.1",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
     "@types/react-howler": "^3.7.1",
@@ -19,18 +19,18 @@
     "bulma": "^0.8.0",
     "howler": "^2.1.3",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-dom": "^16.12.0",
     "react-howler": "^3.7.4",
     "react_ujs": "^2.6.1",
     "stimulus": "https://github.com/stimulusjs/dev-builds/archive/b8cc8c4/stimulus.tar.gz",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
     "wavesurfer.js": "^3.3.1"
   },
   "version": "0.1.0",
   "devDependencies": {
     "@types/webpack-env": "^1.15.1",
-    "webpack-dev-server": "^3.10.2"
+    "webpack-dev-server": "^3.10.3"
   }
 }
