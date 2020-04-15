@@ -25,6 +25,7 @@ gem 'delayed_job_active_record'
 gem 'devise', '4.7.1'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'groupify', git: 'https://github.com/identification-io/groupify', branch: 'feature/polymorphic_adding'
 gem 'kaminari'
 
 # Use Active Storage variant
@@ -34,9 +35,9 @@ gem 'kaminari'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :production do
-  gem "aws-sdk-s3", '1.61.1'
-  gem "sentry-raven", '3.0.0'
+  gem 'aws-sdk-s3', '1.61.1'
   gem 'newrelic_rpm'
+  gem 'sentry-raven', '3.0.0'
 end
 
 group :development, :test do
@@ -51,9 +52,9 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'pry-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry-rails'
 end
 
 group :test do
