@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, and :omniauthable
@@ -9,4 +11,6 @@ class User < ApplicationRecord
 
   has_many :activities, dependent: :destroy
   has_many :notifications, dependent: :destroy
+
+  groupify :group_member
 end
