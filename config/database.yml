@@ -27,7 +27,7 @@ development:
   <% if ENV["LOCAL"] %>
   host: localhost
   <% else %>
-  host: localhost
+  host: db
   <% end %>
   username: postgres
   password: jamroulette
