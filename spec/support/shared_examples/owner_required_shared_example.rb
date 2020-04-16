@@ -11,7 +11,7 @@ RSpec.shared_examples 'Owner Required' do
 
   it 'does not allow members who are not owners' do
     member = create(:user)
-    create(:group_membership, member: member)
+    create(:group_membership, member: member, group: group)
     sign_in member
 
     action

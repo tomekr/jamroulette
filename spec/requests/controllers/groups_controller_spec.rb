@@ -180,8 +180,9 @@ RSpec.describe GroupsController, type: :request do
     it_behaves_like 'Owner Required'
     before { sign_in(user) }
 
-    let!(:group_membership) { create(:group_membership, :owner, member: user) }
-    let(:action) { delete group_path(group_membership.group) }
+    let(:group) { create(:group) }
+    let!(:group_membership) { create(:group_membership, :owner, member: user, group: group) }
+    let(:action) { delete group_path(group) }
 
     it 'destroys a group' do
       expect do
