@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe GroupsController, type: :request do
+  let(:user) { create(:user) }
+
   # TODO: Remove when beta invite requirements are removed
   before do
     InviteCode.create(code: 'correct-code')
     post '/validate_beta_user', params: { beta_code: 'correct-code' }
   end
-
-  let(:user) { create(:user) }
 
   describe 'GET #index' do
     it 'displays public groups' do
@@ -80,12 +80,13 @@ RSpec.describe GroupsController, type: :request do
   end
 
   describe 'POST #create' do
-    it_behaves_like 'Auth Required'
-    before { sign_in(user) }
-
     let(:group_params) { { name: 'A Public Group', visible: true } }
     let(:action) { post groups_path, params: { group: group_params } }
     let(:created_group) { Group.last }
+
+    before { sign_in(user) }
+
+    it_behaves_like 'Auth Required'
 
     it 'creates a group' do
       expect do
@@ -134,16 +135,16 @@ RSpec.describe GroupsController, type: :request do
   end
 
   context 'updating a group' do
-    before { sign_in(user) }
-
     let(:group) { create(:group, name: 'My Editable Group') }
     let!(:group_membership) { create(:group_membership, :owner, member: user, group: group) }
 
+    before { sign_in(user) }
+
     describe 'GET #edit' do
+      let(:action) { get edit_group_path(group) }
+
       it_behaves_like 'Auth Required'
       it_behaves_like 'Owner Required'
-
-      let(:action) { get edit_group_path(group) }
 
       it 'displays group to edit' do
         action
@@ -152,12 +153,12 @@ RSpec.describe GroupsController, type: :request do
     end
 
     describe 'PUT #update' do
-      it_behaves_like 'Auth Required'
-      it_behaves_like 'Owner Required'
-
       let(:group_update_params) { { name: 'My Updated Group' } }
       let(:action) { put group_path(group), params: { group: group_update_params } }
       let(:target) { Group.last }
+
+      it_behaves_like 'Auth Required'
+      it_behaves_like 'Owner Required'
 
       it 'updates the group' do
         action
@@ -176,13 +177,14 @@ RSpec.describe GroupsController, type: :request do
   end
 
   describe 'DELETE #destroy' do
-    it_behaves_like 'Auth Required'
-    it_behaves_like 'Owner Required'
-    before { sign_in(user) }
-
     let(:group) { create(:group) }
     let!(:group_membership) { create(:group_membership, :owner, member: user, group: group) }
     let(:action) { delete group_path(group) }
+
+    it_behaves_like 'Auth Required'
+    it_behaves_like 'Owner Required'
+
+    before { sign_in(user) }
 
     it 'destroys a group' do
       expect do
