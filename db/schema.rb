@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_155105) do
   create_table "groups", force: :cascade do |t|
     t.string "type"
     t.string "name"
-    t.boolean "private", default: true
+    t.boolean "visible", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

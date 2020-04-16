@@ -19,7 +19,7 @@ RSpec.describe 'visiting the home page', type: :system do
     click_on 'Groups'
     click_on 'New Group'
 
-    fill_in 'Group name', with: 'The Groovies'
+    fill_in 'Group Name', with: 'The Groovies'
     click_on 'Create Group'
 
     expect(page).to have_content('Group was successfully created')

@@ -25,7 +25,7 @@ gem 'delayed_job_active_record'
 gem 'devise', '4.7.1'
 
 gem 'acts-as-taggable-on', '~> 6.0'
-gem 'groupify', git: 'https://github.com/identification-io/groupify', branch: 'feature/polymorphic_adding'
+gem 'groupify', git: 'https://github.com/tomekr/groupify.git', branch: 'feature/polymorphic_adding'
 gem 'kaminari'
 
 # Use Active Storage variant

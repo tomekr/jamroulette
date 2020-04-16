@@ -5,7 +5,7 @@ class GroupifyMigration < ActiveRecord::Migration[6.0]
     create_table :groups do |t|
       t.string :type
       t.string :name
-      t.boolean :private, default: true
+      t.boolean :visible, default: false
 
       t.timestamps
     end

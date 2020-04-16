@@ -1,0 +1,21 @@
+<section class="section">
+  <section class="section">
+    <div class="container has-bottom-border">
+      <h1 class="title">New Group</h1>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-third">
+        Groups allow you to collaborate across multiple rooms. Members of a group have access to all of its rooms and jams.
+      </div>
+
+      <div class="column">
+        <%= render 'form', group: @group %>
+
+        <%= link_to 'Back', groups_path %>
+      </div>
+    </div>
+  </div>  
+</section>

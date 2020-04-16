@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/identification-io/groupify
+  remote: https://github.com/tomekr/groupify.git
   revision: dea8e4738b62d78ddb975e2cfe7822bfb73233ff
   branch: feature/polymorphic_adding
   specs:

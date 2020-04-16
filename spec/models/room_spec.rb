@@ -78,7 +78,7 @@ RSpec.describe Room, type: :model do
       create(:jam, room: room, user: room.user)
       create(:jam, room: room, user: uploader)
 
-      expect(room.users).to match([room.user, uploader])
+      expect(room.users).to contain_exactly(room.user, uploader)
     end
   end
 end

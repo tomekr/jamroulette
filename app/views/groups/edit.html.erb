@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="container has-bottom-border">
+    <h1 class="title">Edit <%= @group.name %></h1>
+  </div>
+</section>
+
+<div class="container">
+  <div class="columns">
+    <div class="column">
+      <%= render 'form', group: @group %>
+
+      <%= link_to 'Show', @group %> |
+      <%= link_to 'Back', groups_path %>
+    </div>
+  </div>
+</div>  
