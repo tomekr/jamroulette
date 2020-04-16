@@ -2,7 +2,7 @@
   <div class="column is-half">
     <%= form_with(model: group, local: true) do |form| %>
       <% if group.errors.any? %>
-        <div id="error_explanation">
+        <div id="error_explanation" class="notification is-danger">
           <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
           <ul>

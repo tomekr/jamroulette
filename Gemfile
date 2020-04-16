@@ -22,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 gem 'delayed_job_active_record'
 
+gem 'cancancan', '3.1.0'
 gem 'devise', '4.7.1'
 
 gem 'acts-as-taggable-on', '~> 6.0'

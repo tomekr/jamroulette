@@ -2,6 +2,8 @@
 
 class GroupsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  load_and_authorize_resource
+
   before_action :set_group, only: %i[show edit update destroy]
 
   # GET /groups

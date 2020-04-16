@@ -8,5 +8,9 @@ FactoryBot.define do
     trait(:private) do
       visible { false }
     end
+
+    trait(:public) do
+      visible { true }
+    end
   end
 end
