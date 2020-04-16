@@ -38,7 +38,6 @@ class GroupsController < ApplicationController
   end
 
   # PATCH/PUT /groups/1
-  # PATCH/PUT /groups/1.json
   def update
     if @group.update(group_params)
       redirect_to @group, notice: 'Group was successfully updated.'
@@ -48,7 +47,6 @@ class GroupsController < ApplicationController
   end
 
   # DELETE /groups/1
-  # DELETE /groups/1.json
   def destroy
     @group.destroy
     redirect_to groups_url, notice: 'Group was successfully destroyed.'
