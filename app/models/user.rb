@@ -12,5 +12,12 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  groupify :group_member
+  has_many :group_memberships
+  has_many :groups, through: :group_memberships
+
+  def in_group?(group, opts = {})
+    return false unless group.present?
+
+    groups.as(opts[:as]).include?(group)
+  end
 end

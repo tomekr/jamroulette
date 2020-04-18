@@ -23,4 +23,19 @@ RSpec.describe Group, type: :model do
       expect(user.groups.as(:owner)).to contain_exactly group
     end
   end
+
+  describe '.add' do
+    it 'adds a user to a group' do
+      group.add(user)
+      expect(user.groups).to contain_exactly group
+    end
+  end
+
+  describe '.members' do
+    it 'lists the members of a group' do
+      users = create_list(:user, 3)
+      users.each { |user| group.add(user) }
+      expect(group.members).to match_array users
+    end
+  end
 end

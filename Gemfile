@@ -26,7 +26,6 @@ gem 'cancancan', '3.1.0'
 gem 'devise', '4.7.1'
 
 gem 'acts-as-taggable-on', '~> 6.0'
-gem 'groupify', git: 'https://github.com/tomekr/groupify.git', branch: 'feature/polymorphic_adding'
 gem 'kaminari'
 
 # Use Active Storage variant

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GroupifyMigration < ActiveRecord::Migration[6.0]
+class GroupsMigration < ActiveRecord::Migration[6.0]
   def change
     create_table :groups do |t|
       t.string :type
@@ -11,8 +11,8 @@ class GroupifyMigration < ActiveRecord::Migration[6.0]
     end
 
     create_table :group_memberships do |t|
-      t.references :member, polymorphic: true, index: true, null: false
-      t.references :group, polymorphic: true, index: true
+      t.belongs_to :user
+      t.belongs_to :group
 
       # The membership type the member belongs with
       t.string     :membership_type

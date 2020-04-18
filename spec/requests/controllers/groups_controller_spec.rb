@@ -24,18 +24,17 @@ RSpec.describe GroupsController, type: :request do
 
     context 'is a member of a private group' do
       let(:group) { create(:group, :private, name: 'Private Group') }
-      before { sign_in(user) }
+      before do
+        sign_in(user)
+        group.add(user)
+      end
 
       it 'displays private groups owned by user' do
-        create(:group_membership, :owner, member: user, group: group)
-
         get groups_path
         expect(response.body).to include('Private Group')
       end
 
       it 'displays private groups' do
-        create(:group_membership, member: user, group: group)
-
         get groups_path
         expect(response.body).to include('Private Group')
       end
@@ -55,7 +54,7 @@ RSpec.describe GroupsController, type: :request do
 
     it 'allows members to view a private group' do
       group = create(:group, :private, name: 'Private Group')
-      create(:group_membership, member: user, group: group)
+      group.add(user)
 
       get group_path(group)
       expect(response.body).to include('Private Group')
@@ -136,9 +135,11 @@ RSpec.describe GroupsController, type: :request do
 
   context 'updating a group' do
     let(:group) { create(:group, name: 'My Editable Group') }
-    let!(:group_membership) { create(:group_membership, :owner, member: user, group: group) }
 
-    before { sign_in(user) }
+    before do
+      sign_in(user)
+      group.add_owner(user)
+    end
 
     describe 'GET #edit' do
       let(:action) { get edit_group_path(group) }
@@ -178,13 +179,15 @@ RSpec.describe GroupsController, type: :request do
 
   describe 'DELETE #destroy' do
     let(:group) { create(:group) }
-    let!(:group_membership) { create(:group_membership, :owner, member: user, group: group) }
     let(:action) { delete group_path(group) }
 
     it_behaves_like 'Auth Required'
     it_behaves_like 'Owner Required'
 
-    before { sign_in(user) }
+    before do
+      sign_in(user)
+      group.add_owner(user)
+    end
 
     it 'destroys a group' do
       expect do

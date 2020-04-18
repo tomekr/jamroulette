@@ -63,15 +63,13 @@ ActiveRecord::Schema.define(version: 2020_04_15_155105) do
   end
 
   create_table "group_memberships", force: :cascade do |t|
-    t.string "member_type", null: false
-    t.bigint "member_id", null: false
-    t.string "group_type"
+    t.bigint "user_id"
     t.bigint "group_id"
     t.string "membership_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_type", "group_id"], name: "index_group_memberships_on_group_type_and_group_id"
-    t.index ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id"
+    t.index ["group_id"], name: "index_group_memberships_on_group_id"
+    t.index ["user_id"], name: "index_group_memberships_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
