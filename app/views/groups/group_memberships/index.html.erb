@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Groups Group Memberships</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @groups_group_memberships.each do |groups_group_membership| %>
+      <tr>
+        <td><%= link_to 'Show', groups_group_membership %></td>
+        <td><%= link_to 'Edit', edit_groups_group_membership_path(groups_group_membership) %></td>
+        <td><%= link_to 'Destroy', groups_group_membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Groups Group Membership', new_groups_group_membership_path %>

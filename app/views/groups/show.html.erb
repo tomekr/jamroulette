@@ -1,7 +1,29 @@
 <section class="section">
-  <h1 class="title"><%= @group.name %></h1>
+  <div class="columns">
+    <div class="column is-one-fifth">
+      <aside class="menu">
+        <p class="menu-label">
+          General
+        </p>
+        <ul class="menu-list">
+          <li>
+            <%= link_to group_path(@group), class: 'is-active' do %>
+              <i class="fas fa-tachometer-alt"></i> Dashboard
+            <% end %>
+          </li>
+          <li>
+            <%= link_to group_group_membership_path(@group) do %>
+              <i class="fas fa-users"></i> Members
+            <% end %>
+          </li>
+        </ul>
+      </aside>
+    </div>
+    <div class="column">
+      <h1 class="title"><%= @group.name %></h1>
 
-  <%= link_to 'Edit', edit_group_path(@group) %> |
-  <%= link_to 'Back', groups_path %>
-
+      <%= link_to 'Edit', edit_group_path(@group) %> |
+      <%= link_to 'Back', groups_path %>
+    </div>
+  </div>
 </section>

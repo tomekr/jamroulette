@@ -1,0 +1,2 @@
+module Groups::GroupMembershipsHelper
+end

@@ -1,0 +1,17 @@
+<%= form_with(model: groups_group_membership, local: true) do |form| %>
+  <% if groups_group_membership.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(groups_group_membership.errors.count, "error") %> prohibited this groups_group_membership from being saved:</h2>
+
+      <ul>
+        <% groups_group_membership.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

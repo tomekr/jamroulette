@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    # # Default to json format for all notification routes
+    # Default to json format for all notification routes
     defaults format: :json do
       resources :notifications, only: :index do
         put 'read', on: :collection
@@ -24,5 +24,11 @@ Rails.application.routes.draw do
     get 'random', on: :collection
   end
 
-  resources :groups
+  resources :groups do
+    scope module: :groups, as: :group do
+      # as: membership normalizes path helpers
+      # (i.e. new_group_membership isntead of  new_group_group_membership)
+      resources :group_memberships, as: :memberships
+    end
+  end
 end
