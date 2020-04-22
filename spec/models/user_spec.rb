@@ -14,33 +14,34 @@ RSpec.describe User, type: :model do
   describe '#in_group?' do
     let(:user) { create(:user) }
     let(:group) { create(:group) }
-    it 'returns true if user is a member of a group' do
+
+    example 'member of group' do
       group.add(user)
       expect(user.in_group?(group)).to be true
     end
 
+    example 'nil group' do
+      expect(user.in_group?(nil)).to be false
+    end
+
+    example 'not a member of group' do
+      expect(user.in_group?(group)).to be false
+    end
+
     context 'as owner' do
-      it 'returns true if in group' do
+      example 'member and owner of group' do
         group.add_owner(user)
         expect(user.in_group?(group, as: :owner)).to be true
       end
 
-      it 'returns false if user is a member but not an owner' do
+      example 'member of group but not owner' do
         group.add(user)
         expect(user.in_group?(group, as: :owner)).to be false
       end
 
-      it 'return false if user is not in the group as owner' do
+      example 'not a member of group' do
         expect(user.in_group?(group, as: :owner)).to be false
       end
-    end
-
-    it 'returns false if group is not present' do
-      expect(user.in_group?(nil)).to be false
-    end
-
-    it 'return false if user is not in the group' do
-      expect(user.in_group?(group)).to be false
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Group < ApplicationRecord
-  has_many :group_memberships
+  has_many :group_memberships, dependent: :destroy
   has_many :users, through: :group_memberships
 
   validates :name, presence: true
@@ -18,7 +18,7 @@ class Group < ApplicationRecord
   end
 
   def add(user)
-    user.group_memberships.create(group: self)
+    group_memberships.create!(user: user)
   end
 
   def members

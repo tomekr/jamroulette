@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  has_many :group_memberships
+  has_many :group_memberships, dependent: :destroy
   has_many :groups, through: :group_memberships
 
   def in_group?(group, opts = {})
