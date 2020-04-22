@@ -18,6 +18,6 @@ class User < ApplicationRecord
   def in_group?(group, opts = {})
     return false unless group.present?
 
-    groups.as(opts[:as]).include?(group)
+    group_memberships.as(opts[:as]).where(group: group).exists?
   end
 end
