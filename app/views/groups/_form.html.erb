@@ -1,0 +1,48 @@
+<div class="columns">
+  <div class="column is-half">
+    <%= form_with(model: group, local: true) do |form| %>
+      <% if group.errors.any? %>
+        <div id="error_explanation" class="notification is-danger">
+          <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+          <ul>
+            <% group.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :name, 'Group Name', class: 'label' %>
+        <div class="control">
+          <%= form.text_field :name, class: "input", autofocus: true %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label :visible, 'Visibility', class: 'label' %>
+        <div class="control">
+          <label class="radio">
+            <%= form.radio_button :visible, false %>
+            <i class="fas fa-lock"></i>
+            Private
+            <p class="help">The group and its jams can only be viewed by members.</p>
+          </label>
+          <br>
+          <br>
+          <label class="radio">
+            <%= form.radio_button :visible, true %>
+            <i class="fas fa-globe-americas"></i>
+            Public
+            <p class="help">The group and any public jams can be viewed without any authentication.</p>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= form.submit class: 'button is-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

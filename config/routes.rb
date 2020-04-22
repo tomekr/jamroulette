@@ -23,4 +23,6 @@ Rails.application.routes.draw do
     end
     get 'random', on: :collection
   end
+
+  resources :groups
 end

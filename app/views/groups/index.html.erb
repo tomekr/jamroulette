@@ -1,0 +1,23 @@
+<section class="section">
+  <h1 class="title">Your Groups</h1>
+  <div class="box">
+    <% if @current_user_groups.present? %>
+      <%= render 'group_index', groups: @current_user_groups %>
+    <% else %>
+        You are not currently in any groups
+    <% end %>
+  </div>
+</section>
+
+<section class="section">
+  <h1 class="title">Public Groups</h1>
+  <div class="box">
+    <%= render 'group_index', groups: @groups %>
+  </div>
+</section>
+
+<br>
+
+<section class="section">
+  <%= link_to "New Group", new_group_path, class: "button is-success" %>
+</section>
