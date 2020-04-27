@@ -1,18 +1,21 @@
 <%= javascript_pack_tag 'jam_type_toggle' %>
 
-<div id="upload-track-modal" class="modal">
-  <div class="modal-background"></div>
+<div id="upload-track-modal" class="modal" data-jam-upload-target="uploadModal">
+  <div class="modal-background" data-action="click->jam-upload#toggleModal"></div>
   <div class="modal-card">
-    <%= form_with(model: @new_jam, url: [@room, @new_jam],  multipart: true,  local: true) do |form| %>
-      <header class="modal-card-head">
-        <p class="modal-card-title">Upload a Jam</p>
-        <button class="delete modal-close-button" aria-label="close"></button>
-      </header>
-      <section class="modal-card-body">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Upload a Jam</p>
+      <button class="delete modal-close-button" aria-label="close" data-action="click->jam-upload#toggleModal"></button>
+    </header>
+
+    <section class="modal-card-body">
+      <%= form_with(model: @new_jam, url: [@room, @new_jam],  multipart: true,  local: true, data: {"jam-upload-target": "uploadForm"}) do |form| %>
         <div class="field">
           <div id="file-upload-field" class="file has-name">
             <label class="file-label">
-              <%= form.file_field :file, class: "file-input", accept: "audio/*" %>
+              <%= form.file_field :file, class: "file-input",
+                                  data: { "jam-upload-target": "fileField", "action": "change->jam-upload#fileSelected" },
+                                  accept: "audio/*" %>
               <span class="file-cta">
                 <span class="file-icon">
                   <i class="fas fa-upload"></i>
@@ -21,12 +24,12 @@
                   Choose a file...
                 </span>
               </span>
-              <span class="file-name">
+              <span class="file-name" data-jam-upload-target="fileName">
                 No file selected
               </span>
             </label>
           </div>
-          <%= form.hidden_field(:duration_list) %>
+          <%= form.hidden_field :duration_list, data: { "jam-upload-target": "durationField"} %>
         </div>
 
         <div id="jam-type-buttons" class="field has-addons">
@@ -61,7 +64,7 @@
           <label class="label">BPM</label>
           <div class="field has-addons">
             <div class="control">
-              <%= form.text_field :bpm_list, class: "input" %>
+              <%= form.text_field :bpm_list, class: "input", data: { "jam-upload-target": "bpmField"} %>
             </div>
             <div class="control">
               <a class="button is-static">
@@ -92,12 +95,12 @@
           <label class="label">Notes</label>
           <%= form.text_area :notes, class: "textarea" %>
         </div>
-      </section>
+      <% end %>
+    </section>
 
-      <footer class="modal-card-foot">
-        <%= submit_tag "Upload", class: "button is-primary" %>
-        <button class="button modal-close-button">Cancel</button>
-      </footer>
-    <% end %>
+    <footer class="modal-card-foot">
+      <%= submit_tag "Upload", class: "button is-primary", data: {"action": "click->jam-upload#upload"} %>
+      <button class="button modal-close-button" data-action="click->jam-upload#toggleModal">Cancel</button>
+    </footer>
   </div>
 </div>

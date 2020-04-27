@@ -1,228 +1,177 @@
-<section class="section" id="room-header">
-  <div id="breadcrumb">
-    <%= "Home/#{@room.name}"%>
-  </div>
-  <div id="share-this-room">
-    Share this Room: <%= link_to room_url(@room) %>
-  <div>
-</section>
-
-<section class="section" id="main">
-  <% if @primary_jam %>
-    <div id="stage" class="box">
-      <%= react_component("waveform_player", { id: @primary_jam.id, audioUrl: url_for(@primary_jam.file) }) %>
-      <div class="jam-attributes jam-attributes-big">
-        <ul>
-          <li>
-            <span class="jam-attribute jam-attribute-date">
-              <span class="jam-key">Latest JAM: </span>
-              <span class="jam-value"><%= @primary_jam.created_at.to_formatted_s(:long) %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-filename">
-              <span class="jam-key">FILE: </span>
-              <span class="jam-value"><%= @primary_jam.file.filename %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-bpm">
-              <span class="jam-key"><i class="fas fa-file-audio"></i> Jam Type: </span>
-              <span class="jam-value"><%= @primary_jam.jam_type %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-length">
-              <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
-              <span class="jam-value"><%= format_duration(@primary_jam.duration) %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-bpm">
-              <span class="jam-key"><i class="fas fa-drum"></i> BPM: </span>
-              <span class="jam-value"><%= @primary_jam.bpm %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-bpm">
-              <span class="jam-key"><i class="fas fa-music"></i> Song Key: </span>
-              <span class="jam-value"><%= @primary_jam.song_key_list %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-bpm">
-              <span class="jam-key"><i class="fas fa-users"></i> Could Use: </span>
-              <span class="jam-value"><%= @primary_jam.could_use_list %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-bpm">
-              <span class="jam-key"><i class="fas fa-compact-disc"></i></i> Styles: </span>
-              <span class="jam-value"><%= @primary_jam.style_list %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-user">
-              <span class="jam-key"><i class="far fa-user"></i> User: </span>
-              <span class="jam-value"><%= jam_user(@primary_jam) %></span>
-            </span>
-          </li>
-          <li>
-            <span class="jam-attribute jam-attribute-notes">
-              <span class="jam-key"><i class="far fa-sticky-note"></i> Notes: </span>
-              <span class="jam-value"><%= @primary_jam.notes %></span>
-            </span>
-          </li>
-        </ul>
-      </div>
+<div data-controller="jam-upload" data-jam-upload-active-class="is-active">
+  <section class="section" id="room-header">
+    <div id="breadcrumb">
+      <%= "Home/#{@room.name}"%>
     </div>
-    <div class="jam-buttons">
-      <h1>JAM on this track!</h1>
-      <%= link_to "Download Track", url_for(@primary_jam.file), class: "button is-dark" %>
-      <button id="upload-jam-button" class="button">Upload New Track</button>
-    </div>
-  <% else %>
+    <div id="share-this-room">
+      Share this Room: <%= link_to room_url(@room) %>
     <div>
+  </section>
+
+  <section class="section" id="main">
+    <% if @primary_jam %>
+      <div id="stage" class="box">
+        <%= react_component("waveform_player", { id: @primary_jam.id, audioUrl: url_for(@primary_jam.file) }) %>
+        <div class="jam-attributes jam-attributes-big">
+          <ul>
+            <li>
+              <span class="jam-attribute jam-attribute-date">
+                <span class="jam-key">Latest JAM: </span>
+                <span class="jam-value"><%= @primary_jam.created_at.to_formatted_s(:long) %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-filename">
+                <span class="jam-key">FILE: </span>
+                <span class="jam-value"><%= @primary_jam.file.filename %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-bpm">
+                <span class="jam-key"><i class="fas fa-file-audio"></i> Jam Type: </span>
+                <span class="jam-value"><%= @primary_jam.jam_type %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-length">
+                <span class="jam-key"><i class="far fa-clock"></i> Length: </span>
+                <span class="jam-value"><%= format_duration(@primary_jam.duration) %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-bpm">
+                <span class="jam-key"><i class="fas fa-drum"></i> BPM: </span>
+                <span class="jam-value"><%= @primary_jam.bpm %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-bpm">
+                <span class="jam-key"><i class="fas fa-music"></i> Song Key: </span>
+                <span class="jam-value"><%= @primary_jam.song_key_list %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-bpm">
+                <span class="jam-key"><i class="fas fa-users"></i> Could Use: </span>
+                <span class="jam-value"><%= @primary_jam.could_use_list %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-bpm">
+                <span class="jam-key"><i class="fas fa-compact-disc"></i></i> Styles: </span>
+                <span class="jam-value"><%= @primary_jam.style_list %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-user">
+                <span class="jam-key"><i class="far fa-user"></i> User: </span>
+                <span class="jam-value"><%= jam_user(@primary_jam) %></span>
+              </span>
+            </li>
+            <li>
+              <span class="jam-attribute jam-attribute-notes">
+                <span class="jam-key"><i class="far fa-sticky-note"></i> Notes: </span>
+                <span class="jam-value"><%= @primary_jam.notes %></span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="jam-buttons">
+        <h1>JAM on this track!</h1>
+        <%= link_to "Download Track", url_for(@primary_jam.file), class: "button is-dark" %>
+        <button id="upload-jam-button" class="button" data-action="click->jam-upload#toggleModal">Upload New Track</button>
+      </div>
+    <% else %>
       <div>
-        <p>This room is brand new! Upload a track to get started!</p>
-      </div>
-      <br />
-      <button id="upload-jam-button" class="button">Upload New Track</button>
-    </div>
-  <% end %>
-</section>
-
-
-<section class="section" id="supporting-jams">
-  <div id="previous-jams">
-    <% unless @supporting_jams.empty? %>
-      <div class="columns jam-header">
-        <div class="column">
-          Supporting Jams
+        <div>
+          <p>This room is brand new! Upload a track to get started!</p>
         </div>
-        <div class="column">
-          Date
-        </div>
-        <div class="column">
-          Filename
-        </div>
-        <div class="column">
-          <i class="fas fa-file-audio"></i>
-        </div>
-        <div class="column">
-          <i class="far fa-clock"></i>
-          Length
-        </div>
-        <div class="column">
-          <i class="fas fa-drum"></i>
-          BPM
-        </div>
-        <div class="column">
-          <i class="far fa-user"></i>
-          User
-        </div>
-        <div class="column">
-        </div>
-      </div>
-
-      <div class="jam-rows">
-        <% @supporting_jams.each do |jam| %>
-          <div class="box">
-            <div class="columns jam-row">
-              <div class="column">
-                <% if jam.midi? %>
-                  <span class="jam-value">MIDI File</span>
-                <% else %>
-                  <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>
-                <% end %>
-              </div>
-              <div class="column">
-                <span class="jam-value"><%= jam.created_at.to_formatted_s(:long) %></span>
-              </div>
-              <div class="column">
-                <span class="jam-value"><%= jam.file.filename %></span>
-              </div>
-              <div class="column">
-                <span class="jam-value"><%= jam.jam_type %></span>
-              </div>
-              <div class="column">
-                <span class="jam-value"><%= format_duration(jam.duration) %></span>
-              </div>
-              <div class="column">
-                <span class="jam-value"><%= jam.bpm %></span>
-              </div>
-              <div class="column">
-                <span class="jam-value"><%= jam_user(jam) %></span>
-              </div>
-              <div class="column">
-                <div class="field">
-                  <span class="jam-value"><%= link_to "Download Track", url_for(jam.file), class: "button is-dark" %></span>
-                </div>
-                <% if jam.idea? || jam.mix? %>
-                  <div class="field">
-                    <span class="jam-value"><%= link_to "Promote", promote_room_jam_path(jam.room, jam), method: :put, class: "button is-primary" %></span>
-                  </div>
-                <% end %>
-              </div>
-            </div>  
-          </div>
-          
-        <% end %>
+        <br />
+        <button id="upload-jam-button" class="button" data-action="click->jam-upload#toggleModal">Upload New Track</button>
       </div>
     <% end %>
-  </div>
-</section>
+  </section>
 
-<%= render 'upload_track_modal' %>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const uploadTrackModal = document.querySelector('#upload-track-modal');
+  <section class="section" id="supporting-jams">
+    <div id="previous-jams">
+      <% unless @supporting_jams.empty? %>
+        <div class="columns jam-header">
+          <div class="column">
+            Supporting Jams
+          </div>
+          <div class="column">
+            Date
+          </div>
+          <div class="column">
+            Filename
+          </div>
+          <div class="column">
+            <i class="fas fa-file-audio"></i>
+          </div>
+          <div class="column">
+            <i class="far fa-clock"></i>
+            Length
+          </div>
+          <div class="column">
+            <i class="fas fa-drum"></i>
+            BPM
+          </div>
+          <div class="column">
+            <i class="far fa-user"></i>
+            User
+          </div>
+          <div class="column">
+          </div>
+        </div>
 
-    const uploadJamButton = document.querySelector('button#upload-jam-button');
-    uploadJamButton.onclick = (event) => {
-      event.preventDefault();
-      
-      uploadTrackModal.classList.add('is-active');
-    
-      const closeFunction = (e) => {
-        e.preventDefault();
-        uploadTrackModal.classList.remove('is-active');
-      };
+        <div class="jam-rows">
+          <% @supporting_jams.each do |jam| %>
+            <div class="box">
+              <div class="columns jam-row">
+                <div class="column">
+                  <% if jam.midi? %>
+                    <span class="jam-value">MIDI File</span>
+                  <% else %>
+                    <span class="jam-value"><%= react_component("waveform_player", { id: jam.id, audioUrl: url_for(jam.file) }) %></span>
+                  <% end %>
+                </div>
+                <div class="column">
+                  <span class="jam-value"><%= jam.created_at.to_formatted_s(:long) %></span>
+                </div>
+                <div class="column">
+                  <span class="jam-value"><%= jam.file.filename %></span>
+                </div>
+                <div class="column">
+                  <span class="jam-value"><%= jam.jam_type %></span>
+                </div>
+                <div class="column">
+                  <span class="jam-value"><%= format_duration(jam.duration) %></span>
+                </div>
+                <div class="column">
+                  <span class="jam-value"><%= jam.bpm %></span>
+                </div>
+                <div class="column">
+                  <span class="jam-value"><%= jam_user(jam) %></span>
+                </div>
+                <div class="column">
+                  <div class="field">
+                    <span class="jam-value"><%= link_to "Download Track", url_for(jam.file), class: "button is-dark" %></span>
+                  </div>
+                  <% if jam.idea? || jam.mix? %>
+                    <div class="field">
+                      <span class="jam-value"><%= link_to "Promote", promote_room_jam_path(jam.room, jam), method: :put, class: "button is-primary" %></span>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
 
-      uploadTrackModal.querySelector('.modal-background').addEventListener('click', closeFunction);
-    
-      uploadTrackModal.querySelectorAll("button.modal-close-button").forEach(element => {
-        element.addEventListener('click', closeFunction);
-      });
-    }
-    
-    // Handle audio file upload
-    const fileInput = document.querySelector('#file-upload-field input[type=file]');
-
-    fileInput.addEventListener('change', () => {
-      if (fileInput.files.length > 0) {
-        const fileName = document.querySelector('#file-upload-field .file-name');
-        const file = fileInput.files[0]
-        fileName.textContent = file.name;
-
-        // Extract duration if file is audio and also not midi
-        if (file.type.startsWith("audio/") && !(file.type === "audio/midi" || file.type === "audio/x-midi")) {
-          const durationInput = document.querySelector('#jam_duration_list');
-          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-          // Extract duration from audio
-          file.arrayBuffer().then(fileBuffer => {
-            audioContext.decodeAudioData(fileBuffer)
-              .then(decodeAudioData => {
-                const duration = decodeAudioData.duration;
-                durationInput.value = parseInt(duration);
-              })
-          });
-        }
-
-        // Send focus to bpm input
-        uploadTrackModal.querySelector('#jam_bpm_list').focus();
-      }
-    });
-  });
-</script>
+  <%= render 'upload_track_modal' %>
+</div>
