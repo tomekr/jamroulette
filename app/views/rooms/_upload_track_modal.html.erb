@@ -10,7 +10,7 @@
 
     <section class="modal-card-body">
       <progress class="progress is-primary" value="0" max="100" data-jam-upload-target="progressBar"></progress>
-      <%= form_with(model: @new_jam, url: [@room, @new_jam],  multipart: true,  local: true, data: {"jam-upload-target": "uploadForm"}) do |form| %>
+      <%= form_with(model: @new_jam, url: [@room, @new_jam],  local: true, data: {"jam-upload-target": "uploadForm"}) do |form| %>
         <div class="field">
           <div id="file-upload-field" class="file has-name">
             <label class="file-label">
