@@ -65,5 +65,18 @@ alice_jam = alice_room.jams.build(
 alice_jam.file.attach(io: File.open('spec/support/assets/test.mp3'), filename: 'test.mp3', content_type: 'audio/mpeg')
 alice_jam.save
 
+# Create a private group for bob
+group = Group.create(name: "Bob's Private Group")
+group.add(bob)
+
+# Create a private group for alice
+group = Group.create(name: "Alice's Private Group")
+group.add(alice)
+
+# Create a public group and add bob and alice
+group = Group.create(name: 'Public Group', visible: true)
+group.add(bob)
+group.add(alice)
+
 # TODO: Remove when no longer in beta
 InviteCode.create(code: 'Mellon')
