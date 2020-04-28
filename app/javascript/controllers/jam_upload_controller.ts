@@ -84,7 +84,7 @@ export default class extends Controller {
         this.extractDurationFromAudioFile(fileToUpload)
       }
 
-      const directUploadController = new DirectUploadController(this, fileToUpload)
+      const directUploadController = new DirectUploadController(this, fileToUpload, this.progressBarTarget)
       directUploadController.start()
 
       // Send focus to bpm input
@@ -101,10 +101,10 @@ class DirectUploadController {
   hiddenInput: HTMLInputElement
   progressBar: HTMLProgressElement
 
-  constructor(source: Controller, file: File) {
+  constructor(source: Controller, file: File, progressBar: HTMLProgressElement) {
     this.directUpload = new DirectUpload(file, source.fileFieldTarget.dataset.directUploadUrl, this)
     this.source = source
-    this.progressBar = this.source.progressBarTarget
+    this.progressBar = progressBar
     this.file = file
   }
 
@@ -137,6 +137,7 @@ class DirectUploadController {
   }
 
   private uploadRequestStarted(): void {
+    this.progressBar.value = 0
     this.progressBar.classList.remove(this.source.progressDoneClass)
     this.progressBar.classList.add(this.source.progressLoadingClass)
   }
