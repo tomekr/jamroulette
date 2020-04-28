@@ -9,11 +9,12 @@
     </header>
 
     <section class="modal-card-body">
+      <progress class="progress is-primary" value="0" max="100" data-jam-upload-target="progressBar"></progress>
       <%= form_with(model: @new_jam, url: [@room, @new_jam],  multipart: true,  local: true, data: {"jam-upload-target": "uploadForm"}) do |form| %>
         <div class="field">
           <div id="file-upload-field" class="file has-name">
             <label class="file-label">
-              <%= form.file_field :file, class: "file-input",
+              <%= form.file_field :file, class: "file-input", direct_upload: true,
                                   data: { "jam-upload-target": "fileField", "action": "change->jam-upload#fileSelected" },
                                   accept: "audio/*" %>
               <span class="file-cta">
@@ -99,7 +100,7 @@
     </section>
 
     <footer class="modal-card-foot">
-      <%= submit_tag "Upload", class: "button is-primary", data: {"action": "click->jam-upload#upload"} %>
+      <%= submit_tag "Upload", class: "button is-primary", data: {"action": "click->jam-upload#submitForm"} %>
       <button class="button modal-close-button" data-action="click->jam-upload#toggleModal">Cancel</button>
     </footer>
   </div>
