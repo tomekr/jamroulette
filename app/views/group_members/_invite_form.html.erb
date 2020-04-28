@@ -1,0 +1,26 @@
+<%= form_with url: group_group_members_path(group), method: :post do %>
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control has-icons-left">
+      <%= text_field_tag :email, nil, class: "input", placeholder: 'Email Address' %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Choose a role</label>
+    <div class="control">
+      <div class="select">
+        <%= select_tag :role, options_for_select(['Member', 'Owner']) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= submit_tag 'Invite', class: 'button is-success' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+pt-BR:
+  activerecord:
+    attributes:
+      invite:
+        email: "Email"
+  invitation:
+    flash:
+      invite_issued:
+        one: "Problema no convite"
+        other: "Problemas nos convites"
+      invite_error:
+        one: "Não foi possível enviar um convite para %{email}"
+        other: "Não foi possível enviar convites para %{email}"
+    invite_mailer:
+      existing_user:
+        subject: "Instruções do convite"
+        hello: "Olá %{email}"
+        someone_invited_you: "%{sender} convidou você para %{invitable} em %{url}. Agora você tem permissões para acessar com a url a seguir."
+        ignore: "Se as suas permissões não foram adicionadas ou se você sentir que este é um erro, por favor, entre em contato com %{sender}."
+      new_user:
+        subject: "Instruções do convite"
+        hello: "Olá %{email}"
+        someone_invited_you: "%{sender} convidou você para %{invitable} em %{url}. Agora você tem permissões para acessar com a url a seguir."
+        accept: "Aceitar o convite"
+        ignore: "Se você não deseja aceitar este convite, por favor, ignore este email. Sua conta não será criada até você acessar o link a seguir e criar a sua conta."

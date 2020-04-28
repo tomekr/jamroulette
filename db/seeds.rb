@@ -67,11 +67,11 @@ alice_jam.save
 
 # Create a private group for bob
 group = Group.create(name: "Bob's Private Group")
-group.add(bob)
+group.add_owner(bob)
 
 # Create a private group for alice
 group = Group.create(name: "Alice's Private Group")
-group.add(alice)
+group.add_owner(alice)
 
 # Create a public group and add bob and alice
 group = Group.create(name: 'Public Group', visible: true)

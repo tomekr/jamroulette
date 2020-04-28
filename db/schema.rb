@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_155105) do
+ActiveRecord::Schema.define(version: 2020_04_28_181741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -84,6 +84,22 @@ ActiveRecord::Schema.define(version: 2020_04_15_155105) do
     t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string "email"
+    t.string "token"
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.integer "invitable_id"
+    t.string "invitable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_invites_on_email"
+    t.index ["invitable_id", "invitable_type"], name: "index_invites_on_invitable_id_and_invitable_type"
+    t.index ["recipient_id"], name: "index_invites_on_recipient_id"
+    t.index ["sender_id"], name: "index_invites_on_sender_id"
+    t.index ["token"], name: "index_invites_on_token"
   end
 
   create_table "jams", force: :cascade do |t|

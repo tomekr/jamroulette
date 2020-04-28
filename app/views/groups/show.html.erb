@@ -1,7 +1,13 @@
 <section class="section">
-  <h1 class="title"><%= @group.name %></h1>
+  <div class="columns">
+    <div class="column is-one-fifth">
+      <%= render 'shared/groups_sidebar', group: @group %>
+    </div>
+    <div class="column">
+      <h1 class="title"><%= @group.name %></h1>
 
-  <%= link_to 'Edit', edit_group_path(@group) %> |
-  <%= link_to 'Back', groups_path %>
-
+      <%= link_to 'Edit', edit_group_path(@group) %> |
+      <%= link_to 'Back', groups_path %>
+    </div>
+  </div>
 </section>

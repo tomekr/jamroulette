@@ -25,4 +25,25 @@ RSpec.describe 'visiting the home page', type: :system do
     expect(page).to have_content('Group was successfully created')
     expect(page).to have_content('The Groovies')
   end
+
+  context 'invitations' do
+    let(:group) { create(:group) }
+
+    it 'allows a group owner to invite a user via email' do
+      group.add_owner(user)
+      user_to_invite = create(:user, email: 'invitee@example.com')
+
+      visit group_path(group)
+      click_on 'Members'
+
+      fill_in 'Email Address', with: 'invitee@example.com'
+      select 'Member', from: :role
+
+      click_on 'Invite'
+
+      within('.pending-invites') do
+        expect(page).to have_content('invitee@example.com')
+      end
+    end
+  end
 end

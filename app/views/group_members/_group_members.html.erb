@@ -1,0 +1,14 @@
+<section class="panel">
+  <p class="panel-heading">
+    Current Members
+  </p>
+
+  <% members.each do |member| %>
+    <a class="panel-block">
+      <span class="panel-icon">
+        <i class="fas fa-user" aria-hidden="true"></i>
+      </span>
+      <%= member.display_name %>
+    </a>
+  <% end %>
+</section>
