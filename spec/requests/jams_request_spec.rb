@@ -28,7 +28,7 @@ RSpec.describe 'Jams', type: :request do
 
       it 'restricts mime type on form field to audio/*' do
         get room_path(room)
-        expect(response.body).to include('accept="audio/*" type="file"')
+        expect(response.body).to include('accept="audio/*"')
       end
 
       context 'with a MIDI file' do
