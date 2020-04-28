@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import { DirectUpload } from "@rails/activestorage"
 
 export default class extends Controller {
   static classes = ["active"]
@@ -13,8 +14,26 @@ export default class extends Controller {
   bpmFieldTarget: HTMLInputElement
 
   toggleModal(event: CustomEvent) {
-    event.preventDefault()
     this.uploadModalTarget.classList.toggle(this.activeClass)
+  }
+
+  uploadFile(file: File): void {
+    const url = this.fileFieldTarget.dataset.directUploadUrl
+    const upload = new DirectUpload(file, url)
+    upload.create((error, blob) => {
+      if (error) {
+        throw new Error('Direct Upload Error - ' + error);
+      } else {
+        // Add an appropriately-named hidden input to the form with a
+        // value of blob.signed_id so that the blob ids will be
+        // transmitted in the normal upload flow
+        const hiddenField = document.createElement('input')
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("value", blob.signed_id);
+        hiddenField.name = this.fileFieldTarget.name
+        this.uploadFormTarget.appendChild(hiddenField)
+      }
+    })
   }
 
   upload() {
@@ -58,6 +77,8 @@ export default class extends Controller {
       if (this.isAudioWithDuration(fileToUpload) && this.browserHasAudioContext()) {
         this.extractDurationFromAudioFile(fileToUpload)
       }
+
+      this.uploadFile(fileToUpload)
 
       // Send focus to bpm input
       this.bpmFieldTarget.focus()

@@ -13,7 +13,7 @@
         <div class="field">
           <div id="file-upload-field" class="file has-name">
             <label class="file-label">
-              <%= form.file_field :file, class: "file-input",
+              <%= form.file_field :file, class: "file-input", direct_upload: true,
                                   data: { "jam-upload-target": "fileField", "action": "change->jam-upload#fileSelected" },
                                   accept: "audio/*" %>
               <span class="file-cta">
