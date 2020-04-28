@@ -87,6 +87,9 @@ export default class extends Controller {
       const directUploadController = new DirectUploadController(this, fileToUpload, this.progressBarTarget)
       directUploadController.start()
 
+      // Remove the file from the form so it isn't uploaded again
+      this.fileFieldTarget.value = null
+
       // Send focus to bpm input
       this.bpmFieldTarget.focus()
     }
