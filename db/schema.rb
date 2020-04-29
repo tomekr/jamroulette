@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_181741) do
+ActiveRecord::Schema.define(version: 2020_04_29_153917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -87,19 +87,18 @@ ActiveRecord::Schema.define(version: 2020_04_28_181741) do
   end
 
   create_table "invites", force: :cascade do |t|
-    t.string "email"
-    t.string "token"
-    t.integer "sender_id"
-    t.integer "recipient_id"
-    t.integer "invitable_id"
-    t.string "invitable_type"
+    t.bigint "group_id", null: false
+    t.bigint "recipient_id"
+    t.bigint "sender_id"
+    t.string "invite_token"
+    t.string "role"
+    t.datetime "expires_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_invites_on_email"
-    t.index ["invitable_id", "invitable_type"], name: "index_invites_on_invitable_id_and_invitable_type"
+    t.index ["expires_at"], name: "index_invites_on_expires_at"
+    t.index ["group_id"], name: "index_invites_on_group_id"
     t.index ["recipient_id"], name: "index_invites_on_recipient_id"
     t.index ["sender_id"], name: "index_invites_on_sender_id"
-    t.index ["token"], name: "index_invites_on_token"
   end
 
   create_table "jams", force: :cascade do |t|
@@ -188,6 +187,9 @@ ActiveRecord::Schema.define(version: 2020_04_28_181741) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activities", "users"
+  add_foreign_key "invites", "groups"
+  add_foreign_key "invites", "users", column: "recipient_id"
+  add_foreign_key "invites", "users", column: "sender_id"
   add_foreign_key "jams", "rooms"
   add_foreign_key "jams", "users"
   add_foreign_key "notifications", "users"

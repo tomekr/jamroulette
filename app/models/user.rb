@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include Invitation::User
-
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,6 +14,7 @@ class User < ApplicationRecord
 
   has_many :group_memberships, dependent: :destroy
   has_many :groups, through: :group_memberships
+  has_many :invites, dependent: :destroy
 
   def in_group?(group, opts = {})
     return false unless group.present?
