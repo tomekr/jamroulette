@@ -7,10 +7,7 @@ class GroupMembersController < ApplicationController
     authorize! :read, @group
     @invite = Invite.new
     @members = @group.members
-  end
-
-  def create
-    authorize! :manage, @group
+    @pending_members = @group.invites.unexpired.map(&:recipient)
   end
 
   private

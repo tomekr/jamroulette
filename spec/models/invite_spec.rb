@@ -10,12 +10,18 @@ RSpec.describe Invite, type: :model do
       expect(invite).to be_valid
     end
 
-    it 'does not allow invite if recipient is already in group' do
+    it 'is invalid is recipient already in group' do
       group = create(:group)
       recipient = create(:user)
       group.add(recipient)
 
       invite = build(:invite, group: group, recipient: recipient)
+      expect(invite).to be_invalid
+    end
+
+    it 'is invalid if recipient already has unexpired invite' do
+      create(:invite, group: invite.group, recipient: invite.recipient)
+
       expect(invite).to be_invalid
     end
 
@@ -43,10 +49,10 @@ RSpec.describe Invite, type: :model do
     end
   end
 
-  it 'sets expired_at to 1 month ago' do
+  it 'sets expired_at to 1 month from now' do
     freeze_time do
       invite = Invite.new
-      expect(invite.expires_at).to eq 1.month.ago
+      expect(invite.expires_at).to eq 1.month.from_now
     end
   end
 

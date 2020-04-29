@@ -12,12 +12,16 @@
             Invite a member
           </p>
           <div class="panel-block">
-            <%= render 'invite_form', group: @group %>
+            <%= render 'invite_form', group: @group, invite: @invite %>
           </div>
         </section>
       <% end %>
 
       <%= render 'group_members', members: @members %>
+
+      <% if @pending_members.any? %>
+        <%= render 'pending_members', members: @pending_members %>
+      <% end %>
 
       <%= link_to 'Edit', edit_group_path(@group) %> |
       <%= link_to 'Back', groups_path %>
