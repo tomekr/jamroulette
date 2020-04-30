@@ -10,7 +10,7 @@ RSpec.describe Invite, type: :model do
       expect(invite).to be_valid
     end
 
-    it 'is invalid is recipient already in group' do
+    it 'is invalid if recipient already in group' do
       group = create(:group)
       recipient = create(:user)
       group.add(recipient)
