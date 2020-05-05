@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :group_memberships, dependent: :destroy
   has_many :groups, through: :group_memberships
 
+  has_many :invites, class_name: 'Invite', foreign_key: :recipient_id, dependent: :destroy
+  has_many :sent_invites, class_name: 'Invite', foreign_key: :sender_id, dependent: :destroy
+
   def in_group?(group, opts = {})
     return false unless group.present?
 

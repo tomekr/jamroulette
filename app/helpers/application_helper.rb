@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def bulma_flash_mapping(message_type)
     case message_type
@@ -16,5 +18,13 @@ module ApplicationHelper
     return false unless user
 
     user.notifications.unread.any?
+  end
+
+  def aside_link_to(url, &block)
+    if current_page?(url)
+      link_to url, class: 'is-active', &block
+    else
+      link_to url, &block
+    end
   end
 end

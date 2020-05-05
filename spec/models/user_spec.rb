@@ -11,6 +11,24 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'destroying a user' do
+    it 'destroys associated invites as a recipient' do
+      recipient = create(:invite).recipient
+
+      expect do
+        recipient.destroy
+      end.to change(Invite, :count).from(1).to(0)
+    end
+
+    it 'destroys associated invites as a sender' do
+      sender = create(:invite).sender
+
+      expect do
+        sender.destroy
+      end.to change(Invite, :count).from(1).to(0)
+    end
+  end
+
   describe '#in_group?' do
     let(:user) { create(:user) }
     let(:group) { create(:group) }

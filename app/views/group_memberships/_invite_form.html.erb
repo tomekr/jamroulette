@@ -1,0 +1,26 @@
+<%= form_with model: @invite, url: [@group, @invite], method: :post, local: true do |form| %>
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control has-icons-left">
+      <%= form.text_field :email, class: "input", placeholder: 'Email Address' %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Choose a role</label>
+    <div class="control">
+      <div class="select">
+        <%= form.select :role, ['Member', 'Owner'] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit 'Invite', class: 'button is-success' %>
+    </div>
+  </div>
+<% end %>

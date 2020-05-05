@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="columns">
+    <div class="column is-one-fifth">
+      <%= render 'shared/groups_sidebar', group: @group %>
+    </div>
+    <div class="column">
+      <h1 class="title">Group Members</h1>
+
+      <% if can? :manage, @group %>
+        <section class="panel">
+          <p class="panel-heading">
+            Invite a member
+          </p>
+          <div class="panel-block">
+            <%= render 'invite_form', group: @group, invite: @invite %>
+          </div>
+        </section>
+      <% end %>
+
+      <%= render 'group_members', members: @members %>
+
+      <% if @pending_members.any? %>
+        <%= render 'pending_members', members: @pending_members %>
+      <% end %>
+
+      <%= link_to 'Edit', edit_group_path(@group) %> |
+      <%= link_to 'Back', groups_path %>
+    </div>
+  </div>
+</section>

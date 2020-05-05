@@ -21,5 +21,7 @@ class Ability
     end
 
     can :create, Group
+
+    can :manage, Invite, group: { group_memberships: { user: user, membership_type: 'owner' } }
   end
 end

@@ -24,5 +24,9 @@ Rails.application.routes.draw do
     get 'random', on: :collection
   end
 
-  resources :groups
+  resources :groups do
+    resources :group_memberships
+    # TODO: Add a destroy action
+    resources :invites, only: %i[create]
+  end
 end
