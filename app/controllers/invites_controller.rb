@@ -1,33 +1,22 @@
 # frozen_string_literal: true
 
 class InvitesController < ApplicationController
-  before_action :set_group
+  load_and_authorize_resource :group
+  authorize_resource :invite, through: :group
 
   def create
-    authorize! :manage, @group
-
-    recipient = User.find_by(email: invite_params[:email])
-    invite = @group.invites.build(
+    recipient = User.find_by(email: params[:invite][:email])
+    @invite = @group.invites.build(
       sender: current_user,
       recipient: recipient
     )
 
-    if invite.save
-      flash[:success] = 'Invite sent!'
+    if @invite.save
+      flash.notice = 'Invite sent!'
     else
-      flash.alert = invite.errors.full_messages.join(', ')
+      flash.alert = @invite.errors.full_messages.join(', ')
     end
 
     redirect_to group_group_members_path(@group)
-  end
-
-  private
-
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
-
-  def invite_params
-    params.require(:invite).permit(:email, :role)
   end
 end

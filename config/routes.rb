@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :group_members
-    resources :invites, only: %i[create destroy]
+    # TODO: Add a destroy action
+    resources :invites, only: %i[create]
   end
 end

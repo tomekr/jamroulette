@@ -7,7 +7,6 @@ FactoryBot.define do
     association :sender, factory: :user
 
     invite_token { 'secret-invite-token' }
-    expires_at { Invite::EXPIRES.from_now }
     role { 'Member' }
 
     trait :expired do
