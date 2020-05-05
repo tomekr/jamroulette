@@ -34,7 +34,7 @@ RSpec.describe InvitesController, type: :request do
 
     it 'redirects to group members index' do
       action
-      expect(response).to redirect_to(group_group_members_path(group))
+      expect(response).to redirect_to(group_group_memberships_path(group))
     end
 
     context 'user already in group' do

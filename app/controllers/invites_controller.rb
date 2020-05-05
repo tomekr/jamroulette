@@ -17,6 +17,6 @@ class InvitesController < ApplicationController
       flash.alert = @invite.errors.full_messages.join(', ')
     end
 
-    redirect_to group_group_members_path(@group)
+    redirect_to group_group_memberships_path(@group)
   end
 end

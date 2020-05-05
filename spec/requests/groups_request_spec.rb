@@ -23,7 +23,7 @@ RSpec.describe 'Groups', type: :request do
 
     it 'displays invite member form' do
       group.add_owner(user)
-      get group_group_members_path(group)
+      get group_group_memberships_path(group)
       expect(response.body).to include('Invite a member')
     end
   end
@@ -38,14 +38,14 @@ RSpec.describe 'Groups', type: :request do
 
     it 'does not display an invite member form' do
       group.add(user)
-      get group_group_members_path(group)
+      get group_group_memberships_path(group)
       expect(response.body).to_not include('Invite a member')
     end
   end
 
   context 'as non-member' do
     it 'does not display an invite member form' do
-      get group_group_members_path(group)
+      get group_group_memberships_path(group)
       expect(response.body).to_not include('Invite a member')
     end
   end
