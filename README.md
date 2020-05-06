@@ -3,6 +3,8 @@
 
 Jam Roulette is a Rails (+ React, Typescript) application for layered jamming and collaboration.
 
+<img src="https://user-images.githubusercontent.com/723637/81198847-8dc3d580-8f87-11ea-97b6-08e0a0bc5f91.png" alt="alt text" width="400"><img src="https://user-images.githubusercontent.com/723637/81198851-8e5c6c00-8f87-11ea-8fdc-dbc3228e91c5.png" alt="alt text" width="400">
+
 ## Contributing
 
 We very much welcome PRs! Please fork this repo and see the project's [Trello board](https://trello.com/b/ftn4JCO8/jam-roulette-kanban) for open cards to take on. If available, cards labeled "good first issue" would be a good place to start. Alternatively, take a look at the [Bugs project](https://github.com/tomekr/jamroulette/projects/1) section on Github.
